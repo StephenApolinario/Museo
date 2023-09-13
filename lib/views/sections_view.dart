@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/utilities/menu/menu.dart' as menu;
 
-class WingsView extends StatelessWidget {
-  const WingsView({super.key});
+class SectionsView extends StatelessWidget {
+  const SectionsView({super.key});
 
   @override
   Widget build(BuildContext context) {

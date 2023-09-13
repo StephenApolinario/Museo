@@ -10,7 +10,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       drawer: const menu.NavigationDrawer(),
       appBar: AppBar(
-        title: Text(context.loc.perfil_title),
+        title: Text(context.loc.profile_title),
       ),
       body: Center(
         child: Column(

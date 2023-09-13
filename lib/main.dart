@@ -13,7 +13,7 @@ import 'package:museo/views/store/store_view.dart';
 import 'package:museo/views/map_view.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:museo/views/user/profile_view.dart';
-import 'package:museo/views/wings_view.dart';
+import 'package:museo/views/sections_view.dart';
 import 'package:museo/utilities/menu/menu.dart' as menu;
 import 'package:url_launcher/url_launcher.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         aboutMovi: (context) => const MoviView(),
         aboutApplication: (context) => const ApplicationView(),
         search: (context) => const SearchView(),
-        wings: (context) => const WingsView(),
+        sections: (context) => const SectionsView(),
         map: (context) => const MapView(),
         store: (context) => const StoreView(),
         souvernirs: (context) => const SouvenirsView(),

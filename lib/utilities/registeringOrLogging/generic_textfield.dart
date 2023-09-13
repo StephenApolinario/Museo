@@ -13,6 +13,7 @@ Column commonTextField({
   Color fillColor = Colors.white,
   double textFieldBorder = 5.0,
   TextInputType keyboardType = TextInputType.text,
+  List<Widget>? additionalWidget,
 }) {
   List<Widget> widgets = [];
 

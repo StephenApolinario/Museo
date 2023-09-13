@@ -55,9 +55,9 @@ class RegisteringPersonalDataRegisteringView extends StatelessWidget {
                     commonTextField(
                       hintTitle: context.loc.registering_name,
                     ),
-                    // Surname title
+                    // lastname title
                     commonTextField(
-                      hintTitle: context.loc.registering_surname,
+                      hintTitle: context.loc.registering_lastname,
                     ),
                     // Email title
                     commonTextField(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart' as custom_color;
 import 'package:museo/constants/routes.dart';
 import 'package:museo/constants/urls.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/utilities/menu/menu_items.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -47,15 +48,15 @@ class NavigationDrawer extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Text(
-                          'Entrar ou registrar-se',
+                        child: Text(
+                          context.loc.login_or_register,
                         ),
                       ),
                       TextButton(
                         onPressed: () {},
-                        child: const Text(
-                          'Esqueceu sua senha?',
-                          style: TextStyle(
+                        child: Text(
+                          context.loc.forget_password,
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                         ),
@@ -77,49 +78,49 @@ class NavigationDrawer extends StatelessWidget {
                 menuItem(
                   context: context,
                   icon: Icons.house_outlined,
-                  title: 'INÍCIO',
+                  title: context.loc.home,
                   route: home,
                 ),
                 menuItem(
                   context: context,
                   icon: Icons.search,
-                  title: 'PESQUISE',
+                  title: context.loc.search,
                   route: search,
                 ),
                 menuItem(
                   context: context,
                   icon: Icons.search,
-                  title: 'ALAS',
-                  route: wings,
+                  title: context.loc.sections,
+                  route: sections,
                 ),
                 menuItem(
                   context: context,
                   icon: Icons.map,
-                  title: 'MAPA',
+                  title: context.loc.map,
                   route: map,
                 ),
                 menuItem(
                   context: context,
                   icon: Icons.store,
-                  title: 'LOJINHA',
+                  title: context.loc.souvenirs,
                   route: souvernirs,
                 ),
                 menuItem(
                   context: context,
                   icon: Icons.airplane_ticket,
-                  title: 'INGRESSO E CUPONS',
+                  title: context.loc.store,
                   route: store,
                 ),
                 menuItem(
                   context: context,
                   icon: Icons.museum,
-                  title: 'SOBRE O MOVI',
+                  title: context.loc.about_movi,
                   route: aboutMovi,
                 ),
                 menuItem(
                   context: context,
                   icon: Icons.info,
-                  title: 'SOBRE O APLICATIVO',
+                  title: context.loc.about_application,
                   route: aboutApplication,
                 ),
                 // Logos on bottom
