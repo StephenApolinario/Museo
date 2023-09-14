@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.1
   localization: ^2.1.0
   flutter_localization: ^0.1.13
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,7 @@ flutter:
   assets:
     - assets/logos/
     - assets/
+    - assets/mascots/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -6,6 +6,7 @@ import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/utilities/dialogs/start_dialog.dart';
 import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
+import 'package:museo/views/onboarding/onboarding_screen.dart';
 import 'package:museo/views/ride/ride_view.dart';
 import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs_view.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const OnBoardingScreen(),
       routes: {
         aboutMovi: (context) => const MoviView(),
         aboutApplication: (context) => const ApplicationView(),
