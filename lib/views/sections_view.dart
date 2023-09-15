@@ -10,7 +10,7 @@ class SectionsView extends StatelessWidget {
     return Scaffold(
       drawer: const menu.NavigationDrawer(),
       appBar: AppBar(
-        title: const Text('Alas'),
+        title: Text(context.loc.sections),
       ),
       body: Center(
         child: Column(

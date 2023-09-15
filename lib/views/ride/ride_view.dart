@@ -9,7 +9,7 @@ class RideView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Percurso'),
+        title: Text(context.loc.route_title),
       ),
       drawer: const menu.NavigationDrawer(),
       body: Center(

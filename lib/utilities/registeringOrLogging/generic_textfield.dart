@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 Column commonTextField({
   required String hintTitle,
+  required TextEditingController specifiedController,
   Color textFieldColor = Colors.white,
   double fontSize = 16,
   Alignment alignment = Alignment.topLeft,
@@ -39,6 +40,7 @@ Column commonTextField({
   // Textfield
   widgets.add(
     TextField(
+      controller: specifiedController,
       enableSuggestions: suggestions,
       keyboardType: keyboardType,
       autocorrect: autocorrect,

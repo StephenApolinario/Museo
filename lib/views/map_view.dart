@@ -10,7 +10,7 @@ class MapView extends StatelessWidget {
     return Scaffold(
       drawer: const menu.NavigationDrawer(),
       appBar: AppBar(
-        title: const Text('Mapa'),
+        title: Text(context.loc.map),
       ),
       body: Center(
         child: Column(

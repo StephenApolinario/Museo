@@ -15,7 +15,7 @@ class ApplicationView extends StatelessWidget {
         backgroundColor: mainBlue,
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          context.loc.about_movi,
+          context.loc.about_application,
           style: const TextStyle(
             color: Colors.white,
           ),

@@ -10,7 +10,7 @@ class SearchView extends StatelessWidget {
     return Scaffold(
       drawer: const menu.NavigationDrawer(),
       appBar: AppBar(
-        title: const Text('Pesquisa'),
+        title: Text(context.loc.search),
       ),
       body: Center(
         child: Column(

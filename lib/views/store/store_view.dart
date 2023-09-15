@@ -15,7 +15,7 @@ class _StoreViewState extends State<StoreView> {
     return Scaffold(
       drawer: const menu.NavigationDrawer(),
       appBar: AppBar(
-        title: const Text('Ingressos e cupons'),
+        title: Text(context.loc.store),
       ),
       body: Center(
         child: Column(

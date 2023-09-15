@@ -4,8 +4,30 @@ import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/utilities/registeringOrLogging/generic_textfield.dart';
 import 'package:museo/views/user/registering_personal_data_view.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  late TextEditingController _email;
+  late TextEditingController _password;
+
+  @override
+  void initState() {
+    _email = TextEditingController();
+    _password = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +65,12 @@ class LoginView extends StatelessWidget {
                   children: [
                     // Email Textfield
                     commonTextField(
+                      specifiedController: _email,
                       hintTitle: context.loc.email_hint,
                     ),
                     // Password Textfield
                     commonTextField(
+                      specifiedController: _password,
                       hintTitle: context.loc.password_hint,
                     ),
                     // Forget password
