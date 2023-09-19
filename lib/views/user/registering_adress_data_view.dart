@@ -178,7 +178,7 @@ class _RegisteringAdressDataViewState extends State<RegisteringAdressDataView> {
                         }
                       },
                       child: Text(
-                        context.loc.registering_continue_button,
+                        context.loc.continue_message,
                       ),
                     ),
                   ],

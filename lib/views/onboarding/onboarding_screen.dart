@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -112,10 +113,17 @@ class OnBoardingScreenShowState extends State<OnBoardingScreenShow> {
                         duration: const Duration(milliseconds: 300),
                       );
                     },
-                    child: const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    ),
+                    child: _pageIndex == data.length - 1
+                        ? Text(
+                            context.loc.continue_message,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          ),
                   ),
                 ],
               )

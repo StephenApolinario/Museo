@@ -42,7 +42,7 @@
     "registering_CPF": "CPF",
     "registering_birthday": "Data de nascimento",
     "registering_phonenumber": "Celular",
-    "registering_continue_button": "Continuar",
+    "continue_message": "Continuar",
     "registering_house_CEP": "CEP",
     "registering_house_country": "País",
     "registering_house_state": "Estado",

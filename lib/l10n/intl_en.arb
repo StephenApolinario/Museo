@@ -42,7 +42,7 @@
     "registering_CPF": "CPF",
     "registering_birthday": "Date of birth",
     "registering_phonenumber": "Mobile number",
-    "registering_continue_button": "Continue",
+    "continue_message": "Continue",
     "registering_house_CEP": "CEP",
     "registering_house_country": "Country",
     "registering_house_state": "State",
