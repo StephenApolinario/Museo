@@ -9,4 +9,5 @@ const souvernirs = '/store/souvernirs';
 const userProfile = '/user/profile';
 const login = '/login';
 const ride = '/ride';
+const rideSelect = '/ride/select';
 const favorites = '/favorites';

@@ -8,7 +8,7 @@ import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
 import 'package:museo/views/favorite/favorite_view.dart';
 import 'package:museo/views/onboarding/onboarding_screen.dart';
-import 'package:museo/views/ride/ride_view.dart';
+import 'package:museo/views/ride/ride_select_view.dart';
 import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs_view.dart';
 import 'package:museo/views/store/store_view.dart';
@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const OnBoardingScreen(),
+      // home: const RideSelectView(),
       routes: {
         aboutMovi: (context) => const MoviView(),
         aboutApplication: (context) => const ApplicationView(),
@@ -58,8 +59,8 @@ class MyApp extends StatelessWidget {
         souvernirs: (context) => const SouvenirsView(),
         userProfile: (context) => const ProfileView(),
         login: (context) => const LoginView(),
-        ride: (context) => const RideView(),
         favorites: (context) => const FavoriteView(),
+        rideSelect: (context) => const RideSelectView(),
       },
     );
   }
@@ -132,8 +133,11 @@ class MyHomePage extends StatelessWidget {
                           ),
                         );
                       } else if (shouldLogin == false) {
-                        Navigator.pop(context);
-                        Navigator.of(context).pushNamed(ride);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RideSelectView()),
+                        );
                       }
                     }
                   },
