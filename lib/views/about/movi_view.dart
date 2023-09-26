@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/utilities/menu/menu.dart' as menu;
 
 class MoviView extends StatelessWidget {
   const MoviView({super.key});
@@ -10,7 +9,6 @@ class MoviView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainBlue,
-      drawer: const menu.NavigationDrawer(),
       appBar: AppBar(
         backgroundColor: mainBlue,
         iconTheme: const IconThemeData(color: Colors.white),

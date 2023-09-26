@@ -12,11 +12,11 @@ import 'package:museo/views/tour/tour_select_view.dart';
 import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs_view.dart';
 import 'package:museo/views/store/store_view.dart';
-import 'package:museo/views/map_view.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:museo/views/user/profile_view.dart';
 import 'package:museo/views/sections_view.dart';
 import 'package:museo/utilities/menu/menu.dart' as menu;
+import 'package:museo/views/user/registering_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -53,11 +53,11 @@ class MyApp extends StatelessWidget {
         aboutApplication: (context) => const ApplicationView(),
         search: (context) => const SearchView(),
         sections: (context) => const SectionsView(),
-        map: (context) => const MapView(),
         store: (context) => const StoreView(),
         souvernirs: (context) => const SouvenirsView(),
         userProfile: (context) => const ProfileView(),
         login: (context) => const LoginView(),
+        register: (context) => const RegisteringView(),
         favorites: (context) => const FavoriteView(),
         tourSelect: (context) => const TourSelectView(),
       },

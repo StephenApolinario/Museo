@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Column commonTextField({
   required String hintTitle,
@@ -15,6 +16,8 @@ Column commonTextField({
   double textFieldBorder = 5.0,
   TextInputType keyboardType = TextInputType.text,
   List<Widget>? additionalWidget,
+  bool obsecure = false,
+  TextInputFormatter? formatter,
 }) {
   List<Widget> widgets = [];
 
@@ -44,6 +47,7 @@ Column commonTextField({
       enableSuggestions: suggestions,
       keyboardType: keyboardType,
       autocorrect: autocorrect,
+      obscureText: obsecure,
       style: const TextStyle(
         fontSize: 12,
       ),
@@ -57,6 +61,12 @@ Column commonTextField({
           ),
         ),
       ),
+      inputFormatters: formatter != null
+          ? [
+              FilteringTextInputFormatter.digitsOnly,
+              formatter,
+            ]
+          : null,
     ),
   );
 

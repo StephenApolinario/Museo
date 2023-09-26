@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:map_launcher/map_launcher.dart';
 import 'package:museo/constants/colors.dart' as custom_color;
 import 'package:museo/constants/routes.dart';
 import 'package:museo/constants/urls.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/gen/assets.gen.dart';
 import 'package:museo/utilities/menu/menu_items.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -98,8 +101,11 @@ class NavigationDrawer extends StatelessWidget {
               menuItem(
                 context: context,
                 icon: Icons.map,
-                title: context.loc.map,
-                route: map,
+                // TODO -> Title retrived by context.loc
+                title: 'LOCALIZAÇÃO',
+                onTapAction: () {
+                  return openMapsSheet(context);
+                },
               ),
               menuItem(
                 context: context,
@@ -153,7 +159,7 @@ class NavigationDrawer extends StatelessWidget {
                     },
                     // icon: const Icon(Icons.access_alarm), //Logo Movi Here
                     icon: Image.asset(
-                      'assets/logos/movi.png',
+                      Assets.logos.movi.path,
                       height: 40,
                       width: 40,
                     ),
@@ -176,9 +182,8 @@ class NavigationDrawer extends StatelessWidget {
                         throw Exception('Could not launch $url');
                       }
                     },
-                    // icon: const Icon(Icons.access_alarm), //Logo Movi Here
                     icon: Image.asset(
-                      'assets/logos/univali.png',
+                      Assets.logos.univali.path,
                       height: 40,
                       width: 40,
                     ),
@@ -190,5 +195,47 @@ class NavigationDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+openMapsSheet(context) async {
+  try {
+    final coords = Coords(
+      -26.754003,
+      -48.687816,
+    );
+    const title = 'Museu Oceanográfico Univali';
+    final availableMaps = await MapLauncher.installedMaps;
+
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: SingleChildScrollView(
+            child: Wrap(
+              children: [
+                for (var map in availableMaps)
+                  ListTile(
+                    onTap: () => map.showMarker(
+                      coords: coords,
+                      title: title,
+                      description:
+                          'Museu universitário com grande variedade de vida marinha e ênfase na fauna local.',
+                    ),
+                    title: Text(map.mapName),
+                    leading: SvgPicture.asset(
+                      map.icon,
+                      height: 30.0,
+                      width: 30.0,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  } catch (e) {
+    rethrow;
   }
 }

@@ -87,6 +87,7 @@ class _QuizzViewState extends State<QuizzView> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Section title on top
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -106,6 +107,7 @@ class _QuizzViewState extends State<QuizzView> {
               ),
             ),
           ),
+          // Question number / Questions length (1/2 ~~ 2/10)
           Padding(
             padding: const EdgeInsets.only(top: 8, left: 16),
             // TODO This strings must be provided by an API
@@ -117,6 +119,7 @@ class _QuizzViewState extends State<QuizzView> {
               ),
             ),
           ),
+          // Build the quizz with the question and awnsers options
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -131,6 +134,7 @@ class _QuizzViewState extends State<QuizzView> {
               ),
             ),
           ),
+          // Button on the bottom (Continue or View Result)
           Padding(
             padding: const EdgeInsets.all(16),
             child: Row(

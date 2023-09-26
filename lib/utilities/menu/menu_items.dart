@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+typedef Tap<T> = Function();
+
 ListTile menuItem({
   required BuildContext context,
   required IconData icon,
   required String title,
-  required String route,
+  String? route,
+  Tap? onTapAction,
 }) {
   return ListTile(
     textColor: Colors.white,
@@ -12,8 +15,12 @@ ListTile menuItem({
     leading: Icon(icon),
     title: Text(title),
     onTap: () {
-      Navigator.pop(context);
-      Navigator.of(context).pushNamed(route);
+      if (onTapAction != null) {
+        onTapAction();
+      } else if (route != null) {
+        Navigator.pop(context);
+        Navigator.of(context).pushNamed(route);
+      }
     },
   );
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/constants/routes.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/utilities/dialogs/generic_dialog.dart';
 import 'package:museo/utilities/registeringOrLogging/generic_textfield.dart';
-import 'package:museo/views/user/registering_personal_data_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -64,7 +65,9 @@ class _LoginViewState extends State<LoginView> {
                 child: Column(
                   children: [
                     // Email Textfield
+                    // TODO -> Valid if the input its an e-mail address.
                     commonTextField(
+                      keyboardType: TextInputType.emailAddress,
                       specifiedController: _email,
                       hintTitle: context.loc.email_hint,
                     ),
@@ -72,6 +75,7 @@ class _LoginViewState extends State<LoginView> {
                     commonTextField(
                       specifiedController: _password,
                       hintTitle: context.loc.password_hint,
+                      obsecure: true,
                     ),
                     // Forget password
                     Align(
@@ -99,7 +103,34 @@ class _LoginViewState extends State<LoginView> {
                                 fontSize: 18,
                               ),
                             ),
-                            onPressed: () => {},
+                            onPressed: () {
+                              final email = _email.text;
+                              final password = _password.text;
+                              final allFilled =
+                                  email.isNotEmpty && password.isNotEmpty;
+
+                              if (allFilled) {
+                                showGenericDialog(
+                                  // TODO -> Content should be provided by L10N
+                                  context: context,
+                                  title: 'Congratulations',
+                                  content:
+                                      'Now, the developer have to create the connection with the databse and create your user kkk',
+                                  optionsBuilder: () => {
+                                    'Ok': false,
+                                  },
+                                );
+                              } else {
+                                showGenericDialog(
+                                  context: context,
+                                  title: context.loc.dialog_error_ops,
+                                  content: context.loc.dialog_error_not_filled,
+                                  optionsBuilder: () => {
+                                    'Ok': false,
+                                  },
+                                );
+                              }
+                            },
                           ),
                           // Not registred yet?
                           TextButton(
@@ -110,10 +141,7 @@ class _LoginViewState extends State<LoginView> {
                               ),
                             ),
                             onPressed: () => {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const RegisteringPersonalDataRegisteringView(),
-                              ))
+                              Navigator.of(context).pushNamed(register),
                             },
                           ),
                         ],
