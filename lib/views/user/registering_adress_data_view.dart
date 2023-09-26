@@ -159,9 +159,9 @@ class _RegisteringAdressDataViewState extends State<RegisteringAdressDataView> {
                         if (allFilled) {
                           showGenericDialog(
                             context: context,
-                            title: "Congratulations",
+                            title: 'Congratulations',
                             content:
-                                "Now, the developer have to create the connection with the databse and create your user kkk",
+                                'Now, the developer have to create the connection with the databse and create your user kkk',
                             optionsBuilder: () => {
                               'Ok': false,
                             },

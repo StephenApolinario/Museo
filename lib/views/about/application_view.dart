@@ -28,7 +28,7 @@ class ApplicationView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              Image.asset("assets/univali.jpg"),
+              Image.asset('assets/univali.jpg'),
               const SizedBox(height: 50),
               Text(
                 context.loc.about_application_content,

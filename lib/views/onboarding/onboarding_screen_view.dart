@@ -183,16 +183,16 @@ class OnBoard {
 
 final List<OnBoard> data = [
   OnBoard(
-    title: "Seja bem vindo!",
+    title: 'Seja bem vindo!',
     description:
-        "Esse aplicativo foi desenvolvido especialmente pensando em acessibilidade. A inclusão na visita do museu foi convertida para esse aplicativo áudio guia.",
-    image: "assets/mascots/tuba.png",
+        'Esse aplicativo foi desenvolvido especialmente pensando em acessibilidade. A inclusão na visita do museu foi convertida para esse aplicativo áudio guia.',
+    image: 'assets/mascots/tuba.png',
   ),
   OnBoard(
-    title: "Sobre o aplicativo",
+    title: 'Sobre o aplicativo',
     description:
-        "Aqui se encontra uma visita guiada por áudios em cada vitrine do museu, ou seja, automaticamente quando você for passando pelas vitrines, o áudio e determina assunto vai mudar, gerando uma facilidade de manusear o aplicativo. \n\n Continue com seu fone de ouvido que estamos apenas começando!",
-    image: "assets/mascots/whale.png",
+        'Aqui se encontra uma visita guiada por áudios em cada vitrine do museu, ou seja, automaticamente quando você for passando pelas vitrines, o áudio e determina assunto vai mudar, gerando uma facilidade de manusear o aplicativo. \n\n Continue com seu fone de ouvido que estamos apenas começando!',
+    image: 'assets/mascots/whale.png',
   ),
 ];
 

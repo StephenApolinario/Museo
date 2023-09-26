@@ -153,7 +153,7 @@ class NavigationDrawer extends StatelessWidget {
                     },
                     // icon: const Icon(Icons.access_alarm), //Logo Movi Here
                     icon: Image.asset(
-                      "assets/logos/movi.png",
+                      'assets/logos/movi.png',
                       height: 40,
                       width: 40,
                     ),
@@ -178,7 +178,7 @@ class NavigationDrawer extends StatelessWidget {
                     },
                     // icon: const Icon(Icons.access_alarm), //Logo Movi Here
                     icon: Image.asset(
-                      "assets/logos/univali.png",
+                      'assets/logos/univali.png',
                       height: 40,
                       width: 40,
                     ),

@@ -7,8 +7,8 @@ import 'package:museo/utilities/dialogs/start_dialog.dart';
 import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
 import 'package:museo/views/favorite/favorite_view.dart';
-import 'package:museo/views/onboarding/onboarding_screen.dart';
-import 'package:museo/views/ride/ride_select_view.dart';
+import 'package:museo/views/onboarding/onboarding_screen_view.dart';
+import 'package:museo/views/tour/tour_select_view.dart';
 import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs_view.dart';
 import 'package:museo/views/store/store_view.dart';
@@ -18,7 +18,7 @@ import 'package:museo/views/user/profile_view.dart';
 import 'package:museo/views/sections_view.dart';
 import 'package:museo/utilities/menu/menu.dart' as menu;
 import 'package:url_launcher/url_launcher.dart';
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const OnBoardingScreen(),
-      // home: const RideSelectView(),
       routes: {
         aboutMovi: (context) => const MoviView(),
         aboutApplication: (context) => const ApplicationView(),
@@ -60,7 +59,7 @@ class MyApp extends StatelessWidget {
         userProfile: (context) => const ProfileView(),
         login: (context) => const LoginView(),
         favorites: (context) => const FavoriteView(),
-        rideSelect: (context) => const RideSelectView(),
+        tourSelect: (context) => const TourSelectView(),
       },
     );
   }
@@ -83,7 +82,7 @@ class MyHomePage extends StatelessWidget {
               }
             },
             // icon: const Icon(Icons.access_alarm), //Logo Movi Here
-            icon: Image.asset("assets/logos/movi.png"),
+            icon: Image.asset('assets/logos/movi.png'),
           ),
         ],
       ),
@@ -94,7 +93,7 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // "Vamos iniciar" [X]
+              // 'Vamos iniciar' [X]
               Text(
                 context.loc.start_title,
                 style: const TextStyle(
@@ -136,7 +135,7 @@ class MyHomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const RideSelectView()),
+                              builder: (context) => const TourSelectView()),
                         );
                       }
                     }
@@ -149,7 +148,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // "Pesquise"
+              // 'Pesquise'
               const SizedBox(height: 30),
               Text(
                 context.loc.search_title,
@@ -181,7 +180,7 @@ class MyHomePage extends StatelessWidget {
               ),
               // MOVI PIC? [X]
               const SizedBox(height: 30),
-              Image.asset("assets/movi.png"),
+              Image.asset('assets/movi.png'),
             ],
           ),
         ),

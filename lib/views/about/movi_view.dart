@@ -28,7 +28,7 @@ class MoviView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              Image.asset("assets/movi.png"),
+              Image.asset('assets/movi.png'),
               const SizedBox(height: 50),
               Text(
                 context.loc.about_movi_content,

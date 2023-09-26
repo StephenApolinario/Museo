@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/views/ride/ride_view.dart';
+import 'package:museo/views/tour/tour_view.dart';
 
-class RideType {
+class TourType {
   final String name, description, icon;
 
   static const int maxNameLength = 13;
   static const int maxDescriptionLength = 70;
 
-  RideType({
+  TourType({
     required this.name,
     required this.description,
     required this.icon,
@@ -26,27 +26,52 @@ class RideType {
   }
 }
 
-List<RideType> fakeRideType = [
-  RideType(
+List<TourType> fakeTourType = [
+  TourType(
     name: 'Fast',
     description:
-        "Don't have enough time? Take a quick tour and enjoy the brief details",
-    icon: 'assets/rides/fast.svg',
+        'Don\'t have enough time? Take a quick tour and enjoy the brief details',
+    icon: 'assets/tour/fast.svg',
   ),
-  RideType(
+  TourType(
     name: 'Normal',
     description: 'Normal description',
-    icon: 'assets/rides/fast.svg',
+    icon: 'assets/tour/fast.svg',
   ),
-  RideType(
+  TourType(
     name: 'Detailed',
     description: 'Detailed description',
-    icon: 'assets/rides/fast.svg',
+    icon: 'assets/tour/fast.svg',
+  ),
+  TourType(
+    name: 'Detailed',
+    description: 'Detailed description',
+    icon: 'assets/tour/fast.svg',
+  ),
+  TourType(
+    name: 'Detailed',
+    description: 'Detailed description',
+    icon: 'assets/tour/fast.svg',
+  ),
+  TourType(
+    name: 'Detailed',
+    description: 'Detailed description',
+    icon: 'assets/tour/fast.svg',
+  ),
+  TourType(
+    name: 'Detailed',
+    description: 'Detailed description',
+    icon: 'assets/tour/fast.svg',
+  ),
+  TourType(
+    name: 'Detailed',
+    description: 'Detailed description',
+    icon: 'assets/tour/fast.svg',
   ),
 ];
 
-class RideSelectView extends StatelessWidget {
-  const RideSelectView({super.key});
+class TourSelectView extends StatelessWidget {
+  const TourSelectView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,22 +119,21 @@ class TourOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (fakeRideType.isNotEmpty) {
+    if (fakeTourType.isNotEmpty) {
       return ListView.builder(
         shrinkWrap: true,
-        itemCount: fakeRideType.length,
+        itemCount: fakeTourType.length,
         itemBuilder: (context, index) {
           if (index % 2 == 0) {
-            if (index == fakeRideType.length - 1) {
+            if (index == fakeTourType.length - 1) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  RideCard(
-                    // name: fakeRideType[index].name,
-                    name: fakeRideType[index].name,
-                    description: fakeRideType[index].description,
-                    icon: fakeRideType[index].icon,
+                  TourCard(
+                    name: fakeTourType[index].name,
+                    description: fakeTourType[index].description,
+                    icon: fakeTourType[index].icon,
                   ),
                 ],
               );
@@ -118,15 +142,15 @@ class TourOptions extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  RideCard(
-                    name: fakeRideType[index].name,
-                    description: fakeRideType[index].description,
-                    icon: fakeRideType[index].icon,
+                  TourCard(
+                    name: fakeTourType[index].name,
+                    description: fakeTourType[index].description,
+                    icon: fakeTourType[index].icon,
                   ),
-                  RideCard(
-                    name: fakeRideType[index + 1].name,
-                    description: fakeRideType[index + 1].description,
-                    icon: fakeRideType[index + 1].icon,
+                  TourCard(
+                    name: fakeTourType[index + 1].name,
+                    description: fakeTourType[index + 1].description,
+                    icon: fakeTourType[index + 1].icon,
                   ),
                 ],
               );
@@ -138,17 +162,17 @@ class TourOptions extends StatelessWidget {
       );
     } else {
       return const Text(
-        "Sorry, but there doesn't seem to be any tour at the moment",
+        'Sorry, but there doesn\'t seem to be any tour at the moment',
         textAlign: TextAlign.center,
       );
     }
   }
 }
 
-class RideCard extends StatelessWidget {
+class TourCard extends StatelessWidget {
   final String name, description, icon;
 
-  const RideCard({
+  const TourCard({
     super.key,
     required this.name,
     required this.description,
@@ -164,8 +188,8 @@ class RideCard extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return RideView(
-                  rideMode: name,
+                return TourView(
+                  mode: name,
                 );
               },
             ),
@@ -192,7 +216,7 @@ class RideCard extends StatelessWidget {
                   height: 50,
                   width: 50,
                 ),
-                // Ride name
+                // Tour name
                 const SizedBox(height: 10),
                 Text(
                   name,
