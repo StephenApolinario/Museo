@@ -466,6 +466,7 @@ class _RegisteringViewState extends State<RegisteringView> {
                     final allFilled =
                         password.isNotEmpty && repeatPassword.isNotEmpty;
                     if (allFilled && (password == repeatPassword)) {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       // TODO -> Connection with databse and remove fake waiting.
                       LoadingScreen().show(
                           context: context,
