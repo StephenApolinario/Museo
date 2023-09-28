@@ -8,6 +8,7 @@ import 'package:museo/utilities/dialogs/start_dialog.dart';
 import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
 import 'package:museo/views/favorite/favorite_view.dart';
+import 'package:museo/views/onboarding/onboarding_screen_view.dart';
 import 'package:museo/views/quiz/quiz_view.dart';
 import 'package:museo/views/tour/tour_select_view.dart';
 import 'package:museo/views/search_view.dart';
@@ -48,9 +49,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const QuizView(
-        tourMode: 'Teste',
-      ),
+      home: const OnBoardingScreen(),
       routes: {
         aboutMovi: (context) => const MoviView(),
         aboutApplication: (context) => const ApplicationView(),
