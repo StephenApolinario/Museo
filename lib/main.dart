@@ -3,14 +3,15 @@ import 'package:museo/constants/colors.dart';
 import 'package:museo/constants/routes.dart';
 import 'package:museo/constants/urls.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/gen/assets.gen.dart';
 import 'package:museo/utilities/dialogs/start_dialog.dart';
 import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
 import 'package:museo/views/favorite/favorite_view.dart';
-import 'package:museo/views/onboarding/onboarding_screen_view.dart';
+import 'package:museo/views/quiz/quiz_view.dart';
 import 'package:museo/views/tour/tour_select_view.dart';
 import 'package:museo/views/search_view.dart';
-import 'package:museo/views/store/souvenirs_view.dart';
+import 'package:museo/views/store/souvenirs/souvenirs_view.dart';
 import 'package:museo/views/store/store_view.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:museo/views/user/profile_view.dart';
@@ -47,7 +48,9 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const OnBoardingScreen(),
+      home: const QuizView(
+        tourMode: 'Teste',
+      ),
       routes: {
         aboutMovi: (context) => const MoviView(),
         aboutApplication: (context) => const ApplicationView(),
@@ -82,7 +85,7 @@ class MyHomePage extends StatelessWidget {
               }
             },
             // icon: const Icon(Icons.access_alarm), //Logo Movi Here
-            icon: Image.asset('assets/logos/movi.png'),
+            icon: Image.asset(Assets.logos.movi.path),
           ),
         ],
       ),

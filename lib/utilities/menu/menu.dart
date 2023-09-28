@@ -204,7 +204,7 @@ openMapsSheet(context) async {
       -26.754003,
       -48.687816,
     );
-    const title = 'Museu Oceanográfico Univali';
+    const title = 'Museu Oceanográfico UNIVALI';
     final availableMaps = await MapLauncher.installedMaps;
 
     showModalBottomSheet(

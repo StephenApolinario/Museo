@@ -76,6 +76,9 @@ flutter:
     - assets/tour/
     - assets/logos/
     - assets/mascots/
+    - assets/store/icons/
+    - assets/store/images/bags/
+    - assets/store/images/caps/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

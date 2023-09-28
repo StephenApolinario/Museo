@@ -97,6 +97,13 @@ class $AssetsSectionsGen {
       [beige, black, black2, blue, brown, exhibition, gray, green, red];
 }
 
+class $AssetsStoreGen {
+  const $AssetsStoreGen();
+
+  $AssetsStoreIconsGen get icons => const $AssetsStoreIconsGen();
+  $AssetsStoreImagesGen get images => const $AssetsStoreImagesGen();
+}
+
 class $AssetsTourGen {
   const $AssetsTourGen();
 
@@ -107,6 +114,92 @@ class $AssetsTourGen {
   List<String> get values => [fast];
 }
 
+class $AssetsStoreIconsGen {
+  const $AssetsStoreIconsGen();
+
+  /// File path: assets/store/icons/add_to_cart.svg
+  String get addToCart => 'assets/store/icons/add_to_cart.svg';
+
+  /// File path: assets/store/icons/back.svg
+  String get back => 'assets/store/icons/back.svg';
+
+  /// File path: assets/store/icons/bag_1.svg
+  String get bag1 => 'assets/store/icons/bag_1.svg';
+
+  /// File path: assets/store/icons/cart.svg
+  String get cart => 'assets/store/icons/cart.svg';
+
+  /// File path: assets/store/icons/heart.svg
+  String get heart => 'assets/store/icons/heart.svg';
+
+  /// File path: assets/store/icons/search.svg
+  String get search => 'assets/store/icons/search.svg';
+
+  /// List of all assets
+  List<String> get values => [addToCart, back, bag1, cart, heart, search];
+}
+
+class $AssetsStoreImagesGen {
+  const $AssetsStoreImagesGen();
+
+  $AssetsStoreImagesBagsGen get bags => const $AssetsStoreImagesBagsGen();
+  $AssetsStoreImagesCapsGen get caps => const $AssetsStoreImagesCapsGen();
+}
+
+class $AssetsStoreImagesBagsGen {
+  const $AssetsStoreImagesBagsGen();
+
+  /// File path: assets/store/images/bags/bag_1.png
+  AssetGenImage get bag1 =>
+      const AssetGenImage('assets/store/images/bags/bag_1.png');
+
+  /// File path: assets/store/images/bags/bag_2.png
+  AssetGenImage get bag2 =>
+      const AssetGenImage('assets/store/images/bags/bag_2.png');
+
+  /// File path: assets/store/images/bags/bag_3.png
+  AssetGenImage get bag3 =>
+      const AssetGenImage('assets/store/images/bags/bag_3.png');
+
+  /// File path: assets/store/images/bags/bag_4.png
+  AssetGenImage get bag4 =>
+      const AssetGenImage('assets/store/images/bags/bag_4.png');
+
+  /// File path: assets/store/images/bags/bag_5.png
+  AssetGenImage get bag5 =>
+      const AssetGenImage('assets/store/images/bags/bag_5.png');
+
+  /// File path: assets/store/images/bags/bag_6.png
+  AssetGenImage get bag6 =>
+      const AssetGenImage('assets/store/images/bags/bag_6.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [bag1, bag2, bag3, bag4, bag5, bag6];
+}
+
+class $AssetsStoreImagesCapsGen {
+  const $AssetsStoreImagesCapsGen();
+
+  /// File path: assets/store/images/caps/cap_1.png
+  AssetGenImage get cap1 =>
+      const AssetGenImage('assets/store/images/caps/cap_1.png');
+
+  /// File path: assets/store/images/caps/cap_2.png
+  AssetGenImage get cap2 =>
+      const AssetGenImage('assets/store/images/caps/cap_2.png');
+
+  /// File path: assets/store/images/caps/cap_3.png
+  AssetGenImage get cap3 =>
+      const AssetGenImage('assets/store/images/caps/cap_3.png');
+
+  /// File path: assets/store/images/caps/cap_4.png
+  AssetGenImage get cap4 =>
+      const AssetGenImage('assets/store/images/caps/cap_4.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [cap1, cap2, cap3, cap4];
+}
+
 class Assets {
   Assets._();
 
@@ -115,6 +208,7 @@ class Assets {
   static const AssetGenImage movi = AssetGenImage('assets/movi.png');
   static const $AssetsQuizzGen quizz = $AssetsQuizzGen();
   static const $AssetsSectionsGen sections = $AssetsSectionsGen();
+  static const $AssetsStoreGen store = $AssetsStoreGen();
   static const $AssetsTourGen tour = $AssetsTourGen();
   static const AssetGenImage univali = AssetGenImage('assets/univali.jpg');
   static const AssetGenImage univaliBlackWhite =

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/views/quizz/quizz_view.dart';
+import 'package:museo/views/quiz/quiz_view.dart';
 
 class Tour {
   final String title, subtitle, descrption, image;
@@ -59,7 +59,7 @@ class _TourViewState extends State<TourView> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => QuizzView(tourMode: widget.mode),
+            builder: (context) => QuizView(tourMode: widget.mode),
           ),
         );
       }
