@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:museo/views/quiz/components/result/background_container.dart';
-import 'package:museo/views/quiz/components/result/result_container.dart';
-import 'package:museo/views/quiz/components/result/row_share_and_continue_button.dart';
+import 'package:museo/views/quiz/components/result/build_background_container.dart';
+import 'package:museo/views/quiz/components/result/build_result_container.dart';
+import 'package:museo/views/quiz/components/result/build_row_share_and_continue_button.dart';
 import 'package:museo/views/quiz/quiz_view.dart' show Question;
 
 class ResultPage extends StatelessWidget {
@@ -46,7 +46,7 @@ class ResultPage extends StatelessWidget {
                   const SizedBox(height: 150),
                   MiddleContainer(quizzResult: quizzResult, tourMode: tourMode),
                   const SizedBox(height: 30),
-                  RowShareAndContinueButton(tourMode: tourMode)
+                  BuildRowShareAndContinueButton(tourMode: tourMode)
                 ],
               ),
             ),
@@ -98,8 +98,8 @@ class MiddleContainer extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  ResultContainer(quizzResult: quizzResult),
-                  const BackgroundContainer(),
+                  BuildResultContainer(quizzResult: quizzResult),
+                  const BuildBackgroundContainer(),
                 ],
               ),
             ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ResultContainer extends StatelessWidget {
-  const ResultContainer({
+class BuildResultContainer extends StatelessWidget {
+  const BuildResultContainer({
     super.key,
     required this.quizzResult,
   });

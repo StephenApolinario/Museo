@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:museo/views/quiz/quiz_result_view.dart';
 import 'package:museo/views/quiz/quiz_view.dart' show Quiz;
 
-class ContinueButton extends StatelessWidget {
+class BuildContinueButton extends StatelessWidget {
   final PageController controller;
   final BuildContext context;
   final Quiz quiz;
@@ -10,7 +10,7 @@ class ContinueButton extends StatelessWidget {
   final int questionNumber, score;
   final String tourMode;
 
-  const ContinueButton({
+  const BuildContinueButton({
     super.key,
     required this.quiz,
     required this.questionNumber,

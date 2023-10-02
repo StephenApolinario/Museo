@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/store/product.dart';
+import 'package:museo/models/store/products.dart';
 
-class ColorAndSize extends StatelessWidget {
-  const ColorAndSize({
+class BuildColorAndSize extends StatelessWidget {
+  const BuildColorAndSize({
     super.key,
     required this.product,
   });

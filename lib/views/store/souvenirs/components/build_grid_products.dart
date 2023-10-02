@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:museo/models/store/product.dart';
-import 'package:museo/views/store/souvenirs/components/item_card.dart';
+import 'package:museo/models/store/products.dart';
+import 'package:museo/views/store/souvenirs/components/build_item_card.dart';
 import 'package:museo/views/store/souvenirs/souvenirs_detail_view.dart';
 
-class GridProducts extends StatelessWidget {
+class BuildGridProducts extends StatelessWidget {
   final int categorieIndex;
 
-  const GridProducts({
+  const BuildGridProducts({
     super.key,
     required this.categorieIndex,
   });
@@ -25,7 +25,7 @@ class GridProducts extends StatelessWidget {
               childAspectRatio: 0.75,
             ),
             itemBuilder: (context, index) {
-              return ItemCard(
+              return BuildItemCard(
                 product: fakeSouvenirsList[categorieIndex].products[index],
                 press: () => Navigator.push(
                   context,

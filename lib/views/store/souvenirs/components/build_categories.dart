@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/store/product.dart';
+import 'package:museo/models/store/products.dart';
 
-class Categories extends StatefulWidget {
+class BuildCategories extends StatefulWidget {
   final int categorieIndex;
   final Function(int) updateIndex;
 
-  const Categories({
+  const BuildCategories({
     super.key,
     required this.categorieIndex,
     required this.updateIndex,
   });
 
   @override
-  State<Categories> createState() => _CategoriesState();
+  State<BuildCategories> createState() => _BuildCategoriesState();
 }
 
-class _CategoriesState extends State<Categories> {
+class _BuildCategoriesState extends State<BuildCategories> {
   List<SouvenirsCategory> categories = fakeSouvenirsList;
   @override
   Widget build(BuildContext context) {

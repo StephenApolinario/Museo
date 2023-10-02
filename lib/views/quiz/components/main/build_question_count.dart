@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/views/quiz/quiz_view.dart' show Quiz;
 
-class QuestionCount extends StatelessWidget {
-  const QuestionCount({
+class BuildQuestionCount extends StatelessWidget {
+  const BuildQuestionCount({
     super.key,
     required int questionNumber,
     required this.quiz,

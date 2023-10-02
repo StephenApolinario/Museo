@@ -4,26 +4,34 @@ import 'package:museo/constants/routes.dart';
 import 'package:museo/constants/urls.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/gen/assets.gen.dart';
+import 'package:museo/providers/shopping_ticket_cart.dart';
 import 'package:museo/utilities/dialogs/start_dialog.dart';
 import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
 import 'package:museo/views/favorite/favorite_view.dart';
 import 'package:museo/views/onboarding/onboarding_screen_view.dart';
-import 'package:museo/views/quiz/quiz_view.dart';
 import 'package:museo/views/tour/tour_select_view.dart';
 import 'package:museo/views/search_view.dart';
-import 'package:museo/views/store/souvenirs/souvenirs_view.dart';
-import 'package:museo/views/store/store_view.dart';
+import 'package:museo/views/store/souvenirs/souvenirs_store_view.dart';
+import 'package:museo/views/store/tickets/tickets_store_view.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:museo/views/user/profile_view.dart';
 import 'package:museo/views/sections_view.dart';
 import 'package:museo/utilities/menu/menu.dart' as menu;
 import 'package:museo/views/user/registering_view.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ShoppingTicketCart()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -56,7 +64,7 @@ class MyApp extends StatelessWidget {
         search: (context) => const SearchView(),
         sections: (context) => const SectionsView(),
         store: (context) => const StoreView(),
-        souvernirs: (context) => const SouvenirsView(),
+        souvernirs: (context) => const SouvenirsStoreView(),
         userProfile: (context) => const ProfileView(),
         login: (context) => const LoginView(),
         register: (context) => const RegisteringView(),
@@ -137,7 +145,8 @@ class MyHomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const TourSelectView()),
+                            builder: (context) => const TourSelectView(),
+                          ),
                         );
                       }
                     }

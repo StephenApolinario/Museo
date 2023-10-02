@@ -144,6 +144,8 @@ class $AssetsStoreImagesGen {
 
   $AssetsStoreImagesBagsGen get bags => const $AssetsStoreImagesBagsGen();
   $AssetsStoreImagesCapsGen get caps => const $AssetsStoreImagesCapsGen();
+  $AssetsStoreImagesTicketsGen get tickets =>
+      const $AssetsStoreImagesTicketsGen();
 }
 
 class $AssetsStoreImagesBagsGen {
@@ -198,6 +200,17 @@ class $AssetsStoreImagesCapsGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [cap1, cap2, cap3, cap4];
+}
+
+class $AssetsStoreImagesTicketsGen {
+  const $AssetsStoreImagesTicketsGen();
+
+  /// File path: assets/store/images/tickets/ticket.png
+  AssetGenImage get ticket =>
+      const AssetGenImage('assets/store/images/tickets/ticket.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [ticket];
 }
 
 class Assets {

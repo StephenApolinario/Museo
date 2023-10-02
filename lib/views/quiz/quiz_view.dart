@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/views/quiz/components/main/build_question_options.dart';
-import 'package:museo/views/quiz/components/main/continue_button.dart';
-import 'package:museo/views/quiz/components/main/question_count.dart';
-import 'package:museo/views/quiz/components/main/quizz_title.dart';
+import 'package:museo/views/quiz/components/main/build_continue_button.dart';
+import 'package:museo/views/quiz/components/main/build_question_count.dart';
+import 'package:museo/views/quiz/components/main/build_quizz_title.dart';
 
 class Question {
   final String text;
@@ -116,15 +116,15 @@ class _QuizViewState extends State<QuizView> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          QuizTitle(quiz: fakeQuiz),
-          QuestionCount(questionNumber: _questionNumber, quiz: fakeQuiz),
+          BuildQuizTitle(quiz: fakeQuiz),
+          BuildQuestionCount(questionNumber: _questionNumber, quiz: fakeQuiz),
           QuestionWithOptions(
             updateParent: _updateParent,
             quiz: fakeQuiz,
             controller: _controller,
             increaseScore: _increaseScore,
           ),
-          ContinueButton(
+          BuildContinueButton(
             context: context,
             quiz: fakeQuiz,
             questionNumber: _questionNumber - 1,

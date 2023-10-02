@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/views/store/components/build_outilned_button.dart';
 
-class CartCounter extends StatefulWidget {
-  const CartCounter({super.key});
+class BuildCartCounter extends StatefulWidget {
+  const BuildCartCounter({super.key});
 
   @override
-  State<CartCounter> createState() => _CartCounterState();
+  State<BuildCartCounter> createState() => _BuildCartCounterState();
 }
 
-class _CartCounterState extends State<CartCounter> {
+class _BuildCartCounterState extends State<BuildCartCounter> {
   int numOfItems = 1;
   @override
   Widget build(BuildContext context) {
@@ -43,26 +44,6 @@ class _CartCounterState extends State<CartCounter> {
           },
         ),
       ],
-    );
-  }
-
-  SizedBox buildOutlinedButton({
-    required IconData icon,
-    required Function() press,
-  }) {
-    return SizedBox(
-      width: 40,
-      height: 32,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(13),
-          ),
-        ),
-        onPressed: press,
-        child: Icon(icon),
-      ),
     );
   }
 }

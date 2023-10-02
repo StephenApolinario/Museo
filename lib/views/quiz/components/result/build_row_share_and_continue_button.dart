@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/views/tour/tour_view.dart';
 
-class RowShareAndContinueButton extends StatelessWidget {
-  const RowShareAndContinueButton({
+class BuildRowShareAndContinueButton extends StatelessWidget {
+  const BuildRowShareAndContinueButton({
     super.key,
     required this.tourMode,
   });

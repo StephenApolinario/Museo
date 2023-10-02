@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BackgroundContainer extends StatelessWidget {
-  const BackgroundContainer({
+class BuildBackgroundContainer extends StatelessWidget {
+  const BuildBackgroundContainer({
     super.key,
   });
 

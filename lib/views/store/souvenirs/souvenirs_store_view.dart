@@ -3,19 +3,19 @@ import 'package:flutter_svg/svg.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/gen/assets.gen.dart';
-import 'package:museo/views/store/souvenirs/components/categories.dart';
-import 'package:museo/views/store/souvenirs/components/grid_products.dart';
+import 'package:museo/views/store/souvenirs/components/build_categories.dart';
+import 'package:museo/views/store/souvenirs/components/build_grid_products.dart';
 
-class SouvenirsView extends StatefulWidget {
-  const SouvenirsView({
+class SouvenirsStoreView extends StatefulWidget {
+  const SouvenirsStoreView({
     super.key,
   });
 
   @override
-  State<SouvenirsView> createState() => _SouvenirsViewState();
+  State<SouvenirsStoreView> createState() => _SouvenirsStoreViewState();
 }
 
-class _SouvenirsViewState extends State<SouvenirsView> {
+class _SouvenirsStoreViewState extends State<SouvenirsStoreView> {
   int categorieIndex = 0;
 
   void updateCategoriIndex(int newValue) {
@@ -31,11 +31,11 @@ class _SouvenirsViewState extends State<SouvenirsView> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Categories(
+          BuildCategories(
             categorieIndex: categorieIndex,
             updateIndex: updateCategoriIndex,
           ),
-          GridProducts(
+          BuildGridProducts(
             categorieIndex: categorieIndex,
           ),
         ],

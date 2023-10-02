@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/views/quiz/quiz_view.dart' show Quiz;
 
-class QuizTitle extends StatelessWidget {
-  const QuizTitle({
+class BuildTitleCouponStore extends StatelessWidget {
+  final String title;
+
+  const BuildTitleCouponStore({
     super.key,
-    required this.quiz,
+    required this.title,
   });
-
-  final Quiz quiz;
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +15,12 @@ class QuizTitle extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        // TODO This color must be provided by an API
         color: mainBlue,
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 5, bottom: 5, right: 5, left: 16),
         child: Text(
-          // TODO This title must be provided by an API
-          quiz.title,
+          title,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 24,

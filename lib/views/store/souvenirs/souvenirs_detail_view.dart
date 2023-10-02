@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:museo/gen/assets.gen.dart';
-import 'package:museo/models/store/product.dart';
-import 'package:museo/views/store/souvenirs/components/cart_counter.dart';
-import 'package:museo/views/store/souvenirs/components/color_size.dart';
+import 'package:museo/models/store/products.dart';
+import 'package:museo/views/store/souvenirs/components/build_cart_counter.dart';
+import 'package:museo/views/store/souvenirs/components/build_color_and_size.dart';
 
 class SouvenirsDetailsView extends StatelessWidget {
   final Product product;
@@ -21,37 +21,7 @@ class SouvenirsDetailsView extends StatelessWidget {
       appBar: buildAppBar(),
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: size.height * 0.52,
-              padding: EdgeInsets.only(
-                top: size.height * 0.12,
-                left: 20,
-                right: 20,
-              ),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
-                ),
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ColorAndSize(product: product),
-                    const SizedBox(height: 10),
-                    Description(product: product),
-                    const SizedBox(height: 10),
-                    const CounterWithFavoriteButton(),
-                    const SizedBox(height: 10),
-                    AddToCart(product: product)
-                  ],
-                ),
-              ),
-            ),
-          ),
+          ProductDescription(size: size, product: product),
           ProductWithImage(product: product),
         ],
       ),
@@ -72,6 +42,52 @@ class SouvenirsDetailsView extends StatelessWidget {
         ),
         const SizedBox(width: 10),
       ],
+    );
+  }
+}
+
+class ProductDescription extends StatelessWidget {
+  const ProductDescription({
+    super.key,
+    required this.size,
+    required this.product,
+  });
+
+  final Size size;
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: size.height * 0.52,
+        padding: EdgeInsets.only(
+          top: size.height * 0.12,
+          left: 20,
+          right: 20,
+        ),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              BuildColorAndSize(product: product),
+              const SizedBox(height: 10),
+              Description(product: product),
+              const SizedBox(height: 10),
+              const CounterWithFavoriteButton(),
+              const SizedBox(height: 10),
+              AddToCart(product: product)
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -144,7 +160,7 @@ class CounterWithFavoriteButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const CartCounter(),
+        const BuildCartCounter(),
         Container(
           height: 32,
           width: 32,

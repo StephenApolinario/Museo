@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/store/product.dart';
+import 'package:museo/models/store/products.dart';
 
-class ItemCard extends StatelessWidget {
+class BuildItemCard extends StatelessWidget {
   final Product product;
   final Function() press;
 
-  const ItemCard({
+  const BuildItemCard({
     super.key,
     required this.product,
     required this.press,
