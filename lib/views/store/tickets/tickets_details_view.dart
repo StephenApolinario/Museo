@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/helpers/price.dart';
 import 'package:museo/models/store/tickets.dart';
 
 class CouponsDetailsView extends StatelessWidget {
@@ -211,7 +212,7 @@ class TicketDetails extends StatelessWidget {
           const SizedBox(height: 40),
           // Price TODO -> This string shoul be provided by Context.loc
           Text(
-            'Valor: R\$ ${(ticket.price).toStringAsFixed(2)}',
+            'Valor: ${generatePrice(price: ticket.price)}',
             style: const TextStyle(
               color: mainBlue,
               fontSize: 22,

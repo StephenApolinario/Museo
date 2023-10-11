@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:museo/models/store/opening_hours.dart';
+import 'package:museo/models/museum_information.dart';
 import 'package:museo/views/store/tickets/components/build_container_day.dart';
 
 class DaysType {
@@ -35,7 +35,7 @@ class _BuildDateSelectorState extends State<BuildDateSelector> {
 
   void generateDaysList() {
     DateTime today = DateTime.now();
-    DateTime initialDate = checkNextOpenDay(today: today.weekday);
+    DateTime initialDate = checkNextOpenDay(today: today);
     // 7 * 4 => 4 weeks to the future is the limit of the list.
     // Create a list that add 7 * 4 days to the future (4 weeks)
     daysList = List.generate(7 * 8, (index) {
@@ -68,15 +68,23 @@ class _BuildDateSelectorState extends State<BuildDateSelector> {
     );
   }
 
-  DateTime checkNextOpenDay({required int today}) {
+  DateTime checkNextOpenDay({required DateTime today}) {
     int minDifferenceDays = 9;
-    for (OperatingDays day in operatingDays) {
-      int difference =
-          (day.day - today + 7) % 7; // Calculate the positive difference
+    for (OperatingDays day in fakeOperatingDays) {
+      int difference = (day.day - today.weekday + 7) %
+          7; // Calculate the positive difference
       if (difference < minDifferenceDays) {
         minDifferenceDays = difference;
       }
     }
+
+    bool museumIsClosed =
+        fakeOperatingDays.any((element) => today.hour > element.close);
+
+    if (museumIsClosed && minDifferenceDays == 0) {
+      minDifferenceDays += 1;
+    }
+
     return DateTime(
       DateTime.now().year,
       DateTime.now().month,

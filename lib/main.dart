@@ -10,6 +10,7 @@ import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
 import 'package:museo/views/favorite/favorite_view.dart';
 import 'package:museo/views/onboarding/onboarding_screen_view.dart';
+import 'package:museo/views/store/checkout/checkout_view.dart';
 import 'package:museo/views/tour/tour_select_view.dart';
 import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs/souvenirs_store_view.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         register: (context) => const RegisteringView(),
         favorites: (context) => const FavoriteView(),
         tourSelect: (context) => const TourSelectView(),
+        checkout: (context) => const CheckoutView(),
       },
     );
   }

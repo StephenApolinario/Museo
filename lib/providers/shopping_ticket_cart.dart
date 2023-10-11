@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:museo/models/store/coupon_discount.dart';
 import 'package:museo/models/store/tickets.dart';
 
 class ShoppingTicketCart with ChangeNotifier {
@@ -13,6 +14,8 @@ class ShoppingTicketCart with ChangeNotifier {
       cart.tickets.add(
         TicketsCart(
           id: ticket.id,
+          name: ticket.title,
+          price: ticket.price,
           quantity: 0,
         ),
       );
@@ -22,7 +25,7 @@ class ShoppingTicketCart with ChangeNotifier {
   void updateCart({required int newQuantity, required int ticketID}) {
     cart.tickets.firstWhere((ticket) => ticket.id == ticketID).quantity =
         newQuantity;
-    notifyListeners();
+    shoppingCartPrice();
   }
 
   void updateDateCart({required DateTime date}) {
@@ -30,12 +33,46 @@ class ShoppingTicketCart with ChangeNotifier {
     notifyListeners();
   }
 
-  double shoppingCartPrice() {
+  void shoppingCartPrice() {
     double price = 0;
     for (var ticket in cart.tickets) {
       price += ticket.quantity *
           fakeTickets.firstWhere((element) => ticket.id == element.id).price;
     }
-    return price;
+    cart.totalPriceBeforeDiscount = price;
+    notifyListeners();
+  }
+
+  bool anyTicket() {
+    bool isTicket = cart.tickets.any(
+      (ticket) => ticket.quantity > 0,
+    );
+    return isTicket;
+  }
+
+  void applyDiscount({
+    required CouponDiscount coupon,
+  }) {
+    late double newTotalPrice;
+    const double minimumPrice = 1;
+    switch (coupon.access) {
+      case CouponAcess.value:
+        newTotalPrice = cart.totalPriceBeforeDiscount - coupon.valueDiscount;
+      case CouponAcess.percentage:
+        newTotalPrice = cart.totalPriceBeforeDiscount -
+            (cart.totalPriceBeforeDiscount * coupon.percentageDiscount / 100);
+      default:
+        throw Exception('Discount doens\'t have any type');
+    }
+    cart.isCouponApplied = true;
+    cart.coupon = coupon;
+    cart.totalPriceAfterDiscount =
+        newTotalPrice == 0 ? minimumPrice : newTotalPrice;
+    notifyListeners();
+  }
+
+  void removeDiscount() {
+    cart.isCouponApplied = false;
+    notifyListeners();
   }
 }

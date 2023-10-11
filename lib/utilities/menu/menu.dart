@@ -33,6 +33,7 @@ class NavigationDrawer extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    // TODO -> This must be provided by the API
                     const CircleAvatar(
                       radius: 52,
                       backgroundImage: NetworkImage(

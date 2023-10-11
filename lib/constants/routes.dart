@@ -11,3 +11,4 @@ const register = '/register';
 const tour = '/tour';
 const tourSelect = '/tour/select';
 const favorites = '/favorites';
+const checkout = '/store/checkout';

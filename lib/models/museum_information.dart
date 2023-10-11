@@ -10,7 +10,27 @@ class OperatingDays {
   });
 }
 
-final List<OperatingDays> operatingDays = [
+class MuseumAddress {
+  String country, state, city, phoneNumber, email;
+
+  MuseumAddress({
+    required this.country,
+    required this.state,
+    required this.city,
+    required this.phoneNumber,
+    required this.email,
+  });
+}
+
+final MuseumAddress fakeMuseumAddress = MuseumAddress(
+  country: 'Brazil',
+  state: 'SC',
+  city: 'Balenário Piçarras',
+  phoneNumber: '(47) 3341-5570',
+  email: 'educacao.movi@univali.br',
+);
+
+final List<OperatingDays> fakeOperatingDays = [
   OperatingDays(day: 2, open: 14, close: 17),
   OperatingDays(day: 3, open: 14, close: 17),
   OperatingDays(day: 4, open: 14, close: 17),

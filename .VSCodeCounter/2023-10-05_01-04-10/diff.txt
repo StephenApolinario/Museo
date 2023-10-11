@@ -1,0 +1,242 @@
+Date : 2023-10-05 01:04:10
+Directory : c:\dev\projects\TCC3\museo\lib\views\store\tickets
+Total : 120 files,  -8934 codes, -476 comments, -794 blanks, all -10204 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Properties |          2 |         -8 |          0 |         -2 |        -10 |
+| Markdown   |          2 |        -13 |          0 |         -9 |        -22 |
+| YAML       |          3 |        -46 |        -80 |        -18 |       -144 |
+| Swift      |          6 |        -56 |         -7 |        -20 |        -83 |
+| Groovy     |          3 |        -94 |         -5 |        -22 |       -121 |
+| JSON       |          6 |       -358 |          0 |        -22 |       -380 |
+| XML        |         10 |       -463 |        -48 |        -12 |       -523 |
+| C++        |         16 |       -545 |       -121 |       -182 |       -848 |
+| HTML       |          3 |       -605 |        -18 |        -46 |       -669 |
+| SVG        |          8 |     -1,805 |          0 |         -8 |     -1,813 |
+| Dart       |         61 |     -4,941 |       -197 |       -453 |     -5,591 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                 | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                    |        120 |     -8,934 |       -476 |       -794 |    -10,204 |
+| ..                                                                                                   |        120 |     -8,934 |       -476 |       -794 |    -10,204 |
+| ..\..                                                                                                |        104 |     -7,614 |       -461 |       -687 |     -8,762 |
+| ..\.. (Files)                                                                                        |          2 |       -198 |        -11 |         -6 |       -215 |
+| ..\..\..                                                                                             |         82 |     -5,392 |       -362 |       -516 |     -6,270 |
+| ..\..\.. (Files)                                                                                     |          1 |       -190 |         -8 |         -6 |       -204 |
+| ..\..\..\..                                                                                          |         58 |     -3,897 |       -289 |       -330 |     -4,516 |
+| ..\..\..\.. (Files)                                                                                  |          4 |        -56 |        -80 |        -25 |       -161 |
+| ..\..\..\..\android                                                                                  |         12 |       -161 |        -51 |        -33 |       -245 |
+| ..\..\..\..\android (Files)                                                                          |          3 |        -46 |          0 |        -11 |        -57 |
+| ..\..\..\..\android\app                                                                              |          8 |       -110 |        -51 |        -21 |       -182 |
+| ..\..\..\..\android\app (Files)                                                                      |          1 |        -51 |         -5 |        -12 |        -68 |
+| ..\..\..\..\android\app\src                                                                          |          7 |        -59 |        -46 |         -9 |       -114 |
+| ..\..\..\..\android\app\src\debug                                                                    |          1 |         -3 |         -4 |         -1 |         -8 |
+| ..\..\..\..\android\app\src\main                                                                     |          5 |        -53 |        -38 |         -7 |        -98 |
+| ..\..\..\..\android\app\src\main (Files)                                                             |          1 |        -27 |         -6 |         -1 |        -34 |
+| ..\..\..\..\android\app\src\main\res                                                                 |          4 |        -26 |        -32 |         -6 |        -64 |
+| ..\..\..\..\android\app\src\main\res\drawable                                                        |          1 |         -4 |         -7 |         -2 |        -13 |
+| ..\..\..\..\android\app\src\main\res\drawable-v21                                                    |          1 |         -4 |         -7 |         -2 |        -13 |
+| ..\..\..\..\android\app\src\main\res\values                                                          |          1 |         -9 |         -9 |         -1 |        -19 |
+| ..\..\..\..\android\app\src\main\res\values-night                                                    |          1 |         -9 |         -9 |         -1 |        -19 |
+| ..\..\..\..\android\app\src\profile                                                                  |          1 |         -3 |         -4 |         -1 |         -8 |
+| ..\..\..\..\android\gradle                                                                           |          1 |         -5 |          0 |         -1 |         -6 |
+| ..\..\..\..\android\gradle\wrapper                                                                   |          1 |         -5 |          0 |         -1 |         -6 |
+| ..\..\..\..\assets                                                                                   |         10 |     -2,372 |         -2 |        -48 |     -2,422 |
+| ..\..\..\..\assets\quizz                                                                             |          1 |     -1,738 |          0 |         -2 |     -1,740 |
+| ..\..\..\..\assets\store                                                                             |          8 |       -604 |         -2 |        -46 |       -652 |
+| ..\..\..\..\assets\store\icons                                                                       |          6 |        -37 |          0 |         -6 |        -43 |
+| ..\..\..\..\assets\store\images                                                                      |          2 |       -567 |         -2 |        -40 |       -609 |
+| ..\..\..\..\assets\store\images (Files)                                                              |          1 |       -566 |         -1 |        -39 |       -606 |
+| ..\..\..\..\assets\store\images\Nova guia_files                                                      |          1 |         -1 |         -1 |         -1 |         -3 |
+| ..\..\..\..\assets\tour                                                                              |          1 |        -30 |          0 |          0 |        -30 |
+| ..\..\..\..\ios                                                                                      |          8 |       -229 |         -4 |        -13 |       -246 |
+| ..\..\..\..\ios\Runner                                                                               |          7 |       -222 |         -2 |         -9 |       -233 |
+| ..\..\..\..\ios\Runner (Files)                                                                       |          2 |        -13 |          0 |         -3 |        -16 |
+| ..\..\..\..\ios\RunnerTests                                                                          |          1 |         -7 |         -2 |         -4 |        -13 |
+| ..\..\..\..\ios\Runner\Assets.xcassets                                                               |          3 |       -148 |          0 |         -4 |       -152 |
+| ..\..\..\..\ios\Runner\Assets.xcassets\AppIcon.appiconset                                            |          1 |       -122 |          0 |         -1 |       -123 |
+| ..\..\..\..\ios\Runner\Assets.xcassets\LaunchImage.imageset                                          |          2 |        -26 |          0 |         -3 |        -29 |
+| ..\..\..\..\ios\Runner\Base.lproj                                                                    |          2 |        -61 |         -2 |         -2 |        -65 |
+| ..\..\..\..\linux                                                                                    |          5 |       -102 |        -27 |        -38 |       -167 |
+| ..\..\..\..\linux (Files)                                                                            |          3 |        -86 |        -18 |        -27 |       -131 |
+| ..\..\..\..\linux\flutter                                                                            |          2 |        -16 |         -9 |        -11 |        -36 |
+| ..\..\..\..\macos                                                                                    |          6 |       -448 |         -5 |        -16 |       -469 |
+| ..\..\..\..\macos\Flutter                                                                            |          1 |        -10 |         -3 |         -4 |        -17 |
+| ..\..\..\..\macos\Runner                                                                             |          4 |       -431 |          0 |         -8 |       -439 |
+| ..\..\..\..\macos\Runner (Files)                                                                     |          2 |        -20 |          0 |         -6 |        -26 |
+| ..\..\..\..\macos\RunnerTests                                                                        |          1 |         -7 |         -2 |         -4 |        -13 |
+| ..\..\..\..\macos\Runner\Assets.xcassets                                                             |          1 |        -68 |          0 |         -1 |        -69 |
+| ..\..\..\..\macos\Runner\Assets.xcassets\AppIcon.appiconset                                          |          1 |        -68 |          0 |         -1 |        -69 |
+| ..\..\..\..\macos\Runner\Base.lproj                                                                  |          1 |       -343 |          0 |         -1 |       -344 |
+| ..\..\..\..\test                                                                                     |          1 |        -14 |        -10 |         -7 |        -31 |
+| ..\..\..\..\web                                                                                      |          2 |        -73 |        -16 |         -7 |        -96 |
+| ..\..\..\..\windows                                                                                  |         10 |       -442 |        -94 |       -143 |       -679 |
+| ..\..\..\..\windows\flutter                                                                          |          2 |        -14 |         -9 |        -11 |        -34 |
+| ..\..\..\..\windows\runner                                                                           |          8 |       -428 |        -85 |       -132 |       -645 |
+| ..\..\..\constants                                                                                   |          3 |        -23 |          0 |         -4 |        -27 |
+| ..\..\..\extensions                                                                                  |          2 |        -14 |          0 |         -3 |        -17 |
+| ..\..\..\extensions (Files)                                                                          |          1 |         -8 |          0 |         -1 |         -9 |
+| ..\..\..\extensions\buildcontext                                                                     |          1 |         -6 |          0 |         -2 |         -8 |
+| ..\..\..\gen                                                                                         |          1 |       -184 |        -53 |        -70 |       -307 |
+| ..\..\..\helpers                                                                                     |          3 |       -133 |          0 |        -16 |       -149 |
+| ..\..\..\l10n                                                                                        |          2 |       -110 |          0 |        -18 |       -128 |
+| ..\..\..\models                                                                                      |          5 |       -364 |         -1 |        -35 |       -400 |
+| ..\..\..\models (Files)                                                                              |          1 |        -34 |         -1 |         -6 |        -41 |
+| ..\..\..\models\store                                                                                |          4 |       -330 |          0 |        -29 |       -359 |
+| ..\..\..\providers                                                                                   |          1 |        -69 |          0 |        -10 |        -79 |
+| ..\..\..\utilities                                                                                   |          6 |       -408 |        -11 |        -24 |       -443 |
+| ..\..\..\utilities\dialogs                                                                           |          2 |        -51 |          0 |         -5 |        -56 |
+| ..\..\..\utilities\menu                                                                              |          2 |       -254 |         -8 |         -8 |       -270 |
+| ..\..\..\utilities\registeringOrLogging                                                              |          1 |        -68 |         -3 |         -6 |        -77 |
+| ..\..\..\utilities\widget                                                                            |          1 |        -35 |          0 |         -5 |        -40 |
+| ..\..\about                                                                                          |          2 |        -84 |          0 |         -6 |        -90 |
+| ..\..\favorite                                                                                       |          1 |        -23 |          0 |         -3 |        -26 |
+| ..\..\onboarding                                                                                     |          1 |       -218 |          0 |        -21 |       -239 |
+| ..\..\quiz                                                                                           |         11 |       -664 |        -22 |        -68 |       -754 |
+| ..\..\quiz (Files)                                                                                   |          2 |       -221 |         -5 |        -27 |       -253 |
+| ..\..\quiz\components                                                                                |          9 |       -443 |        -17 |        -41 |       -501 |
+| ..\..\quiz\components\main                                                                           |          6 |       -315 |         -6 |        -30 |       -351 |
+| ..\..\quiz\components\result                                                                         |          3 |       -128 |        -11 |        -11 |       -150 |
+| ..\..\tour                                                                                           |          2 |       -426 |        -15 |        -29 |       -470 |
+| ..\..\user                                                                                           |          3 |       -609 |        -51 |        -38 |       -698 |
+| ..\checkout                                                                                          |          8 |       -689 |        -15 |        -55 |       -759 |
+| ..\checkout (Files)                                                                                  |          1 |        -46 |         -2 |         -4 |        -52 |
+| ..\checkout\components                                                                               |          7 |       -643 |        -13 |        -51 |       -707 |
+| ..\components                                                                                        |          1 |        -20 |          0 |         -2 |        -22 |
+| ..\souvenirs                                                                                         |          7 |       -611 |          0 |        -50 |       -661 |
+| ..\souvenirs (Files)                                                                                 |          2 |       -316 |          0 |        -26 |       -342 |
+| ..\souvenirs\components                                                                              |          5 |       -295 |          0 |        -24 |       -319 |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                             | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\dev\projects\TCC3\museo\README.md                                                                 | Markdown   |        -10 |          0 |         -7 |        -17 |
+| c:\dev\projects\TCC3\museo\analysis_options.yaml                                                     | YAML       |         -4 |        -21 |         -4 |        -29 |
+| c:\dev\projects\TCC3\museo\android\app\build.gradle                                                  | Groovy     |        -51 |         -5 |        -12 |        -68 |
+| c:\dev\projects\TCC3\museo\android\app\src\debug\AndroidManifest.xml                                 | XML        |         -3 |         -4 |         -1 |         -8 |
+| c:\dev\projects\TCC3\museo\android\app\src\main\AndroidManifest.xml                                  | XML        |        -27 |         -6 |         -1 |        -34 |
+| c:\dev\projects\TCC3\museo\android\app\src\main\res\drawable-v21\launch_background.xml               | XML        |         -4 |         -7 |         -2 |        -13 |
+| c:\dev\projects\TCC3\museo\android\app\src\main\res\drawable\launch_background.xml                   | XML        |         -4 |         -7 |         -2 |        -13 |
+| c:\dev\projects\TCC3\museo\android\app\src\main\res\values-night\styles.xml                          | XML        |         -9 |         -9 |         -1 |        -19 |
+| c:\dev\projects\TCC3\museo\android\app\src\main\res\values\styles.xml                                | XML        |         -9 |         -9 |         -1 |        -19 |
+| c:\dev\projects\TCC3\museo\android\app\src\profile\AndroidManifest.xml                               | XML        |         -3 |         -4 |         -1 |         -8 |
+| c:\dev\projects\TCC3\museo\android\build.gradle                                                      | Groovy     |        -27 |          0 |         -5 |        -32 |
+| c:\dev\projects\TCC3\museo\android\gradle.properties                                                 | Properties |         -3 |          0 |         -1 |         -4 |
+| c:\dev\projects\TCC3\museo\android\gradle\wrapper\gradle-wrapper.properties                          | Properties |         -5 |          0 |         -1 |         -6 |
+| c:\dev\projects\TCC3\museo\android\settings.gradle                                                   | Groovy     |        -16 |          0 |         -5 |        -21 |
+| c:\dev\projects\TCC3\museo\assets\quizz\dots.svg                                                     | SVG        |     -1,738 |          0 |         -2 |     -1,740 |
+| c:\dev\projects\TCC3\museo\assets\store\icons\add_to_cart.svg                                        | SVG        |         -9 |          0 |         -1 |        -10 |
+| c:\dev\projects\TCC3\museo\assets\store\icons\back.svg                                               | SVG        |         -7 |          0 |         -1 |         -8 |
+| c:\dev\projects\TCC3\museo\assets\store\icons\bag_1.svg                                              | SVG        |         -8 |          0 |         -1 |         -9 |
+| c:\dev\projects\TCC3\museo\assets\store\icons\cart.svg                                               | SVG        |         -5 |          0 |         -1 |         -6 |
+| c:\dev\projects\TCC3\museo\assets\store\icons\heart.svg                                              | SVG        |         -5 |          0 |         -1 |         -6 |
+| c:\dev\projects\TCC3\museo\assets\store\icons\search.svg                                             | SVG        |         -3 |          0 |         -1 |         -4 |
+| c:\dev\projects\TCC3\museo\assets\store\images\Nova guia.html                                        | HTML       |       -566 |         -1 |        -39 |       -606 |
+| c:\dev\projects\TCC3\museo\assets\store\images\Nova guia_files\saved_resource.html                   | HTML       |         -1 |         -1 |         -1 |         -3 |
+| c:\dev\projects\TCC3\museo\assets\tour\fast.svg                                                      | SVG        |        -30 |          0 |          0 |        -30 |
+| c:\dev\projects\TCC3\museo\ios\RunnerTests\RunnerTests.swift                                         | Swift      |         -7 |         -2 |         -4 |        -13 |
+| c:\dev\projects\TCC3\museo\ios\Runner\AppDelegate.swift                                              | Swift      |        -12 |          0 |         -2 |        -14 |
+| c:\dev\projects\TCC3\museo\ios\Runner\Assets.xcassets\AppIcon.appiconset\Contents.json               | JSON       |       -122 |          0 |         -1 |       -123 |
+| c:\dev\projects\TCC3\museo\ios\Runner\Assets.xcassets\LaunchImage.imageset\Contents.json             | JSON       |        -23 |          0 |         -1 |        -24 |
+| c:\dev\projects\TCC3\museo\ios\Runner\Assets.xcassets\LaunchImage.imageset\README.md                 | Markdown   |         -3 |          0 |         -2 |         -5 |
+| c:\dev\projects\TCC3\museo\ios\Runner\Base.lproj\LaunchScreen.storyboard                             | XML        |        -36 |         -1 |         -1 |        -38 |
+| c:\dev\projects\TCC3\museo\ios\Runner\Base.lproj\Main.storyboard                                     | XML        |        -25 |         -1 |         -1 |        -27 |
+| c:\dev\projects\TCC3\museo\ios\Runner\Runner-Bridging-Header.h                                       | C++        |         -1 |          0 |         -1 |         -2 |
+| c:\dev\projects\TCC3\museo\l10n.yaml                                                                 | YAML       |         -3 |          0 |          0 |         -3 |
+| c:\dev\projects\TCC3\museo\lib\constants\colors.dart                                                 | Dart       |         -6 |          0 |         -2 |         -8 |
+| c:\dev\projects\TCC3\museo\lib\constants\routes.dart                                                 | Dart       |        -14 |          0 |         -1 |        -15 |
+| c:\dev\projects\TCC3\museo\lib\constants\urls.dart                                                   | Dart       |         -3 |          0 |         -1 |         -4 |
+| c:\dev\projects\TCC3\museo\lib\extensions\buildcontext\loc.dart                                      | Dart       |         -6 |          0 |         -2 |         -8 |
+| c:\dev\projects\TCC3\museo\lib\extensions\string.dart                                                | Dart       |         -8 |          0 |         -1 |         -9 |
+| c:\dev\projects\TCC3\museo\lib\gen\assets.gen.dart                                                   | Dart       |       -184 |        -53 |        -70 |       -307 |
+| c:\dev\projects\TCC3\museo\lib\helpers\loadin_screen_controller.dart                                 | Dart       |        -12 |          0 |         -4 |        -16 |
+| c:\dev\projects\TCC3\museo\lib\helpers\loading_screen.dart                                           | Dart       |       -104 |          0 |         -9 |       -113 |
+| c:\dev\projects\TCC3\museo\lib\helpers\price.dart                                                    | Dart       |        -17 |          0 |         -3 |        -20 |
+| c:\dev\projects\TCC3\museo\lib\l10n\intl_en.arb                                                      | JSON       |        -55 |          0 |         -9 |        -64 |
+| c:\dev\projects\TCC3\museo\lib\l10n\intl_pt.arb                                                      | JSON       |        -55 |          0 |         -9 |        -64 |
+| c:\dev\projects\TCC3\museo\lib\main.dart                                                             | Dart       |       -190 |         -8 |         -6 |       -204 |
+| c:\dev\projects\TCC3\museo\lib\models\museum_information.dart                                        | Dart       |        -34 |         -1 |         -6 |        -41 |
+| c:\dev\projects\TCC3\museo\lib\models\store\coupon_discount.dart                                     | Dart       |        -44 |          0 |         -5 |        -49 |
+| c:\dev\projects\TCC3\museo\lib\models\store\payments_methods.dart                                    | Dart       |        -79 |          0 |         -7 |        -86 |
+| c:\dev\projects\TCC3\museo\lib\models\store\products.dart                                            | Dart       |       -133 |          0 |         -9 |       -142 |
+| c:\dev\projects\TCC3\museo\lib\models\store\tickets.dart                                             | Dart       |        -74 |          0 |         -8 |        -82 |
+| c:\dev\projects\TCC3\museo\lib\providers\shopping_ticket_cart.dart                                   | Dart       |        -69 |          0 |        -10 |        -79 |
+| c:\dev\projects\TCC3\museo\lib\utilities\dialogs\generic_dialog.dart                                 | Dart       |        -37 |          0 |         -3 |        -40 |
+| c:\dev\projects\TCC3\museo\lib\utilities\dialogs\start_dialog.dart                                   | Dart       |        -14 |          0 |         -2 |        -16 |
+| c:\dev\projects\TCC3\museo\lib\utilities\menu\menu.dart                                              | Dart       |       -230 |         -8 |         -5 |       -243 |
+| c:\dev\projects\TCC3\museo\lib\utilities\menu\menu_items.dart                                        | Dart       |        -24 |          0 |         -3 |        -27 |
+| c:\dev\projects\TCC3\museo\lib\utilities\registeringOrLogging\generic_textfield.dart                 | Dart       |        -68 |         -3 |         -6 |        -77 |
+| c:\dev\projects\TCC3\museo\lib\utilities\widget\custom_page_route.dart                               | Dart       |        -35 |          0 |         -5 |        -40 |
+| c:\dev\projects\TCC3\museo\lib\views\about\application_view.dart                                     | Dart       |        -42 |          0 |         -3 |        -45 |
+| c:\dev\projects\TCC3\museo\lib\views\about\movi_view.dart                                            | Dart       |        -42 |          0 |         -3 |        -45 |
+| c:\dev\projects\TCC3\museo\lib\views\favorite\favorite_view.dart                                     | Dart       |        -23 |          0 |         -3 |        -26 |
+| c:\dev\projects\TCC3\museo\lib\views\onboarding\onboarding_screen_view.dart                          | Dart       |       -218 |          0 |        -21 |       -239 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\main\build_continue_button.dart                 | Dart       |        -71 |          0 |         -6 |        -77 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\main\build_options.dart                         | Dart       |        -77 |          0 |         -7 |        -84 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\main\build_question.dart                        | Dart       |        -75 |         -3 |         -5 |        -83 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\main\build_question_count.dart                  | Dart       |        -25 |         -1 |         -4 |        -30 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\main\build_question_options.dart                | Dart       |        -37 |          0 |         -4 |        -41 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\main\build_quizz_title.dart                     | Dart       |        -30 |         -2 |         -4 |        -36 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\result\build_background_container.dart          | Dart       |        -18 |          0 |         -3 |        -21 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\result\build_result_container.dart              | Dart       |        -51 |         -7 |         -4 |        -62 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\components\result\build_row_share_and_continue_button.dart | Dart       |        -59 |         -4 |         -4 |        -67 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\quiz_result_view.dart                                      | Dart       |        -97 |         -4 |        -11 |       -112 |
+| c:\dev\projects\TCC3\museo\lib\views\quiz\quiz_view.dart                                             | Dart       |       -124 |         -1 |        -16 |       -141 |
+| c:\dev\projects\TCC3\museo\lib\views\search_view.dart                                                | Dart       |        -21 |          0 |         -3 |        -24 |
+| c:\dev\projects\TCC3\museo\lib\views\sections_view.dart                                              | Dart       |       -177 |        -11 |         -3 |       -191 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\checkout_view.dart                               | Dart       |        -46 |         -2 |         -4 |        -52 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\components\build_cart_summary_details.dart       | Dart       |       -132 |         -5 |        -13 |       -150 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\components\build_cart_summary_title.dart         | Dart       |        -39 |         -1 |         -3 |        -43 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\components\build_coupon_code.dart                | Dart       |       -166 |         -1 |        -14 |       -181 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\components\build_hello_user.dart                 | Dart       |        -79 |         -3 |         -7 |        -89 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\components\build_location_address.dart           | Dart       |        -52 |         -1 |         -5 |        -58 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\components\build_payment_information.dart        | Dart       |        -68 |         -1 |         -3 |        -72 |
+| c:\dev\projects\TCC3\museo\lib\views\store\checkout\components\build_payment_method.dart             | Dart       |       -107 |         -1 |         -6 |       -114 |
+| c:\dev\projects\TCC3\museo\lib\views\store\components\build_outilned_button.dart                     | Dart       |        -20 |          0 |         -2 |        -22 |
+| c:\dev\projects\TCC3\museo\lib\views\store\souvenirs\components\build_cart_counter.dart              | Dart       |        -46 |          0 |         -4 |        -50 |
+| c:\dev\projects\TCC3\museo\lib\views\store\souvenirs\components\build_categories.dart                | Dart       |        -62 |          0 |         -6 |        -68 |
+| c:\dev\projects\TCC3\museo\lib\views\store\souvenirs\components\build_color_and_size.dart            | Dart       |        -98 |          0 |         -6 |       -104 |
+| c:\dev\projects\TCC3\museo\lib\views\store\souvenirs\components\build_grid_products.dart             | Dart       |        -41 |          0 |         -4 |        -45 |
+| c:\dev\projects\TCC3\museo\lib\views\store\souvenirs\components\build_item_card.dart                 | Dart       |        -48 |          0 |         -4 |        -52 |
+| c:\dev\projects\TCC3\museo\lib\views\store\souvenirs\souvenirs_detail_view.dart                      | Dart       |       -248 |          0 |        -19 |       -267 |
+| c:\dev\projects\TCC3\museo\lib\views\store\souvenirs\souvenirs_store_view.dart                       | Dart       |        -68 |          0 |         -7 |        -75 |
+| c:\dev\projects\TCC3\museo\lib\views\tour\tour_select_view.dart                                      | Dart       |       -230 |         -3 |        -12 |       -245 |
+| c:\dev\projects\TCC3\museo\lib\views\tour\tour_view.dart                                             | Dart       |       -196 |        -12 |        -17 |       -225 |
+| c:\dev\projects\TCC3\museo\lib\views\user\login_view.dart                                            | Dart       |       -144 |         -8 |         -8 |       -160 |
+| c:\dev\projects\TCC3\museo\lib\views\user\profile_view.dart                                          | Dart       |        -23 |          0 |         -3 |        -26 |
+| c:\dev\projects\TCC3\museo\lib\views\user\registering_view.dart                                      | Dart       |       -442 |        -43 |        -27 |       -512 |
+| c:\dev\projects\TCC3\museo\linux\flutter\generated_plugin_registrant.cc                              | C++        |        -11 |         -4 |         -5 |        -20 |
+| c:\dev\projects\TCC3\museo\linux\flutter\generated_plugin_registrant.h                               | C++        |         -5 |         -5 |         -6 |        -16 |
+| c:\dev\projects\TCC3\museo\linux\main.cc                                                             | C++        |         -5 |          0 |         -2 |         -7 |
+| c:\dev\projects\TCC3\museo\linux\my_application.cc                                                   | C++        |        -74 |        -11 |        -20 |       -105 |
+| c:\dev\projects\TCC3\museo\linux\my_application.h                                                    | C++        |         -7 |         -7 |         -5 |        -19 |
+| c:\dev\projects\TCC3\museo\macos\Flutter\GeneratedPluginRegistrant.swift                             | Swift      |        -10 |         -3 |         -4 |        -17 |
+| c:\dev\projects\TCC3\museo\macos\RunnerTests\RunnerTests.swift                                       | Swift      |         -7 |         -2 |         -4 |        -13 |
+| c:\dev\projects\TCC3\museo\macos\Runner\AppDelegate.swift                                            | Swift      |         -8 |          0 |         -2 |        -10 |
+| c:\dev\projects\TCC3\museo\macos\Runner\Assets.xcassets\AppIcon.appiconset\Contents.json             | JSON       |        -68 |          0 |         -1 |        -69 |
+| c:\dev\projects\TCC3\museo\macos\Runner\Base.lproj\MainMenu.xib                                      | XML        |       -343 |          0 |         -1 |       -344 |
+| c:\dev\projects\TCC3\museo\macos\Runner\MainFlutterWindow.swift                                      | Swift      |        -12 |          0 |         -4 |        -16 |
+| c:\dev\projects\TCC3\museo\pubspec.yaml                                                              | YAML       |        -39 |        -59 |        -14 |       -112 |
+| c:\dev\projects\TCC3\museo\test\widget_test.dart                                                     | Dart       |        -14 |        -10 |         -7 |        -31 |
+| c:\dev\projects\TCC3\museo\web\index.html                                                            | HTML       |        -38 |        -16 |         -6 |        -60 |
+| c:\dev\projects\TCC3\museo\web\manifest.json                                                         | JSON       |        -35 |          0 |         -1 |        -36 |
+| c:\dev\projects\TCC3\museo\windows\flutter\generated_plugin_registrant.cc                            | C++        |         -9 |         -4 |         -5 |        -18 |
+| c:\dev\projects\TCC3\museo\windows\flutter\generated_plugin_registrant.h                             | C++        |         -5 |         -5 |         -6 |        -16 |
+| c:\dev\projects\TCC3\museo\windows\runner\flutter_window.cpp                                         | C++        |        -49 |         -7 |        -16 |        -72 |
+| c:\dev\projects\TCC3\museo\windows\runner\flutter_window.h                                           | C++        |        -20 |         -5 |         -9 |        -34 |
+| c:\dev\projects\TCC3\museo\windows\runner\main.cpp                                                   | C++        |        -30 |         -4 |        -10 |        -44 |
+| c:\dev\projects\TCC3\museo\windows\runner\resource.h                                                 | C++        |         -9 |         -6 |         -2 |        -17 |
+| c:\dev\projects\TCC3\museo\windows\runner\utils.cpp                                                  | C++        |        -54 |         -2 |        -10 |        -66 |
+| c:\dev\projects\TCC3\museo\windows\runner\utils.h                                                    | C++        |         -8 |         -6 |         -6 |        -20 |
+| c:\dev\projects\TCC3\museo\windows\runner\win32_window.cpp                                           | C++        |       -210 |        -24 |        -55 |       -289 |
+| c:\dev\projects\TCC3\museo\windows\runner\win32_window.h                                             | C++        |        -48 |        -31 |        -24 |       -103 |
+| Total                                                                                                |            |     -8,934 |       -476 |       -794 |    -10,204 |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
