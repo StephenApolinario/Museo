@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:museo/models/quizz/quiz.dart';
+import 'package:museo/models/tour/tour_mode.dart';
 import 'package:museo/views/quiz/quiz_result_view.dart';
-import 'package:museo/views/quiz/quiz_view.dart' show Quiz;
 
 class BuildContinueButton extends StatelessWidget {
   final PageController controller;
@@ -8,7 +9,7 @@ class BuildContinueButton extends StatelessWidget {
   final Quiz quiz;
   final Function increaseQuestionNumber;
   final int questionNumber, score;
-  final String tourMode;
+  final TourMode tourMode;
 
   const BuildContinueButton({
     super.key,
@@ -56,13 +57,14 @@ class BuildContinueButton extends StatelessWidget {
           );
           increaseQuestionNumber();
         } else {
+          quiz.isCompleted = true;
+          quiz.score = score;
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => ResultPage(
                 tourMode: tourMode,
-                score: score,
-                questions: quiz.questions,
+                quiz: quiz,
               ),
             ),
           );

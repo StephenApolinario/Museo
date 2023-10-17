@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/models/store/coupon_discount.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:museo/utilities/dialogs/generic_dialog.dart';
 
 class BuildCouponCode extends StatefulWidget {

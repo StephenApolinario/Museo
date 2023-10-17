@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:museo/views/store/tickets/components/build_date_selector.dart'
     show DaysType;
 import 'package:provider/provider.dart';

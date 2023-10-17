@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:museo/models/quizz/quiz.dart';
+import 'package:museo/models/tour/tour_mode.dart';
 import 'package:museo/views/quiz/components/result/build_background_container.dart';
 import 'package:museo/views/quiz/components/result/build_result_container.dart';
 import 'package:museo/views/quiz/components/result/build_row_share_and_continue_button.dart';
-import 'package:museo/views/quiz/quiz_view.dart' show Question;
 
 class ResultPage extends StatelessWidget {
-  final int score;
-  final List<Question> questions;
-  final String tourMode;
+  final Quiz quiz;
+  final TourMode tourMode;
 
   const ResultPage({
     super.key,
-    required this.score,
-    required this.questions,
+    required this.quiz,
     required this.tourMode,
   });
 
   @override
   Widget build(BuildContext context) {
-    final int quizzResult = ((score / questions.length) * 100).round();
+    final int quizzResult =
+        ((quiz.score / quiz.questions.length) * 100).round();
 
     return Scaffold(
       // TODO This color/image must be provided by an API
@@ -42,7 +42,7 @@ class ResultPage extends StatelessWidget {
               child: Column(
                 children: [
                   // TODO This must be provided by an API
-                  const ResultTitle(title: 'VOCÊ COMPLETOU A ALA VERMELHA!'),
+                  ResultTitle(title: 'VOCÊ COMPLETOU A ${quiz.title}!'),
                   const SizedBox(height: 150),
                   MiddleContainer(quizzResult: quizzResult, tourMode: tourMode),
                   const SizedBox(height: 30),
@@ -86,7 +86,7 @@ class MiddleContainer extends StatelessWidget {
   });
 
   final int quizzResult;
-  final String tourMode;
+  final TourMode tourMode;
 
   @override
   Widget build(BuildContext context) {

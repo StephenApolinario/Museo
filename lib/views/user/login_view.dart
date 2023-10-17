@@ -1,9 +1,8 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/constants/routes.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/utilities/dialogs/generic_dialog.dart';
-import 'package:museo/utilities/registeringOrLogging/generic_textfield.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -13,22 +12,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  late TextEditingController _email;
-  late TextEditingController _password;
-
-  @override
-  void initState() {
-    _email = TextEditingController();
-    _password = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _email.dispose();
-    _password.dispose();
-    super.dispose();
-  }
+  final formLoginKey = GlobalKey<FormState>();
+  late String? email, password;
+  final int minimumPasswordCharacters = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -49,111 +35,208 @@ class _LoginViewState extends State<LoginView> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // What is your login?
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  context.loc.login_title_content,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  children: [
-                    // Email Textfield
-                    // TODO -> Valid if the input its an e-mail address.
-                    commonTextField(
-                      keyboardType: TextInputType.emailAddress,
-                      specifiedController: _email,
-                      hintTitle: context.loc.email_hint,
-                    ),
-                    // Password Textfield
-                    commonTextField(
-                      specifiedController: _password,
-                      hintTitle: context.loc.password_hint,
-                      obsecure: true,
-                    ),
-                    // Forget password
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: TextButton(
-                        child: Text(
-                          context.loc.forget_password,
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        onPressed: () => {},
-                      ),
-                    ),
-                    Center(
-                      child: Column(
-                        children: [
-                          // Enter
-                          const SizedBox(height: 20),
-                          TextButton(
-                            child: Text(
-                              context.loc.enter,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                              ),
-                            ),
-                            onPressed: () {
-                              final email = _email.text;
-                              final password = _password.text;
-                              final allFilled =
-                                  email.isNotEmpty && password.isNotEmpty;
-
-                              if (allFilled) {
-                                showGenericDialog(
-                                  // TODO -> Content should be provided by L10N
-                                  context: context,
-                                  title: 'Congratulations',
-                                  content:
-                                      'Now, the developer have to create the connection with the databse and create your user kkk',
-                                  optionsBuilder: () => {
-                                    'Ok': false,
-                                  },
-                                );
-                              } else {
-                                showGenericDialog(
-                                  context: context,
-                                  title: context.loc.dialog_error_ops,
-                                  content: context.loc.dialog_error_not_filled,
-                                  optionsBuilder: () => {
-                                    'Ok': false,
-                                  },
-                                );
-                              }
-                            },
-                          ),
-                          // Not registred yet?
-                          TextButton(
-                            child: Text(
-                              context.loc.not_registred_yet,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            onPressed: () => {
-                              Navigator.of(context).pushNamed(register),
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              loginTitle(context),
+              loginFields(context),
+              enterButton(context),
+              notRegistredYet(context),
+              lostPasswords(context),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget notRegistredYet(BuildContext context) {
+    return TextButton(
+      child: Text(
+        context.loc.not_registred_yet,
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      onPressed: () => {
+        Navigator.of(context).pushNamed(register),
+      },
+    );
+  }
+
+  Widget enterButton(BuildContext context) {
+    return Column(
+      children: [
+        // Enter
+        const SizedBox(height: 20),
+        TextButton(
+          child: Text(
+            context.loc.enter,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+          onPressed: () {
+            final isValid = formLoginKey.currentState!.validate();
+
+            if (isValid) {
+              formLoginKey.currentState!.save();
+              print(
+                  'Email: $email\nPassword: $password'); // TODO -> Remove this line
+            }
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget lostPasswords(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: Text(
+          context.loc.forget_password,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        onPressed: () => {},
+      ),
+    );
+  }
+
+  Widget loginFields(BuildContext context) {
+    return Form(
+      key: formLoginKey,
+      // autovalidateMode: AutovalidateMode.always,
+      child: ListView(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(16),
+        children: [
+          emailInput(context),
+          const SizedBox(height: 15),
+          passwordInput(context),
+        ],
+      ),
+    );
+  }
+
+  Widget emailInput(BuildContext context) {
+    return Column(
+      children: [
+        // Input Name
+        Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            context.loc.email_hint,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          decoration: const InputDecoration(
+            hintText: 'your@email.com', // TODO -> MUST be provided by L10N
+            contentPadding: EdgeInsets.only(left: 10),
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(),
+            errorStyle: TextStyle(
+              color: Colors.red,
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 2,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 2,
+              ),
+            ),
+          ),
+          validator: (value) {
+            if (value != null) {
+              if (!EmailValidator.validate(value)) {
+                return 'Your email is not valid'; // TODO -> MUST be provided by L10N
+              }
+            }
+            return null;
+          },
+          onSaved: (newValue) => setState(() {
+            email = newValue;
+          }),
+        ),
+      ],
+    );
+  }
+
+  Widget loginTitle(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Text(
+        context.loc.login_title_content,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 32,
+        ),
+      ),
+    );
+  }
+
+  Widget passwordInput(BuildContext context) {
+    return Column(
+      children: [
+        // Input Name
+        Align(
+          alignment: Alignment.topLeft,
+          child: Text(
+            context.loc.password_hint,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        TextFormField(
+          obscureText: true,
+          decoration: const InputDecoration(
+            hintText: '******',
+            contentPadding: EdgeInsets.only(left: 10),
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(),
+            errorStyle: TextStyle(
+              color: Colors.red,
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
+                // width: 2,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 2,
+              ),
+            ),
+          ),
+          validator: (value) {
+            if (value != null) {
+              if (value.length <= minimumPasswordCharacters) {
+                return 'Your password must have more than $minimumPasswordCharacters characters'; // TODO -> MUST be provided by L10N
+              }
+            }
+            return null;
+          },
+          onSaved: (newValue) => setState(() {
+            password = newValue;
+          }),
+        ),
+      ],
     );
   }
 }

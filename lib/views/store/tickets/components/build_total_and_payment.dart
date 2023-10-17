@@ -3,7 +3,7 @@ import 'package:museo/constants/colors.dart';
 import 'package:museo/constants/routes.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/helpers/price.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:museo/utilities/dialogs/generic_dialog.dart';
 import 'package:provider/provider.dart';
 

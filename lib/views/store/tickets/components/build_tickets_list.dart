@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/gen/assets.gen.dart';
 import 'package:museo/models/store/tickets.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:museo/views/store/components/build_outilned_button.dart';
 import 'package:museo/views/store/tickets/tickets_details_view.dart';
 import 'package:museo/helpers/price.dart';
@@ -24,7 +24,6 @@ class _BuildTicketsListState extends State<BuildTicketsList> {
       child: ListView.builder(
         itemCount: fakeTickets.length,
         padding: const EdgeInsets.all(16),
-        scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           return TicketBuilder(index: index);
         },

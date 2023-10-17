@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:museo/models/museum_information.dart';
+import 'package:museo/models/museum/museum_information.dart';
 import 'package:museo/views/store/tickets/components/build_container_day.dart';
 
 class DaysType {

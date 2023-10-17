@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:museo/views/store/tickets/components/build_date_selector.dart';
 import 'package:museo/views/store/tickets/components/build_tickets_list.dart';
 import 'package:museo/views/store/tickets/components/build_title_coupon_store.dart';

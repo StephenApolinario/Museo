@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/views/quiz/quiz_view.dart' show Question, Option;
+import 'package:museo/models/quizz/quiz.dart';
 
 class BuildOptions extends StatelessWidget {
   final Question question;

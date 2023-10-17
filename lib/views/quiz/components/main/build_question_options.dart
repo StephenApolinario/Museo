@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:museo/models/quizz/quiz.dart';
 import 'package:museo/views/quiz/components/main/build_question.dart';
-import 'package:museo/views/quiz/quiz_view.dart' show Quiz;
 
 class QuestionWithOptions extends StatelessWidget {
   final Quiz quiz;

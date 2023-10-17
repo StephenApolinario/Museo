@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:museo/views/store/checkout/components/build_cart_summary_title.dart';
 import 'package:museo/views/store/checkout/components/build_cart_summary_details.dart';
 import 'package:museo/views/store/checkout/components/build_coupon_code.dart';

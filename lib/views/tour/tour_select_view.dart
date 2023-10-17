@@ -2,73 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/models/tour/tour_mode.dart';
 import 'package:museo/views/tour/tour_view.dart';
-
-class TourType {
-  final String name, description, icon;
-
-  static const int maxNameLength = 13;
-  static const int maxDescriptionLength = 70;
-
-  TourType({
-    required this.name,
-    required this.description,
-    required this.icon,
-  }) {
-    if (name.length > maxNameLength) {
-      throw ArgumentError(
-          'Name exceeds maximum length of $maxNameLength characters');
-    }
-    if (description.length > maxDescriptionLength) {
-      throw ArgumentError(
-          'Description exceeds maximum length of $maxDescriptionLength characters');
-    }
-  }
-}
-
-List<TourType> fakeTourType = [
-  TourType(
-    name: 'Fast',
-    description:
-        'Don\'t have enough time? Take a quick tour and enjoy the brief details',
-    icon: 'assets/tour/fast.svg',
-  ),
-  TourType(
-    name: 'Normal',
-    description: 'Normal description',
-    icon: 'assets/tour/fast.svg',
-  ),
-  TourType(
-    name: 'Detailed',
-    description: 'Detailed description',
-    icon: 'assets/tour/fast.svg',
-  ),
-  TourType(
-    name: 'Detailed',
-    description: 'Detailed description',
-    icon: 'assets/tour/fast.svg',
-  ),
-  TourType(
-    name: 'Detailed',
-    description: 'Detailed description',
-    icon: 'assets/tour/fast.svg',
-  ),
-  TourType(
-    name: 'Detailed',
-    description: 'Detailed description',
-    icon: 'assets/tour/fast.svg',
-  ),
-  TourType(
-    name: 'Detailed',
-    description: 'Detailed description',
-    icon: 'assets/tour/fast.svg',
-  ),
-  TourType(
-    name: 'Detailed',
-    description: 'Detailed description',
-    icon: 'assets/tour/fast.svg',
-  ),
-];
 
 class TourSelectView extends StatelessWidget {
   const TourSelectView({super.key});
@@ -119,45 +54,12 @@ class TourOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (fakeTourType.isNotEmpty) {
+    if (fakeTourMode.isNotEmpty) {
       return ListView.builder(
         shrinkWrap: true,
-        itemCount: fakeTourType.length,
+        itemCount: fakeTourMode.length,
         itemBuilder: (context, index) {
-          if (index % 2 == 0) {
-            if (index == fakeTourType.length - 1) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  TourCard(
-                    name: fakeTourType[index].name,
-                    description: fakeTourType[index].description,
-                    icon: fakeTourType[index].icon,
-                  ),
-                ],
-              );
-            } else {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  TourCard(
-                    name: fakeTourType[index].name,
-                    description: fakeTourType[index].description,
-                    icon: fakeTourType[index].icon,
-                  ),
-                  TourCard(
-                    name: fakeTourType[index + 1].name,
-                    description: fakeTourType[index + 1].description,
-                    icon: fakeTourType[index + 1].icon,
-                  ),
-                ],
-              );
-            }
-          } else {
-            return Container();
-          }
+          return buildTourTypeList(index: index);
         },
       );
     } else {
@@ -167,16 +69,45 @@ class TourOptions extends StatelessWidget {
       );
     }
   }
+
+  Widget buildTourTypeList({required int index}) {
+    if (index % 2 == 0) {
+      if (index == fakeTourMode.length - 1) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TourCard(
+              tourMode: fakeTourMode[index],
+            ),
+          ],
+        );
+      } else {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TourCard(
+              tourMode: fakeTourMode[index],
+            ),
+            TourCard(
+              tourMode: fakeTourMode[index + 1],
+            ),
+          ],
+        );
+      }
+    } else {
+      return Container();
+    }
+  }
 }
 
 class TourCard extends StatelessWidget {
-  final String name, description, icon;
+  final TourMode tourMode;
 
   const TourCard({
     super.key,
-    required this.name,
-    required this.description,
-    required this.icon,
+    required this.tourMode,
   });
 
   @override
@@ -189,7 +120,7 @@ class TourCard extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) {
                 return TourView(
-                  mode: name,
+                  tourMode: tourMode, // TODO -> Uncomment line
                 );
               },
             ),
@@ -212,14 +143,14 @@ class TourCard extends StatelessWidget {
               children: [
                 // Icon
                 SvgPicture.asset(
-                  icon,
+                  tourMode.icon,
                   height: 50,
                   width: 50,
                 ),
                 // Tour name
                 const SizedBox(height: 10),
                 Text(
-                  name,
+                  tourMode.title,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -228,7 +159,7 @@ class TourCard extends StatelessWidget {
                 // Description
                 const SizedBox(height: 10),
                 Text(
-                  description,
+                  tourMode.description,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,

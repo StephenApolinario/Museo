@@ -1,224 +1,210 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:museo/constants/colors.dart';
-import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/models/beacon/beacons.dart';
+import 'package:museo/models/quizz/quiz.dart';
+import 'package:museo/models/tour/tour_mode.dart';
+import 'package:museo/models/tour/tour_piece.dart';
 import 'package:museo/views/quiz/quiz_view.dart';
-
-class Tour {
-  final String title, subtitle, descrption, image;
-
-  Tour({
-    required this.title,
-    required this.subtitle,
-    required this.descrption,
-    required this.image,
-  });
-}
-
-final List<Tour> fakeTour = [
-  Tour(
-    title: '1 - This title must be provided by an API',
-    subtitle: '1 - This subtitle must be provided by an API',
-    image: 'assets/univali.jpg',
-    descrption:
-        '1 - This text must be provided by an API\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla efficitur lectus vel lorem venenatis dignissim. Aenean nec nulla in enim interdum placerat sed tincidunt mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer fermentum vulputate hendrerit. Sed id convallis mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur semper, ex ac sagittis efficitur, neque est convallis mi, et rutrum nisl lorem a massa. Quisque ac magna non erat pellentesque interdum et eu nunc. Quisque iaculis urna quis lobortis volutpat. Nullam gravida odio sit amet felis molestie posuere. Vivamus mollis consequat erat, at egestas leo pulvinar in. Vivamus sagittis, dui vitae venenatis dapibus, risus sem efficitur lorem, ut fermentum dui orci vel justo.',
-  ),
-  Tour(
-    title: '2 - This title must be provided by an API',
-    subtitle: '2 - This subtitle must be provided by an API',
-    image: 'assets/univali_black_white.jpg',
-    descrption:
-        '2 - This text must be provided by an API\n Small text here! This text must be provided by an API\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla efficitur lectus vel lorem venenatis dignissim. Aenean nec nulla in enim interdum placerat sed tincidunt mi. ',
-  ),
-];
+import 'package:museo/views/tour/bluetooth_off_view.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:museo/views/tour/none_piece_detected_view.dart';
+import 'package:museo/views/tour/tour_piece_view.dart';
 
 class TourView extends StatefulWidget {
+  final TourMode tourMode;
+
   const TourView({
     super.key,
-    required this.mode,
+    required this.tourMode,
   });
-  final String mode;
 
   @override
   State<TourView> createState() => _TourViewState();
 }
 
 class _TourViewState extends State<TourView> {
-  // TODO
-  // [ ] Instead of using time, its should detect the beacon ID, check if there is beacon on API, and change the title/subtitle/description and image.
-  // [ ] Check if the user really want to got to the next Item if the user spent just a little time on the previous one.
-  // [ ] Tutorial the first time the user opens the tour view
-  int currentIndex = 0;
-  late Timer timer;
+  // Bluetooth Adapter State
+  BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown;
+  late StreamSubscription<BluetoothAdapterState> _adapterStateStateSubscription;
+
+  // For bluetooth beacon logic
+  // Scan bluetooth devices list
+  List<ScanResult> _scanResults = [];
+  late StreamSubscription<List<ScanResult>> _scanResultsSubscription;
+  late StreamSubscription<bool> _isScanningSubscription;
+  bool _isScanning = false;
+  late bool loopScannig = false;
+  late bool isWaiting = false;
+  Beacon? previousBeaconDetected;
+
+  Timer? timer;
+
+  void startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+      startScanning();
+    });
+  }
+
+  Future startScanning() async {
+    if (_isScanning == false) {
+      await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
+    }
+    detectNearestBeacon();
+  }
+
+  Future stopScanning() async {
+    loopScannig = false;
+    await FlutterBluePlus.stopScan();
+    setState(() {});
+  }
 
   @override
   void initState() {
-    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      if (currentIndex + 1 == 2) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => QuizView(tourMode: widget.mode),
-          ),
-        );
-      }
-      // Toggle between index 0 and 1
-      setState(() {
-        currentIndex = (currentIndex + 1) % 2;
-      });
-    });
     super.initState();
+    // Bluetooth state
+    _adapterStateStateSubscription =
+        FlutterBluePlus.adapterState.listen((state) {
+      _adapterState = state;
+      setState(() {});
+    });
+
+    // Bluetooth scan result
+    _scanResultsSubscription = FlutterBluePlus.scanResults.listen((results) {
+      _scanResults = results;
+      setState(() {});
+    });
+
+    // Bluetooth is scanning?
+    _isScanningSubscription = FlutterBluePlus.isScanning.listen((state) {
+      _isScanning = state;
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
-    timer.cancel();
+    _adapterStateStateSubscription.cancel();
+    _scanResultsSubscription.cancel();
+    _isScanningSubscription.cancel();
+    // TODO -> I dont know yet if i uncomment the next line or not.
+    // previousBeaconDetected.clear();
+    _scanResults.clear();
+    stopScanning();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${context.loc.route_title} ${widget.mode}'),
-        actions: [
-          IconButton(
-            onPressed: () async {},
-            // icon: const Icon(Icons.access_alarm), //Logo Movi Here
-            icon: const Icon(
-              Icons.favorite,
-              color: mainBlue,
-            ),
-          ),
-        ],
-      ),
-      // drawer: const menu.NavigationDrawer(),
-      body: Column(
-        children: [
-          // Image - Title - Subtitle
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 16,
-              left: 16,
-              right: 16,
-            ),
-            child: TourImageWithTitleAndSubtitle(
-              title: fakeTour[currentIndex].title,
-              subtitle: fakeTour[currentIndex].subtitle,
-              image: fakeTour[currentIndex].image,
-            ),
-          ),
-          // Blue Container with Description and Play/Speed
-          VerticallyTextAndIcons(
-            description: fakeTour[currentIndex].descrption,
-            color: currentIndex % 2 == 0 ? Colors.red : mainBlue,
-          ),
-        ],
-      ),
-    );
+  build(BuildContext context) {
+    // First flow 1.0
+    if (_adapterState != BluetoothAdapterState.on) {
+      return const BluetoothOffView();
+    } else {
+      // Just for implement the voice.
+      // return TourPieceView(
+      //   tourMode: widget.tourMode,
+      //   tourPiece: widget.tourMode.tourBeacons[0] as TourPiece,
+      // );
+
+      // This logic can be read on detect_beacon_workflow.md
+
+      // 3.0
+      // detectNearestBeacon();
+
+      if (previousBeaconDetected != null) {
+        if (previousBeaconDetected is Quiz) {
+          return QuizView(
+              tourMode: widget.tourMode, quiz: previousBeaconDetected as Quiz);
+        } else {
+          return TourPieceView(
+            tourMode: widget.tourMode,
+            tourPiece: previousBeaconDetected as TourPiece,
+          );
+        }
+      } else {
+        // Executed just on the first time. (When detect a beacon, this MUST never be executed)
+        startTimer();
+        return const NonePieceDetectedView();
+      }
+    }
+
+    // Second flow 2.0
+    //   if (isWaiting == false) {
+    //     if (previousBeaconDetected.isNotEmpty) {
+    //       if (previousBeaconDetected.length == 1) {
+    //         if (previousBeaconDetected.last is Quiz) {
+    //           return QuizView(
+    //               tourMode: widget.tourMode,
+    //               quiz: previousBeaconDetected.last as Quiz);
+    //         } else {
+    //           return TourPieceView(
+    //             tourMode: widget.tourMode,
+    //             tourPiece: previousBeaconDetected.last as TourPiece,
+    //           );
+    //         }
+    //       } else {
+    //         // ASK if user want to move to a new piece or stay on the last one
+    //         // IF user want to move: clear previousBeaconDetected and add the new beacon
+    //         // IF user want to stay on the same beacon: isWaiting = true
+
+    //         // IF User wants to move:
+    //         // Just keep the last detected beacon.
+    //         previousBeaconDetected.removeRange(
+    //             0, previousBeaconDetected.length - 1);
+    //         if (previousBeaconDetected.last is Quiz) {
+    //           return QuizView(
+    //               tourMode: widget.tourMode,
+    //               quiz: previousBeaconDetected.last as Quiz);
+    //         } else {
+    //           return TourPieceView(
+    //             tourMode: widget.tourMode,
+    //             tourPiece: previousBeaconDetected.last as TourPiece,
+    //           );
+    //         }
+    //       }
+    //     }
+    //     // Executed just on the first time. (When detect a beacon, this MUST never be executed)
+    //     else {
+    //       startScanning();
+    //       return const NonePieceDetectedView();
+    //     }
+    //   } else {
+    //     // Continue showing the last peice
+    //     // Wait xx seconds (User can skip the delay)
+    //     // Is waiting = false
+    //     return const Text('2.0 NO: Not implemented yet');
+    //   }
   }
-}
 
-class TourImageWithTitleAndSubtitle extends StatelessWidget {
-  final String image, title, subtitle;
+  void detectNearestBeacon() {
+    // Find the nearest beacon and check if exists on tourModeBeacons
+    Beacon? findedBeacon;
+    int findedBeaconRSSI = 999;
 
-  const TourImageWithTitleAndSubtitle({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.subtitle,
-  });
+    for (var scannedBluetooth in _scanResults) {
+      String scannedBluetoothID = scannedBluetooth.device.remoteId.str;
+      int scannedBluetoothRSSI = scannedBluetooth.rssi;
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Image on top
-        ClipRRect(
-          borderRadius: BorderRadius.circular(35),
-          child: Image.asset(
-            image,
-            fit: BoxFit.fill,
-          ),
-        ),
-        const SizedBox(height: 10),
-        // Title
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 25,
-          ),
-        ),
-        // Subtitle
-        Text(
-          subtitle,
-          textAlign: TextAlign.justify,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
-        ),
-      ],
-    );
-  }
-}
+      for (var beacon in widget.tourMode.tourBeacons) {
+        if (beacon is Quiz) {
+          if (scannedBluetoothID == beacon.beaconUUID &&
+              scannedBluetoothRSSI.abs() < beacon.rssi &&
+              scannedBluetoothRSSI.abs() < findedBeaconRSSI) {
+            findedBeacon = beacon;
+            findedBeaconRSSI = scannedBluetoothRSSI.abs();
+          }
+        } else if (beacon is TourPiece) {
+          if (scannedBluetoothID == beacon.beaconUUID &&
+              scannedBluetoothRSSI.abs() < beacon.rssi &&
+              scannedBluetoothRSSI.abs() < findedBeaconRSSI) {
+            findedBeacon = beacon;
+            findedBeaconRSSI = scannedBluetoothRSSI.abs();
+          }
+        }
+      }
+    }
 
-class VerticallyTextAndIcons extends StatelessWidget {
-  final String description;
-  final Color color;
-
-  const VerticallyTextAndIcons({
-    super.key,
-    required this.description,
-    this.color = mainBlue,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: secondBlue,
-            width: 3,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Expanded(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: SingleChildScrollView(
-                    child: Center(
-                      child: Text(
-                        description,
-                        textAlign: TextAlign.justify,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.play_arrow),
-                  Icon(Icons.speed),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    if (findedBeacon != null) {
+      previousBeaconDetected = findedBeacon;
+    }
   }
 }

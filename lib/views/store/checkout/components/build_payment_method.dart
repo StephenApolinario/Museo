@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/helpers/price.dart';
 import 'package:museo/models/store/payments_methods.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 
 class BuildPaymentMethod extends StatelessWidget {
   final ShoppingTicketCart providerTicket;

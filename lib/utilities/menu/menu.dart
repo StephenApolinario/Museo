@@ -87,12 +87,13 @@ class NavigationDrawer extends StatelessWidget {
                 title: context.loc.favorite,
                 route: favorites,
               ),
-              menuItem(
-                context: context,
-                icon: Icons.search,
-                title: context.loc.search,
-                route: search,
-              ),
+              // TODO -> Implement search option.
+              // menuItem(
+              //   context: context,
+              //   icon: Icons.search,
+              //   title: context.loc.search,
+              //   route: search,
+              // ),
               menuItem(
                 context: context,
                 icon: Icons.segment,
@@ -112,13 +113,13 @@ class NavigationDrawer extends StatelessWidget {
                 context: context,
                 icon: Icons.store,
                 title: context.loc.souvenirs,
-                route: souvernirs,
+                route: souvernirsStore,
               ),
               menuItem(
                 context: context,
                 icon: Icons.airplane_ticket,
                 title: context.loc.store,
-                route: store,
+                route: ticketsStore,
               ),
               menuItem(
                 context: context,

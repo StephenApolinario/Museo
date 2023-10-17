@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/models/tour/tour_mode.dart';
 import 'package:museo/views/tour/tour_view.dart';
 
 class BuildRowShareAndContinueButton extends StatelessWidget {
@@ -8,7 +9,7 @@ class BuildRowShareAndContinueButton extends StatelessWidget {
     required this.tourMode,
   });
 
-  final String tourMode;
+  final TourMode tourMode;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,9 @@ class BuildRowShareAndContinueButton extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => TourView(mode: tourMode),
+                builder: (context) => TourView(
+                  tourMode: tourMode, // TODO -> Uncomment line
+                ),
               ),
             );
           },

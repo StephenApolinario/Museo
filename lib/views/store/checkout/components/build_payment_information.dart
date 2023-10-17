@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/museum_information.dart';
+import 'package:museo/models/museum/museum_information.dart';
 import 'package:museo/models/store/payments_methods.dart';
 
 class BuildPaymentInformation extends StatelessWidget {

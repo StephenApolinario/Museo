@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/models/quizz/quiz.dart';
 import 'package:museo/views/quiz/components/main/build_options.dart';
-import 'package:museo/views/quiz/quiz_view.dart' show Question;
 
 class BuildQuestion extends StatefulWidget {
   final Question question;

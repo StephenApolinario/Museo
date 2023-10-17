@@ -4,11 +4,15 @@ import 'package:museo/constants/routes.dart';
 import 'package:museo/constants/urls.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/gen/assets.gen.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/favorites/favorites_tours.dart';
+import 'package:museo/providers/register/registerig_fields.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
+import 'package:museo/providers/tour/tourPiece.dart';
+import 'package:museo/providers/update/updating_fields.dart';
 import 'package:museo/utilities/dialogs/start_dialog.dart';
 import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
-import 'package:museo/views/favorite/favorite_view.dart';
+import 'package:museo/views/user/favorite/favorite_tour_list_view.dart';
 import 'package:museo/views/onboarding/onboarding_screen_view.dart';
 import 'package:museo/views/store/checkout/checkout_view.dart';
 import 'package:museo/views/tour/tour_select_view.dart';
@@ -16,10 +20,13 @@ import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs/souvenirs_store_view.dart';
 import 'package:museo/views/store/tickets/tickets_store_view.dart';
 import 'package:museo/views/user/login_view.dart';
-import 'package:museo/views/user/profile_view.dart';
+import 'package:museo/views/user/profile/profile_view.dart';
 import 'package:museo/views/sections_view.dart';
 import 'package:museo/utilities/menu/menu.dart' as menu;
-import 'package:museo/views/user/registering_view.dart';
+import 'package:museo/views/user/profile/quizzes_emblems_view.dart';
+import 'package:museo/views/user/profile/update_informations.dart';
+import 'package:museo/views/user/profile/update_password_view.dart';
+import 'package:museo/views/user/registering/registering_view.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,6 +36,10 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ShoppingTicketCart()),
+        ChangeNotifierProvider(create: (_) => RegisteringFields()),
+        ChangeNotifierProvider(create: (_) => UpdatingFields()),
+        ChangeNotifierProvider(create: (_) => FavoritesTours()),
+        ChangeNotifierProvider(create: (_) => SpeakAboutTourPiece()),
       ],
       child: const MyApp(),
     ),
@@ -64,14 +75,17 @@ class MyApp extends StatelessWidget {
         aboutApplication: (context) => const ApplicationView(),
         search: (context) => const SearchView(),
         sections: (context) => const SectionsView(),
-        store: (context) => const StoreView(),
-        souvernirs: (context) => const SouvenirsStoreView(),
+        ticketsStore: (context) => const StoreView(),
+        souvernirsStore: (context) => const SouvenirsStoreView(),
         userProfile: (context) => const ProfileView(),
         login: (context) => const LoginView(),
         register: (context) => const RegisteringView(),
-        favorites: (context) => const FavoriteView(),
+        favorites: (context) => const FavoriteTourListView(),
         tourSelect: (context) => const TourSelectView(),
         checkout: (context) => const CheckoutView(),
+        userUpdatePassword: (context) => const UpdatePasswordView(),
+        userUpdateInformation: (context) => const UpdateInformationView(),
+        quizzEmblems: (context) => const QuizzesEmblemListView(),
       },
     );
   }
@@ -161,7 +175,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // 'Pesquise'
+              // 'Search title'
               const SizedBox(height: 30),
               Text(
                 context.loc.search_title,

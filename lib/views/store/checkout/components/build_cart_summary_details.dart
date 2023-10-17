@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/helpers/price.dart';
-import 'package:museo/providers/shopping_ticket_cart.dart';
+import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:provider/provider.dart';
 
 class BuildCartSummaryDetails extends StatelessWidget {
