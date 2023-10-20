@@ -13,7 +13,7 @@ class BuildPaymentInformation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO -> This MUST be provided by L10N
+          // TODO:  This MUST be provided by L10N
           RichText(
             text: TextSpan(
               text: 'Aceitamos pagamentos em ',

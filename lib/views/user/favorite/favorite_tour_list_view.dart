@@ -34,7 +34,7 @@ class _FavoriteTourListViewState extends State<FavoriteTourListView> {
                 ? const Expanded(
                     child: Center(
                       child: Text(
-                          'Você ainda não tem favoritos!'), // TODO -> MUST be provided by L10N
+                          'Você ainda não tem favoritos!'), // TODO:  MUST be provided by L10N
                     ),
                   )
                 : buildFavoritesList(provider: favoritesTours),

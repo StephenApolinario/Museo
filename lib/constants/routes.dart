@@ -11,15 +11,16 @@ const aboutApplication = '/about/app';
 // Store
 const ticketsStore = '/store/tickets';
 const souvernirsStore = '/store/souvernirs';
+const checkout = '/store/checkout';
 
 // User
-const userProfile = '/user/profile';
-const tourSelect = '/tour/select';
-const checkout = '/store/checkout';
-const favorites = '/user/favorites';
 const userUpdatePassword = '/user/updatePassword';
+const userForgetPassword = '/user/forgetPassword';
 const userUpdateInformation = '/user/updateInformation';
+const userProfile = '/user/profile';
+const favorites = '/user/favorites';
 const quizzEmblems = '/user/profile/emblems';
 
 // Tour
 const tourView = '/tour/view';
+const tourSelect = '/tour/select';

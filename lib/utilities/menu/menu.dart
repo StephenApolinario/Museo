@@ -33,7 +33,7 @@ class NavigationDrawer extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    // TODO -> This must be provided by the API
+                    // TODO:  This must be provided by the API
                     const CircleAvatar(
                       radius: 52,
                       backgroundImage: NetworkImage(
@@ -55,7 +55,9 @@ class NavigationDrawer extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(userForgetPassword);
+                      },
                       child: Text(
                         context.loc.forget_password,
                         style: const TextStyle(
@@ -87,7 +89,7 @@ class NavigationDrawer extends StatelessWidget {
                 title: context.loc.favorite,
                 route: favorites,
               ),
-              // TODO -> Implement search option.
+              // TODO:  Implement search option.
               // menuItem(
               //   context: context,
               //   icon: Icons.search,
@@ -103,7 +105,7 @@ class NavigationDrawer extends StatelessWidget {
               menuItem(
                 context: context,
                 icon: Icons.map,
-                // TODO -> Title retrived by context.loc
+                // TODO:  Title retrived by context.loc
                 title: 'LOCALIZAÇÃO',
                 onTapAction: () {
                   return openMapsSheet(context);

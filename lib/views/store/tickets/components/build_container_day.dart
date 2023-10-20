@@ -29,7 +29,7 @@ class BuildContainerDay extends StatelessWidget {
               DateTime.now().month,
               DateTime.now().day,
             )
-        ? 'Hoje'.toUpperCase() //TODO -> Should be provided from context.loc
+        ? 'Hoje'.toUpperCase() //TODO:  Should be provided from context.loc
         : DateFormat('E', language)
             .format(dateIndex.day)
             .replaceAll('.', '')

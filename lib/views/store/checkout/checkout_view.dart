@@ -21,7 +21,7 @@ class CheckoutView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // TODO -> This text must be provided by the L10N
+        // TODO:  This text must be provided by the L10N
         title: const Text('CHECKOUT'),
       ),
       body: Padding(

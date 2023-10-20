@@ -19,7 +19,7 @@ class BuildCartSummaryDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BuildTickets(providerTicket: providerTicket),
-          // TODO -> Another row for the souvenirs
+          // TODO:  Another row for the souvenirs
           BuildTotalCart(providerTicket: providerTicket),
         ],
       ),
@@ -40,7 +40,7 @@ class BuildTotalCart extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 30),
-        // TODO -> MUST be provided by L10N
+        // TODO:  MUST be provided by L10N
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

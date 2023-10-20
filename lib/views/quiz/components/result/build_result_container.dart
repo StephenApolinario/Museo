@@ -24,7 +24,7 @@ class BuildResultContainer extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            // TODO -> Change the points to an IMAGE. Provided by API
+            // TODO:  Change the points to an IMAGE. Provided by API
             // 90 -- 100 -> Diamond
             // 70 -- 90  -> Gold
             // 50 -- 70  -> Silver

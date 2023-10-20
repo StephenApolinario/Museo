@@ -86,7 +86,7 @@ class _TourViewState extends State<TourView> {
     _adapterStateStateSubscription.cancel();
     _scanResultsSubscription.cancel();
     _isScanningSubscription.cancel();
-    // TODO -> I dont know yet if i uncomment the next line or not.
+    // TODO:  I dont know yet if i uncomment the next line or not.
     // previousBeaconDetected.clear();
     _scanResults.clear();
     stopScanning();

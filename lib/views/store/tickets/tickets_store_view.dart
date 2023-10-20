@@ -50,7 +50,7 @@ class _StoreViewState extends State<StoreView> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO -> This title shoul by provided by context.loc
+          // TODO:  This title shoul by provided by context.loc
           const BuildTitleCouponStore(title: 'Datas disponíveis'),
           const SizedBox(height: 40),
           BuildDateSelector(selectDate: selectDate),

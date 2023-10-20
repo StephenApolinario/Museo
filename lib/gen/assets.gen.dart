@@ -114,6 +114,17 @@ class $AssetsTourGen {
   List<String> get values => [fast];
 }
 
+class $AssetsUserGen {
+  const $AssetsUserGen();
+
+  /// File path: assets/user/forget_password.png
+  AssetGenImage get forgetPassword =>
+      const AssetGenImage('assets/user/forget_password.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [forgetPassword];
+}
+
 class $AssetsStoreIconsGen {
   const $AssetsStoreIconsGen();
 
@@ -226,6 +237,7 @@ class Assets {
   static const AssetGenImage univali = AssetGenImage('assets/univali.jpg');
   static const AssetGenImage univaliBlackWhite =
       AssetGenImage('assets/univali_black_white.jpg');
+  static const $AssetsUserGen user = $AssetsUserGen();
 
   /// List of all assets
   List<AssetGenImage> get values => [movi, univali, univaliBlackWhite];

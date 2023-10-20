@@ -88,7 +88,7 @@ class LeftSideTicket extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO -> This title & Subtitle should be provided by the API
+          // TODO:  This title & Subtitle should be provided by the API
           TicketTitle(ticket: ticket),
           Price(ticket: ticket),
           TicketSubtitle(ticket: ticket),
@@ -232,7 +232,7 @@ class MoreInformation extends StatelessWidget {
                 color: mainBlue,
                 size: 24,
               ),
-              // TODO -> This should be provided by context.loc
+              // TODO:  This should be provided by context.loc
               Text('Mais informações'),
             ],
           ),

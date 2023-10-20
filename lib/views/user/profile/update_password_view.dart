@@ -36,7 +36,7 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // TODO -> MUST be provided by L10N
+        // TODO:  MUST be provided by L10N
         title: const Text(
           'Update Password',
           style: TextStyle(
@@ -82,14 +82,14 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
       children: [
         const SizedBox(height: 10),
         const InputTitle(
-            title: 'Actual password'), // TODO -> MUST be provided by L10N
+            title: 'Actual password'), // TODO:  MUST be provided by L10N
         TextFormField(
           obscureText: true,
           controller: actualPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value != 'teste') {
-              // TODO -> Check if the provided password is the actual one
+              // TODO:  Check if the provided password is the actual one
               return 'You enter an incorrect actual password!';
             }
             return null;
@@ -104,18 +104,18 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
       children: [
         const SizedBox(height: 10),
         const InputTitle(
-            title: 'New Password'), // TODO -> MUST be provided by L10N
+            title: 'New Password'), // TODO:  MUST be provided by L10N
         TextFormField(
           obscureText: true,
           controller: newPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO -> MUST be provided by L10N
+              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
             } else if (value != repeatedNewPasswordController.text) {
-              return 'The passwords must match!'; // TODO -> MUST be provided by L10N
+              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO -> MUST be provided by L10N
+              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
             }
             return null;
           },
@@ -129,18 +129,18 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
       children: [
         const SizedBox(height: 10),
         const InputTitle(
-            title: 'Repeat new password'), // TODO -> MUST be provided by L10N
+            title: 'Repeat new password'), // TODO:  MUST be provided by L10N
         TextFormField(
           obscureText: true,
           controller: repeatedNewPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO -> MUST be provided by L10N
+              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
             } else if (value != newPasswordController.text) {
-              return 'The passwords must match!'; // TODO -> MUST be provided by L10N
+              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO -> MUST be provided by L10N
+              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
             }
             return null;
           },

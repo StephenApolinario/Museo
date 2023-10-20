@@ -48,7 +48,7 @@ class BuildProfileOptions extends StatelessWidget {
                     children: [
                       Icon(Icons.key_sharp),
                       SizedBox(width: 10),
-                      // TODO -> MUST be provided by L10N
+                      // TODO:  MUST be provided by L10N
                       Text('Change Password'),
                     ],
                   ),
@@ -70,7 +70,7 @@ class BuildProfileOptions extends StatelessWidget {
       padding: const EdgeInsets.only(top: 16, bottom: 30),
       child: InkWell(
         borderRadius: BorderRadius.circular(7),
-        onTap: () => print('ok'), // TODO -> Complete the API Logout.
+        onTap: () => print('ok'), // TODO:  Complete the API Logout.
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class BuildProfileOptions extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.red,
                         ),
-                      ), // TODO -> MUST be provided by L10N
+                      ), // TODO:  MUST be provided by L10N
                     ],
                   ),
                 ],
@@ -133,7 +133,7 @@ class BuildProfileOptions extends StatelessWidget {
                     children: [
                       Icon(Icons.account_box_rounded),
                       SizedBox(width: 10),
-                      // TODO -> MUST be provided by L10N
+                      // TODO:  MUST be provided by L10N
                       Text('Change Information'),
                     ],
                   ),
@@ -172,7 +172,7 @@ class BuildProfileOptions extends StatelessWidget {
                     children: [
                       Icon(Icons.favorite_border),
                       SizedBox(width: 10),
-                      Text('Favorites'), // TODO -> MUST be provided by L10N
+                      Text('Favorites'), // TODO:  MUST be provided by L10N
                     ],
                   ),
                 ],
@@ -210,7 +210,7 @@ class BuildProfileOptions extends StatelessWidget {
                     children: [
                       Icon(Icons.star_border),
                       SizedBox(width: 10),
-                      // TODO -> MUST be provided by L10N
+                      // TODO:  MUST be provided by L10N
                       Text('Quizzes Emblems'),
                     ],
                   ),

@@ -120,7 +120,7 @@ class TourCard extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) {
                 return TourView(
-                  tourMode: tourMode, // TODO -> Uncomment line
+                  tourMode: tourMode, // TODO:  Uncomment line
                 );
               },
             ),

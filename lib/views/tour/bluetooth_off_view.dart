@@ -19,7 +19,7 @@ class BluetoothOffView extends StatelessWidget {
   Widget buildTitle(BuildContext context) {
     String? state = adapterState?.toString().split('.').last;
     return Text(
-      'Bluetooth Adapter is ${state ?? 'not available'}', // TODO -> MUST be provided by L10N
+      'Bluetooth Adapter is ${state ?? 'not available'}', // TODO:  MUST be provided by L10N
       style: Theme.of(context)
           .primaryTextTheme
           .titleSmall
@@ -31,7 +31,7 @@ class BluetoothOffView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton(
-        child: const Text('TURN ON'), // TODO -> MUST be provided by L10N
+        child: const Text('TURN ON'), // TODO:  MUST be provided by L10N
         onPressed: () async {
           try {
             if (Platform.isAndroid) {

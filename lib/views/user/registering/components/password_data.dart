@@ -92,18 +92,18 @@ class _RegisteringPasswordDataState extends State<RegisteringPasswordData> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const InputTitle(title: 'Password'), // TODO -> MUST be provided by L10N
+        const InputTitle(title: 'Password'), // TODO:  MUST be provided by L10N
         TextFormField(
           obscureText: true,
           controller: passwordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO -> MUST be provided by L10N
+              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
             } else if (value != repeatedPasswordController.text) {
-              return 'The passwords must match!'; // TODO -> MUST be provided by L10N
+              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO -> MUST be provided by L10N
+              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
             }
             return null;
           },
@@ -117,18 +117,18 @@ class _RegisteringPasswordDataState extends State<RegisteringPasswordData> {
       children: [
         const SizedBox(height: 10),
         const InputTitle(
-            title: 'Repeat password'), // TODO -> MUST be provided by L10N
+            title: 'Repeat password'), // TODO:  MUST be provided by L10N
         TextFormField(
           obscureText: true,
           controller: repeatedPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO -> MUST be provided by L10N
+              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
             } else if (value != passwordController.text) {
-              return 'The passwords must match!'; // TODO -> MUST be provided by L10N
+              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO -> MUST be provided by L10N
+              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
             }
             return null;
           },
@@ -147,8 +147,8 @@ class _RegisteringPasswordDataState extends State<RegisteringPasswordData> {
             if (isValid) {
               print(registeringFields
                   .registerUserInformation.addressData.address);
-              //TODO -> Create the user info into database, and redirect to the login page.
-              //TODO -> Clear the class UserInformation
+              //TODO:  Create the user info into database, and redirect to the login page.
+              //TODO:  Clear the class UserInformation
             }
           },
           child: Text(

@@ -35,7 +35,7 @@ class _UpdateInformationViewState extends State<UpdateInformationView> {
     return Scaffold(
       backgroundColor: mainBlue,
       appBar: AppBar(
-        // TODO -> MUST be provided by L10N
+        // TODO:  MUST be provided by L10N
         title: const Text(
           'Update informations',
           style: TextStyle(

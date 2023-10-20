@@ -20,22 +20,22 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // TODO -> MUST be provided by L10N
+        // TODO:  MUST be provided by L10N
         title: const Text('Emblems'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            //TODO -> This shoul be emblems from API.
+            //TODO:  This shoul be emblems from API.
             fakeUserEmblemsData.isEmpty
                 ? const Expanded(
                     child: Center(
-                      // TODO -> MUST be provided by L10N
+                      // TODO:  MUST be provided by L10N
                       child: Text('Você ainda não nenhum emblema!'),
                     ),
                   )
-                //TODO -> This shoul be emblems from API.
+                //TODO:  This shoul be emblems from API.
                 : buildEmblemsList(emblems: fakeUserEmblemsData),
           ],
         ),
@@ -45,7 +45,7 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
 
   buildEmblemsList({required List<Emblem> emblems}) {
     return GridView.builder(
-      //TODO -> This must be emblems from API.
+      //TODO:  This must be emblems from API.
       itemCount: emblems.length,
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -66,7 +66,7 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          // TODO -> New page with details?
+          // TODO:  New page with details?
         },
         child: Container(
           decoration: BoxDecoration(

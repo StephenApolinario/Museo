@@ -24,7 +24,7 @@ class BuildCartSummaryTitle extends StatelessWidget {
                 padding: EdgeInsets.all(5),
                 child: Center(
                   child: Text(
-                    // TODO -> This text must be provided by L10N
+                    // TODO:  This text must be provided by L10N
                     'Resumo do pedido',
                     style: TextStyle(
                       color: Colors.white,

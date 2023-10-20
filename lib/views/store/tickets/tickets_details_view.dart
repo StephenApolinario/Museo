@@ -71,7 +71,7 @@ class BuildInstagram extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        // TODO -> INSTAGRAM icon
+        // TODO:  INSTAGRAM icon
         Icon(Icons.construction),
         Flexible(
           child: Padding(
@@ -210,7 +210,7 @@ class TicketDetails extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40),
-          // Price TODO -> This string shoul be provided by Context.loc
+          // Price TODO:  This string shoul be provided by Context.loc
           Text(
             'Valor: ${generatePrice(price: ticket.price)}',
             style: const TextStyle(

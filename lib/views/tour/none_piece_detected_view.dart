@@ -13,7 +13,7 @@ class NonePieceDetectedView extends StatelessWidget {
 
   Widget buildTitle(BuildContext context) {
     return Text(
-      'Please, move near to some museum piece', // TODO -> MUST be provided by L10N
+      'Please, move near to some museum piece', // TODO:  MUST be provided by L10N
       style: Theme.of(context)
           .primaryTextTheme
           .titleSmall
@@ -25,7 +25,7 @@ class NonePieceDetectedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lets start!'), // TODO -> MUST be provided by L10N
+        title: const Text('Lets start!'), // TODO:  MUST be provided by L10N
       ),
       body: Scaffold(
         backgroundColor: Colors.lightBlue,

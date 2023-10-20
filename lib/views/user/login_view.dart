@@ -79,8 +79,6 @@ class _LoginViewState extends State<LoginView> {
 
             if (isValid) {
               formLoginKey.currentState!.save();
-              print(
-                  'Email: $email\nPassword: $password'); // TODO -> Remove this line
             }
           },
         ),
@@ -98,7 +96,9 @@ class _LoginViewState extends State<LoginView> {
             color: Colors.white,
           ),
         ),
-        onPressed: () => {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(userForgetPassword);
+        },
       ),
     );
   }
@@ -136,7 +136,7 @@ class _LoginViewState extends State<LoginView> {
         TextFormField(
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-            hintText: 'your@email.com', // TODO -> MUST be provided by L10N
+            hintText: 'your@email.com', // TODO:  MUST be provided by L10N
             contentPadding: EdgeInsets.only(left: 10),
             fillColor: Colors.white,
             filled: true,
@@ -160,7 +160,7 @@ class _LoginViewState extends State<LoginView> {
           validator: (value) {
             if (value != null) {
               if (!EmailValidator.validate(value)) {
-                return 'Your email is not valid'; // TODO -> MUST be provided by L10N
+                return 'Your email is not valid'; // TODO:  MUST be provided by L10N
               }
             }
             return null;
@@ -227,7 +227,7 @@ class _LoginViewState extends State<LoginView> {
           validator: (value) {
             if (value != null) {
               if (value.length <= minimumPasswordCharacters) {
-                return 'Your password must have more than $minimumPasswordCharacters characters'; // TODO -> MUST be provided by L10N
+                return 'Your password must have more than $minimumPasswordCharacters characters'; // TODO:  MUST be provided by L10N
               }
             }
             return null;

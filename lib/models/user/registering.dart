@@ -24,7 +24,7 @@ List<RegisteringTitleSubtitle> createRegisteringSteps({
     ),
     RegisteringTitleSubtitle(
       title: context.loc.registering_content_title,
-      subtitle: 'Defina sua senha', // TODO -> MUST be provided by L10N
+      subtitle: 'Defina sua senha', // TODO:  MUST be provided by L10N
     ),
   ];
 }

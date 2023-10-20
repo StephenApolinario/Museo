@@ -19,6 +19,7 @@ import 'package:museo/views/tour/tour_select_view.dart';
 import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs/souvenirs_store_view.dart';
 import 'package:museo/views/store/tickets/tickets_store_view.dart';
+import 'package:museo/views/user/forget_password.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:museo/views/user/profile/profile_view.dart';
 import 'package:museo/views/sections_view.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
         checkout: (context) => const CheckoutView(),
         userUpdatePassword: (context) => const UpdatePasswordView(),
         userUpdateInformation: (context) => const UpdateInformationView(),
+        userForgetPassword: (context) => const ForgetPasswordView(),
         quizzEmblems: (context) => const QuizzesEmblemListView(),
       },
     );

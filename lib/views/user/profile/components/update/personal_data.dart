@@ -112,7 +112,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your name', // TODO -> MUST be provided by L10N
+                'Please, fill your name', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateName(newValue),
         ),
@@ -135,7 +135,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your last name', // TODO -> MUST be provided by L10N
+                'Please, fill your last name', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateLastName(newValue),
         ),
@@ -156,7 +156,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           keyboardType: TextInputType.emailAddress,
           validator: (value) {
             if (value != null && !EmailValidator.validate(value)) {
-              return 'Please write a valid email'; // TODO -> MUST be provided by L10N
+              return 'Please write a valid email'; // TODO:  MUST be provided by L10N
             }
 
             return null;
@@ -184,8 +184,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your CPF', // TODO -> MUST be provided by L10N
+            message: 'Please, fill your CPF', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateCPF(newValue),
         ),
@@ -212,7 +211,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your birthday', // TODO -> MUST be provided by L10N
+                'Please, fill your birthday', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateBirthday(newValue),
         ),
@@ -239,7 +238,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your phone number', // TODO -> MUST be provided by L10N
+                'Please, fill your phone number', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updatePhonenumber(newValue),
         ),

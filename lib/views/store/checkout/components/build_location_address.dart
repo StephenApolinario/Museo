@@ -33,7 +33,7 @@ class BuildLocationAddress extends StatelessWidget {
                 children: [
                   Text(
                       '${fakeMuseumAddress.city} - ${fakeMuseumAddress.state}'),
-                  // TODO -> String MUST be provided by L10N
+                  // TODO:  String MUST be provided by L10N
                   Text(
                     'Data: ${DateFormat('yMd', language).format(providerTicket.cart.date!).toUpperCase()}',
                   ),

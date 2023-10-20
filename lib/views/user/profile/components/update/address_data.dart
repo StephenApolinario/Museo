@@ -146,7 +146,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
-                  cepTextField(), // TODO -> Valid if the input is an CEP.
+                  cepTextField(), // TODO:  Valid if the input is an CEP.
                   stateTextField(),
                   cityTextField(),
                   neighborhoodTextField(),
@@ -172,8 +172,8 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
             final isValid = formKey.currentState!.validate();
             if (isValid) {
               print(updatingFields.updateUserInformation.addressData.address);
-              //TODO -> Create the user info into database, and redirect to the login page.
-              //TODO -> Clear the class UserInformation
+              //TODO:  Create the user info into database, and redirect to the login page.
+              //TODO:  Clear the class UserInformation
             }
           },
           child: Text(
@@ -205,7 +205,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          const InputTitle(title: 'CEP'), // TODO -> MUST be provided by L10N
+          const InputTitle(title: 'CEP'), // TODO:  MUST be provided by L10N
           TextFormField(
             controller: cepController,
             inputFormatters: [
@@ -216,7 +216,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
             validator: (value) => defaultValidator(
               value: value,
               message:
-                  'Please, fill your CEP', // TODO -> MUST be provided by L10N
+                  'Please, fill your CEP', // TODO:  MUST be provided by L10N
             ),
             onSaved: (newValue) => updatingFields.updateCEP(newValue),
           ),
@@ -237,7 +237,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your state', // TODO -> MUST be provided by L10N
+                'Please, fill your state', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateState(newValue),
         ),
@@ -256,7 +256,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your city', // TODO -> MUST be provided by L10N
+                'Please, fill your city', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateCity(newValue),
         ),
@@ -275,7 +275,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your neighborhood', // TODO -> MUST be provided by L10N
+                'Please, fill your neighborhood', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateNeighborhood(newValue),
         ),
@@ -294,7 +294,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your house address', // TODO -> MUST be provided by L10N
+                'Please, fill your house address', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateHouseAddres(newValue),
         ),
@@ -315,7 +315,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           validator: (value) => defaultValidator(
             value: value,
             message:
-                'Please, fill your house number', // TODO -> MUST be provided by L10N
+                'Please, fill your house number', // TODO:  MUST be provided by L10N
           ),
           onSaved: (newValue) => updatingFields.updateHouseNumber(newValue),
         ),

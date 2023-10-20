@@ -63,7 +63,7 @@ class _BuildCouponCodeState extends State<BuildCouponCode> {
               color: Colors.white,
               size: 25,
             ),
-            // TODO -> This text MUST be provided by L10N
+            // TODO:  This text MUST be provided by L10N
             Text(
               'Cupom de desconto',
               style: TextStyle(
@@ -114,7 +114,7 @@ class _BuildCouponCodeState extends State<BuildCouponCode> {
             style: const TextStyle(
               color: Colors.white,
             ),
-          ), // TODO -> This MUST be provided by L10N
+          ), // TODO:  This MUST be provided by L10N
         );
       },
     );
@@ -164,7 +164,7 @@ class _BuildCouponCodeState extends State<BuildCouponCode> {
             context: context,
             title: context.loc.dialog_error_ops,
             content:
-                'Esse cupom de desconto não existe!', //TODO -> This MUST be provided by L10N
+                'Esse cupom de desconto não existe!', //TODO:  This MUST be provided by L10N
             optionsBuilder: () => {
               'Ok': false,
             },

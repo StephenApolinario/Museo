@@ -67,7 +67,7 @@ List<Emblem> fakeEmblemsData = [
   ),
 ];
 
-// TODO -> Emblems data should be given by API.
+// TODO:  Emblems data should be given by API.
 List<Emblem> fakeUserEmblemsData = [
   fakeEmblemsData[0],
   fakeEmblemsData[5],

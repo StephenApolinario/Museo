@@ -13,10 +13,10 @@ List<UpdateInformationTitle> createUpdateInformationSteps({
 }) {
   return [
     UpdateInformationTitle(
-      title: 'Personal Data', // TODO -> MUST be provided by L10N
+      title: 'Personal Data', // TODO:  MUST be provided by L10N
     ),
     UpdateInformationTitle(
-      title: 'Address Data', // TODO -> MUST be provided by L10N
+      title: 'Address Data', // TODO:  MUST be provided by L10N
     ),
   ];
 }

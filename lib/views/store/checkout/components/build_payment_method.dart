@@ -44,7 +44,7 @@ class BuildPaymentMethod extends StatelessWidget {
               color: Colors.white,
               size: 30,
             ),
-            // TODO -> This text MUST be provided by L10N
+            // TODO:  This text MUST be provided by L10N
             Text(
               'Formas de pagamento',
               style: TextStyle(

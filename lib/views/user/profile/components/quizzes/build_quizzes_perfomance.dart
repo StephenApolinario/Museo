@@ -13,7 +13,7 @@ class BuildQuizzesPerfomance extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Quizzes perfomance', // TODO -> MUST be provided by L10N
+              'Quizzes perfomance', // TODO:  MUST be provided by L10N
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -24,12 +24,12 @@ class BuildQuizzesPerfomance extends StatelessWidget {
               lineWidth: 13,
               progressColor: Colors.green.shade500,
               animation: true,
-              percent: 0.78, // TODO -> This should be given by the API
+              percent: 0.78, // TODO:  This should be given by the API
               circularStrokeCap: CircularStrokeCap.round,
               animateFromLastPercent: true,
               animationDuration: 800,
               center: const Text(
-                '78%', // TODO -> This should be given by the API
+                '78%', // TODO:  This should be given by the API
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

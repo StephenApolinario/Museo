@@ -26,7 +26,7 @@ class BuildTopProfileInformations extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
             child: const Image(
               image: NetworkImage(
-                  // TODO -> This MUST be provided by API.
+                  // TODO:  This MUST be provided by API.
                   'https://i.pinimg.com/564x/97/aa/84/97aa847d061a14894178805f1d551500.jpg'),
             ),
           ),
@@ -40,7 +40,7 @@ class BuildTopProfileInformations extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Stephen', // TODO -> This MUST be provided by API.
+            'Stephen', // TODO:  This MUST be provided by API.
             style: TextStyle(
               fontSize: 20,
               color: mainBlue,
@@ -48,7 +48,7 @@ class BuildTopProfileInformations extends StatelessWidget {
             ),
           ),
           Text(
-            'Michael Apolinário', // TODO -> This MUST be provided by API.
+            'Michael Apolinário', // TODO:  This MUST be provided by API.
             style: TextStyle(
               fontSize: 16,
               color: mainBlue,

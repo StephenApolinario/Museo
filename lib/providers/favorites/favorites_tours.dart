@@ -14,16 +14,16 @@ class FavoritesTours with ChangeNotifier {
 
     if (!alreadyAdded) {
       snackBarText =
-          'You add to your favorites!'; // TODO -> MUST be provided by L10N
+          'You add to your favorites!'; // TODO:  MUST be provided by L10N
       favoritesTours.add(tour);
     } else {
       snackBarText =
-          'You\'ve already added it to your favorites!'; // TODO -> MUST be provided by L10N
+          'You\'ve already added it to your favorites!'; // TODO:  MUST be provided by L10N
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(snackBarText), // TODO -> MUST be provided by L10N
+        content: Text(snackBarText), // TODO:  MUST be provided by L10N
         backgroundColor: alreadyAdded ? Colors.red.shade300 : Colors.green,
       ),
     );
@@ -39,16 +39,16 @@ class FavoritesTours with ChangeNotifier {
     bool alreadyAdded = favoritesTours.any((element) => element == tour);
 
     if (!alreadyAdded) {
-      snackBarText = 'There is some error!'; // TODO -> MUST be provided by L10N
+      snackBarText = 'There is some error!'; // TODO:  MUST be provided by L10N
     } else {
       favoritesTours.remove(tour);
       snackBarText =
-          'You\'ve deleted from your favorites!'; // TODO -> MUST be provided by L10N
+          'You\'ve deleted from your favorites!'; // TODO:  MUST be provided by L10N
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(snackBarText), // TODO -> MUST be provided by L10N
+        content: Text(snackBarText), // TODO:  MUST be provided by L10N
         backgroundColor: Colors.red.shade300,
       ),
     );

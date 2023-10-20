@@ -24,7 +24,7 @@ class SectionsView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Title
-                    // TODO -> Get string by L10N
+                    // TODO:  Get string by L10N
                     const Center(
                       child: Text(
                         'A EXPOSIÇÃO',
@@ -37,7 +37,7 @@ class SectionsView extends StatelessWidget {
                     // About exhibition
                     const SizedBox(height: 10),
                     const Text(
-                      // TODO -> Get string by L10N
+                      // TODO:  Get string by L10N
                       'O projeto museográfico é moderno e valoriza as peças de maneira segura e confortável para o visitante. O Projeto luminotécnico é todo em led e os ambientes são climatizados, o que garante uma visitação agradável em qualquer época do ano. É totalmente acessível para pessoas com deficiência física e com mobilidade reduzida.',
                       textAlign: TextAlign.justify,
                     ),

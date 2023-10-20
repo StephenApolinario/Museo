@@ -18,7 +18,7 @@ class BuildRowShareAndContinueButton extends StatelessWidget {
       children: [
         // Share icon
         ElevatedButton(
-          // TODO -> Share by what? Twitter? Share the points and image?
+          // TODO:  Share by what? Twitter? Share the points and image?
           onPressed: () {},
           style: ElevatedButton.styleFrom(
             backgroundColor: mainBlue,
@@ -42,7 +42,7 @@ class BuildRowShareAndContinueButton extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => TourView(
-                  tourMode: tourMode, // TODO -> Uncomment line
+                  tourMode: tourMode, // TODO:  Uncomment line
                 ),
               ),
             );
