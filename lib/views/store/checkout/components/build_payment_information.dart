@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/museum/museum_information.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/models/museum_information.dart';
 import 'package:museo/models/store/payments_methods.dart';
 
 class BuildPaymentInformation extends StatelessWidget {
@@ -13,10 +14,9 @@ class BuildPaymentInformation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO:  This MUST be provided by L10N
           RichText(
             text: TextSpan(
-              text: 'Aceitamos pagamentos em ',
+              text: context.loc.accept_payments_in,
               style: DefaultTextStyle.of(context).style,
               children: fakeExtraPaymentMethods.map((element) {
                 if (element == fakeExtraPaymentMethods.last) {

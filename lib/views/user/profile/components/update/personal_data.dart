@@ -2,10 +2,12 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/extensions/string.dart';
 import 'package:museo/models/user/update_informations.dart';
 import 'package:museo/providers/update/updating_fields.dart';
+import 'package:museo/providers/user/user.dart';
 import 'package:provider/provider.dart';
 
 class UpdatePersonalData extends StatefulWidget {
@@ -25,10 +27,12 @@ class UpdatePersonalData extends StatefulWidget {
 class _UpdatePersonalDataState extends State<UpdatePersonalData> {
   final formKey = GlobalKey<FormState>();
   late UpdatingFields updatingFields;
+  late User userProvider;
 
   @override
   void initState() {
     updatingFields = Provider.of<UpdatingFields>(context, listen: false);
+    userProvider = Provider.of<User>(context, listen: false);
     super.initState();
   }
 
@@ -47,9 +51,9 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
                   nameTextField(),
                   lastNameTextField(),
                   emailTextField(),
-                  cpfTextField(),
-                  birthdayTextField(),
-                  phoneNumberTextField(),
+                  cpfTextField(), //TODO: Check if CPF is valid.
+                  birthdayTextField(), //TODO: Check if birth of date is valid.
+                  phoneNumberTextField(), //TODO: Check if phonenumber is valid.
                   continueButton(context),
                 ],
               ),
@@ -88,10 +92,10 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
       child: Column(
         children: [
           Text(
-            updateTitleSubtitle.title,
+            context.loc.personal_data,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 32,
+              fontSize: 28,
             ),
           ),
         ],
@@ -107,12 +111,14 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           title: context.loc.registering_name,
         ),
         TextFormField(
-          initialValue: updatingFields.updateUserInformation.personalData.name,
+          initialValue:
+              updatingFields.updateUserInformation.personalData.name != ''
+                  ? updatingFields.updateUserInformation.personalData.name
+                  : userProvider.loggedUser.name,
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your name', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_name,
           ),
           onSaved: (newValue) => updatingFields.updateName(newValue),
         ),
@@ -128,14 +134,15 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           title: context.loc.registering_lastname,
         ),
         TextFormField(
-          initialValue: updatingFields
-              .updateUserInformation.personalData.lastName
-              .toCapitalized(),
+          initialValue:
+              updatingFields.updateUserInformation.personalData.lastName != ''
+                  ? updatingFields.updateUserInformation.personalData.lastName
+                      .toCapitalized()
+                  : userProvider.loggedUser.lastName,
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your last name', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_last_name,
           ),
           onSaved: (newValue) => updatingFields.updateLastName(newValue),
         ),
@@ -151,12 +158,15 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           title: context.loc.registering_email,
         ),
         TextFormField(
-          initialValue: updatingFields.updateUserInformation.personalData.email,
+          initialValue:
+              updatingFields.updateUserInformation.personalData.email != ''
+                  ? updatingFields.updateUserInformation.personalData.email
+                  : userProvider.loggedUser.email,
           decoration: defaultDecoration,
           keyboardType: TextInputType.emailAddress,
           validator: (value) {
             if (value != null && !EmailValidator.validate(value)) {
-              return 'Please write a valid email'; // TODO:  MUST be provided by L10N
+              return context.loc.fill_email;
             }
 
             return null;
@@ -175,7 +185,10 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           title: context.loc.registering_CPF,
         ),
         TextFormField(
-          initialValue: updatingFields.updateUserInformation.personalData.cpf,
+          initialValue:
+              updatingFields.updateUserInformation.personalData.cpf != ''
+                  ? updatingFields.updateUserInformation.personalData.cpf
+                  : userProvider.loggedUser.cpf,
           keyboardType: TextInputType.number,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -184,7 +197,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message: 'Please, fill your CPF', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_cpf,
           ),
           onSaved: (newValue) => updatingFields.updateCPF(newValue),
         ),
@@ -201,7 +214,12 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
         ),
         TextFormField(
           initialValue:
-              updatingFields.updateUserInformation.personalData.birthday,
+              updatingFields.updateUserInformation.personalData.birthday != ''
+                  ? updatingFields.updateUserInformation.personalData.birthday
+                  : DateFormat('dd/MM/yyyy').format(
+                      DateFormat('yyyy/MM/dd')
+                          .parse(userProvider.loggedUser.birthday),
+                    ),
           keyboardType: TextInputType.datetime,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -209,10 +227,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           ],
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
-            value: value,
-            message:
-                'Please, fill your birthday', // TODO:  MUST be provided by L10N
-          ),
+              value: value, message: context.loc.fill_birthday),
           onSaved: (newValue) => updatingFields.updateBirthday(newValue),
         ),
       ],
@@ -227,8 +242,11 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           title: context.loc.registering_phonenumber,
         ),
         TextFormField(
-          initialValue:
-              updatingFields.updateUserInformation.personalData.phoneNumber,
+          initialValue: updatingFields
+                      .updateUserInformation.personalData.phoneNumber !=
+                  ''
+              ? updatingFields.updateUserInformation.personalData.phoneNumber
+              : userProvider.loggedUser.phoneNumber,
           keyboardType: TextInputType.number,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -236,10 +254,7 @@ class _UpdatePersonalDataState extends State<UpdatePersonalData> {
           ],
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
-            value: value,
-            message:
-                'Please, fill your phone number', // TODO:  MUST be provided by L10N
-          ),
+              value: value, message: context.loc.fill_phone_number),
           onSaved: (newValue) => updatingFields.updatePhonenumber(newValue),
         ),
       ],

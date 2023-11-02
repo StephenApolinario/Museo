@@ -1,16 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/models/tour/tour_piece.dart';
-import 'package:museo/providers/favorites/favorites_tours.dart';
-import 'package:provider/provider.dart';
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/models/tour_piece.dart';
+import 'package:museo/services/user_service.dart';
 
 class FavoriteTourView extends StatefulWidget {
-  final TourPiece tour;
+  final TourPiece favoriteMuseumPiece;
 
   const FavoriteTourView({
     super.key,
-    required this.tour,
+    required this.favoriteMuseumPiece,
   });
 
   @override
@@ -18,14 +20,6 @@ class FavoriteTourView extends StatefulWidget {
 }
 
 class _FavoriteTourViewState extends State<FavoriteTourView> {
-  late FavoritesTours favoritesTours;
-
-  @override
-  void initState() {
-    favoritesTours = Provider.of<FavoritesTours>(context, listen: false);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,11 +28,16 @@ class _FavoriteTourViewState extends State<FavoriteTourView> {
         actions: [
           IconButton(
             onPressed: () async {
-              favoritesTours.removeToFavorite(
-                context: context,
-                tour: widget.tour,
+              UserService().removeFavorite(
+                context,
+                widget.favoriteMuseumPiece.id,
               );
-              Navigator.of(context).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(context.loc.favorite_removed),
+                  backgroundColor: Colors.red.shade300,
+                ),
+              );
             },
             icon: const Icon(
               Icons.delete_forever,
@@ -47,10 +46,8 @@ class _FavoriteTourViewState extends State<FavoriteTourView> {
           ),
         ],
       ),
-      // drawer: const menu.NavigationDrawer(),
       body: Column(
         children: [
-          // Image - Title - Subtitle
           Padding(
             padding: const EdgeInsets.only(
               bottom: 16,
@@ -58,15 +55,10 @@ class _FavoriteTourViewState extends State<FavoriteTourView> {
               right: 16,
             ),
             child: TourImageWithTitleAndSubtitle(
-              title: widget.tour.title,
-              subtitle: widget.tour.subtitle,
-              image: widget.tour.image,
-            ),
+                favoriteMuseumPiece: widget.favoriteMuseumPiece),
           ),
-          // Blue Container with Description and Play/Speed
           VerticallyTextAndIcons(
-            description: widget.tour.description,
-            color: mainBlue,
+            favorite: widget.favoriteMuseumPiece,
           ),
         ],
       ),
@@ -75,57 +67,71 @@ class _FavoriteTourViewState extends State<FavoriteTourView> {
 }
 
 class TourImageWithTitleAndSubtitle extends StatelessWidget {
-  final String image, title, subtitle;
+  final TourPiece favoriteMuseumPiece;
 
   const TourImageWithTitleAndSubtitle({
     super.key,
-    required this.image,
-    required this.title,
-    required this.subtitle,
+    required this.favoriteMuseumPiece,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Image on top
-        ClipRRect(
-          borderRadius: BorderRadius.circular(35),
-          child: Image.asset(
-            image,
-            fit: BoxFit.fill,
-          ),
-        ),
+        favoriteImage(),
         const SizedBox(height: 10),
-        // Title
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 25,
-          ),
-        ),
-        // Subtitle
-        Text(
-          subtitle,
-          textAlign: TextAlign.justify,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
-        ),
+        favoriteTitle(),
+        favoriteSubtitle(),
       ],
+    );
+  }
+
+  Text favoriteSubtitle() {
+    return Text(
+      favoriteMuseumPiece.subtitle,
+      textAlign: TextAlign.justify,
+      style: const TextStyle(
+        fontSize: 18,
+      ),
+    );
+  }
+
+  Text favoriteTitle() {
+    return Text(
+      favoriteMuseumPiece.title,
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        fontSize: 25,
+      ),
+    );
+  }
+
+  Widget favoriteImage() {
+    return FutureBuilder(
+      future: getImage(favoriteMuseumPiece.image),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(35),
+            child: Image.network(
+              favoriteMuseumPiece.image,
+              fit: BoxFit.fill,
+            ),
+          );
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
     );
   }
 }
 
 class VerticallyTextAndIcons extends StatelessWidget {
-  final String description;
-  final Color color;
+  final TourPiece favorite;
 
   const VerticallyTextAndIcons({
     super.key,
-    required this.description,
-    this.color = mainBlue,
+    required this.favorite,
   });
 
   @override
@@ -134,7 +140,7 @@ class VerticallyTextAndIcons extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: color,
+          color: colorFromApi(color: favorite.color),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: secondBlue,
@@ -151,7 +157,7 @@ class VerticallyTextAndIcons extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Center(
                       child: Text(
-                        description,
+                        favorite.description,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(
                           color: Colors.white,
@@ -175,4 +181,24 @@ class VerticallyTextAndIcons extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<ImageProvider> getImage(String imageUrl) async {
+  ImageProvider imageProvider = NetworkImage(imageUrl);
+  Completer<ImageProvider> completer = Completer();
+  NetworkImage(imageUrl)
+      .resolve(
+        const ImageConfiguration(),
+      )
+      .addListener(
+        ImageStreamListener(
+          (info, synchronousCall) {
+            completer.complete(imageProvider);
+          },
+          onError: (dynamic exception, StackTrace? stackTrace) {
+            completer.completeError(exception, stackTrace);
+          },
+        ),
+      );
+  return completer.future;
 }

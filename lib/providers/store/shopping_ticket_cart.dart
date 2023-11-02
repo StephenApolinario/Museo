@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:museo/models/store/coupon_discount.dart';
+import 'package:museo/models/store/coupon.dart';
 import 'package:museo/models/store/tickets.dart';
 
 class ShoppingTicketCart with ChangeNotifier {
   late ShoppingTicketsCart cart = ShoppingTicketsCart(tickets: []);
+  late List<NewTicket> tickets = [];
+
+  void updateTickets(List<NewTicket> updatedTickets) {
+    tickets = updatedTickets;
+  }
 
   void clearCart() {
     cart = ShoppingTicketsCart(tickets: []);
   }
 
   void createEmptyCart() {
-    for (var ticket in fakeTickets) {
+    for (var ticket in tickets) {
       cart.tickets.add(
         TicketsCart(
           id: ticket.id,
-          name: ticket.title,
+          name: ticket.name,
           price: ticket.price,
           quantity: 0,
         ),
@@ -22,7 +27,7 @@ class ShoppingTicketCart with ChangeNotifier {
     }
   }
 
-  void updateCart({required int newQuantity, required int ticketID}) {
+  void updateCart({required int newQuantity, required String ticketID}) {
     cart.tickets.firstWhere((ticket) => ticket.id == ticketID).quantity =
         newQuantity;
     shoppingCartPrice();
@@ -37,7 +42,7 @@ class ShoppingTicketCart with ChangeNotifier {
     double price = 0;
     for (var ticket in cart.tickets) {
       price += ticket.quantity *
-          fakeTickets.firstWhere((element) => ticket.id == element.id).price;
+          tickets.firstWhere((element) => ticket.id == element.id).price;
     }
     cart.totalPriceBeforeDiscount = price;
     notifyListeners();
@@ -55,15 +60,21 @@ class ShoppingTicketCart with ChangeNotifier {
   }) {
     late double newTotalPrice;
     const double minimumPrice = 1;
-    switch (coupon.access) {
-      case CouponAcess.value:
-        newTotalPrice = cart.totalPriceBeforeDiscount - coupon.valueDiscount;
-      case CouponAcess.percentage:
-        newTotalPrice = cart.totalPriceBeforeDiscount -
-            (cart.totalPriceBeforeDiscount * coupon.percentageDiscount / 100);
-      default:
-        throw Exception('Discount doens\'t have any type');
+
+    for (var access in coupon.access) {
+      switch (access) {
+        case CouponAcess.value:
+          newTotalPrice = cart.totalPriceBeforeDiscount - coupon.valueDiscount;
+          break;
+        case CouponAcess.percentage:
+          newTotalPrice = cart.totalPriceBeforeDiscount -
+              (cart.totalPriceBeforeDiscount * coupon.percentageDiscount / 100);
+          break;
+        default:
+          throw Exception('Discount doesn\'t have any type');
+      }
     }
+
     cart.isCouponApplied = true;
     cart.coupon = coupon;
     cart.totalPriceAfterDiscount =

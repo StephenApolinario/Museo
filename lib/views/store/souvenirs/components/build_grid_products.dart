@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:museo/models/store/products.dart';
+import 'package:museo/models/store/category_product.dart';
+import 'package:museo/models/store/product.dart';
 import 'package:museo/views/store/souvenirs/components/build_item_card.dart';
 import 'package:museo/views/store/souvenirs/souvenirs_detail_view.dart';
 
 class BuildGridProducts extends StatelessWidget {
-  final int categorieIndex;
+  final SouvenirsCategory selectedCategory;
+  final List<Product> products;
 
   const BuildGridProducts({
     super.key,
-    required this.categorieIndex,
+    required this.selectedCategory,
+    required this.products,
   });
 
   @override
   Widget build(BuildContext context) {
+    final productsFromCategory = products
+        .where((Product product) => product.category == selectedCategory.name)
+        .toList();
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: GridView.builder(
-            itemCount: fakeSouvenirsList[categorieIndex].products.length,
+            itemCount: productsFromCategory.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 20,
@@ -26,13 +33,12 @@ class BuildGridProducts extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return BuildItemCard(
-                product: fakeSouvenirsList[categorieIndex].products[index],
+                product: productsFromCategory[index],
                 press: () => Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => SouvenirsDetailsView(
-                      product:
-                          fakeSouvenirsList[categorieIndex].products[index],
+                      product: productsFromCategory[index],
                     ),
                   ),
                 ),

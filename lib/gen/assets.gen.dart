@@ -117,12 +117,16 @@ class $AssetsTourGen {
 class $AssetsUserGen {
   const $AssetsUserGen();
 
+  /// File path: assets/user/default_profile_picture.jpg
+  AssetGenImage get defaultProfilePicture =>
+      const AssetGenImage('assets/user/default_profile_picture.jpg');
+
   /// File path: assets/user/forget_password.png
   AssetGenImage get forgetPassword =>
       const AssetGenImage('assets/user/forget_password.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [forgetPassword];
+  List<AssetGenImage> get values => [defaultProfilePicture, forgetPassword];
 }
 
 class $AssetsStoreIconsGen {

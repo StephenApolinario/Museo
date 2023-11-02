@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/constants/routes.dart' as routes;
 import 'package:museo/constants/routes.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/services/user_service.dart';
 
 class BuildProfileOptions extends StatelessWidget {
   const BuildProfileOptions({
@@ -17,7 +19,7 @@ class BuildProfileOptions extends StatelessWidget {
         quizzesEmblems(context: context),
         updateInformation(context: context),
         updatePassword(context: context),
-        logout(),
+        logout(context),
       ],
     );
   }
@@ -38,7 +40,7 @@ class BuildProfileOptions extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             border: Border.all(color: mainBlue),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
@@ -46,15 +48,14 @@ class BuildProfileOptions extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.key_sharp),
-                      SizedBox(width: 10),
-                      // TODO:  MUST be provided by L10N
-                      Text('Change Password'),
+                      const Icon(Icons.key_sharp),
+                      const SizedBox(width: 10),
+                      Text(context.loc.update_password),
                     ],
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: mainBlue,
               ),
@@ -65,19 +66,21 @@ class BuildProfileOptions extends StatelessWidget {
     );
   }
 
-  Widget logout() {
+  Widget logout(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, bottom: 30),
       child: InkWell(
         borderRadius: BorderRadius.circular(7),
-        onTap: () => print('ok'), // TODO:  Complete the API Logout.
+        onTap: () {
+          UserService().logout(context);
+        },
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7),
             border: Border.all(color: Colors.red),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
@@ -85,22 +88,22 @@ class BuildProfileOptions extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.logout,
                         color: Colors.red,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
-                        'Logout',
-                        style: TextStyle(
+                        context.loc.logout,
+                        style: const TextStyle(
                           color: Colors.red,
                         ),
-                      ), // TODO:  MUST be provided by L10N
+                      ),
                     ],
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: Colors.red,
               ),
@@ -123,7 +126,7 @@ class BuildProfileOptions extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             border: Border.all(color: mainBlue),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
@@ -131,15 +134,14 @@ class BuildProfileOptions extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.account_box_rounded),
-                      SizedBox(width: 10),
-                      // TODO:  MUST be provided by L10N
-                      Text('Change Information'),
+                      const Icon(Icons.account_box_rounded),
+                      const SizedBox(width: 10),
+                      Text(context.loc.update_information),
                     ],
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: mainBlue,
               ),
@@ -162,7 +164,7 @@ class BuildProfileOptions extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             border: Border.all(color: mainBlue),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
@@ -170,14 +172,14 @@ class BuildProfileOptions extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.favorite_border),
-                      SizedBox(width: 10),
-                      Text('Favorites'), // TODO:  MUST be provided by L10N
+                      const Icon(Icons.favorite_border),
+                      const SizedBox(width: 10),
+                      Text(context.loc.favorite_pieces),
                     ],
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: mainBlue,
               ),
@@ -200,7 +202,7 @@ class BuildProfileOptions extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             border: Border.all(color: mainBlue),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
@@ -208,15 +210,14 @@ class BuildProfileOptions extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.star_border),
-                      SizedBox(width: 10),
-                      // TODO:  MUST be provided by L10N
-                      Text('Quizzes Emblems'),
+                      const Icon(Icons.star_border),
+                      const SizedBox(width: 10),
+                      Text(context.loc.emblem_quizzes),
                     ],
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_sharp,
                 color: mainBlue,
               ),

@@ -22,8 +22,6 @@ class _StoreViewState extends State<StoreView> {
   void initState() {
     _shoppingTicketCart =
         Provider.of<ShoppingTicketCart>(context, listen: false);
-    // Initialize cart with nothing inside.
-    _shoppingTicketCart.createEmptyCart();
     // Select the current time to initial cart when the user not select any date (BC the first one was selected by deafult).
     _shoppingTicketCart.cart.date = selectedDate;
     super.initState();
@@ -50,8 +48,7 @@ class _StoreViewState extends State<StoreView> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO:  This title shoul by provided by context.loc
-          const BuildTitleCouponStore(title: 'Datas disponíveis'),
+          BuildTicketStore(title: context.loc.avaliable_dates),
           const SizedBox(height: 40),
           BuildDateSelector(selectDate: selectDate),
           const BuildTicketsList(),

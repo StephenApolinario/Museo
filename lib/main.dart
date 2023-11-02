@@ -4,11 +4,11 @@ import 'package:museo/constants/routes.dart';
 import 'package:museo/constants/urls.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/gen/assets.gen.dart';
-import 'package:museo/providers/favorites/favorites_tours.dart';
 import 'package:museo/providers/register/registerig_fields.dart';
 import 'package:museo/providers/store/shopping_ticket_cart.dart';
-import 'package:museo/providers/tour/tourPiece.dart';
+import 'package:museo/providers/tour/tour_piece.dart';
 import 'package:museo/providers/update/updating_fields.dart';
+import 'package:museo/providers/user/user.dart';
 import 'package:museo/utilities/dialogs/start_dialog.dart';
 import 'package:museo/views/about/application_view.dart';
 import 'package:museo/views/about/movi_view.dart';
@@ -20,6 +20,7 @@ import 'package:museo/views/search_view.dart';
 import 'package:museo/views/store/souvenirs/souvenirs_store_view.dart';
 import 'package:museo/views/store/tickets/tickets_store_view.dart';
 import 'package:museo/views/user/forget_password.dart';
+import 'package:museo/views/user/forget_password_update.dart';
 import 'package:museo/views/user/login_view.dart';
 import 'package:museo/views/user/profile/profile_view.dart';
 import 'package:museo/views/sections_view.dart';
@@ -31,16 +32,19 @@ import 'package:museo/views/user/registering/registering_view.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: '.env');
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ShoppingTicketCart()),
         ChangeNotifierProvider(create: (_) => RegisteringFields()),
         ChangeNotifierProvider(create: (_) => UpdatingFields()),
-        ChangeNotifierProvider(create: (_) => FavoritesTours()),
         ChangeNotifierProvider(create: (_) => SpeakAboutTourPiece()),
+        ChangeNotifierProvider(create: (_) => User()),
       ],
       child: const MyApp(),
     ),
@@ -88,6 +92,7 @@ class MyApp extends StatelessWidget {
         userUpdateInformation: (context) => const UpdateInformationView(),
         userForgetPassword: (context) => const ForgetPasswordView(),
         quizzEmblems: (context) => const QuizzesEmblemListView(),
+        userGetNewPassword: (context) => const UserGetNewPassword(),
       },
     );
   }
@@ -151,22 +156,31 @@ class MyHomePage extends StatelessWidget {
                     foregroundColor: mainBlue,
                   ),
                   onPressed: () async {
-                    final shouldLogin = await showStartDialog(context);
-                    if (context.mounted) {
+                    final userProvider =
+                        Provider.of<User>(context, listen: false);
+
+                    final navigator = Navigator.of(context);
+                    if (!userProvider.logged) {
+                      final shouldLogin = await showStartDialog(context);
                       if (shouldLogin) {
-                        Navigator.of(context).push(
+                        navigator.push(
                           MaterialPageRoute(
                             builder: (context) => const LoginView(),
                           ),
                         );
                       } else if (shouldLogin == false) {
-                        Navigator.push(
-                          context,
+                        navigator.push(
                           MaterialPageRoute(
                             builder: (context) => const TourSelectView(),
                           ),
                         );
                       }
+                    } else {
+                      navigator.push(
+                        MaterialPageRoute(
+                          builder: (context) => const TourSelectView(),
+                        ),
+                      );
                     }
                   },
                   child: Text(

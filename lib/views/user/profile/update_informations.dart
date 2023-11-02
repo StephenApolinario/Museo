@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/models/user/update_informations.dart';
 import 'package:museo/views/user/profile/components/update/address_data.dart';
 import 'package:museo/views/user/profile/components/update/personal_data.dart';
@@ -35,10 +36,9 @@ class _UpdateInformationViewState extends State<UpdateInformationView> {
     return Scaffold(
       backgroundColor: mainBlue,
       appBar: AppBar(
-        // TODO:  MUST be provided by L10N
-        title: const Text(
-          'Update informations',
-          style: TextStyle(
+        title: Text(
+          context.loc.update_information,
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),

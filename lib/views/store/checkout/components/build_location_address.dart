@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/museum/museum_information.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/models/museum_information.dart';
 import 'package:museo/providers/store/shopping_ticket_cart.dart';
 
 class BuildLocationAddress extends StatelessWidget {
@@ -33,9 +34,8 @@ class BuildLocationAddress extends StatelessWidget {
                 children: [
                   Text(
                       '${fakeMuseumAddress.city} - ${fakeMuseumAddress.state}'),
-                  // TODO:  String MUST be provided by L10N
                   Text(
-                    'Data: ${DateFormat('yMd', language).format(providerTicket.cart.date!).toUpperCase()}',
+                    '${context.loc.data}: ${DateFormat('yMd', language).format(providerTicket.cart.date!).toUpperCase()}',
                   ),
                 ],
               ),

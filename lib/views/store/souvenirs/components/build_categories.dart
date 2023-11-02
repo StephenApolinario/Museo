@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/store/products.dart';
+import 'package:museo/extensions/string.dart';
+import 'package:museo/models/store/category_product.dart';
 
 class BuildCategories extends StatefulWidget {
-  final int categorieIndex;
-  final Function(int) updateIndex;
+  final SouvenirsCategory selectedCategory;
+
+  final List<SouvenirsCategory> categorys;
+  final Function(SouvenirsCategory) updateCategory;
 
   const BuildCategories({
     super.key,
-    required this.categorieIndex,
-    required this.updateIndex,
+    required this.categorys,
+    required this.updateCategory,
+    required this.selectedCategory,
   });
 
   @override
@@ -17,7 +21,6 @@ class BuildCategories extends StatefulWidget {
 }
 
 class _BuildCategoriesState extends State<BuildCategories> {
-  List<SouvenirsCategory> categories = fakeSouvenirsList;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +29,7 @@ class _BuildCategoriesState extends State<BuildCategories> {
         height: 25,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
+          itemCount: widget.categorys.length,
           itemBuilder: (context, index) => buildCategory(index),
         ),
       ),
@@ -36,7 +39,7 @@ class _BuildCategoriesState extends State<BuildCategories> {
   Widget buildCategory(int index) {
     return GestureDetector(
       onTap: () {
-        widget.updateIndex(index);
+        widget.updateCategory(widget.categorys[index]);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -44,10 +47,10 @@ class _BuildCategoriesState extends State<BuildCategories> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              categories[index].name,
+              widget.categorys[index].name.toCapitalized(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: widget.categorieIndex == index
+                color: widget.selectedCategory == widget.categorys[index]
                     ? grayStoreColor
                     : lightGrayStoreColor,
               ),
@@ -55,7 +58,7 @@ class _BuildCategoriesState extends State<BuildCategories> {
             Container(
               height: 2,
               width: 30,
-              color: widget.categorieIndex == index
+              color: widget.selectedCategory == widget.categorys[index]
                   ? Colors.black
                   : Colors.transparent,
             ),

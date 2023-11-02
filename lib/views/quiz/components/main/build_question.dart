@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:museo/constants/colors.dart';
-import 'package:museo/models/quizz/quiz.dart';
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/models/quiz.dart';
 import 'package:museo/views/quiz/components/main/build_options.dart';
 
 class BuildQuestion extends StatefulWidget {
-  final Question question;
+  final NewQuiz quiz;
+  final int index;
   final Function() increaseScore;
   final Function updateParent;
 
   const BuildQuestion({
     super.key,
-    required this.question,
+    required this.index,
+    required this.quiz,
     required this.increaseScore,
     required this.updateParent,
   });
@@ -22,6 +24,7 @@ class BuildQuestion extends StatefulWidget {
 class _BuildQuestionState extends State<BuildQuestion> {
   @override
   Widget build(BuildContext context) {
+    final NewQuestion question = widget.quiz.questions[widget.index];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,8 +36,7 @@ class _BuildQuestionState extends State<BuildQuestion> {
               minWidth: 300,
             ),
             decoration: BoxDecoration(
-              // TODO This color must be provided by an API
-              color: mainBlue,
+              color: colorFromApi(color: widget.quiz.color),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
@@ -44,7 +46,7 @@ class _BuildQuestionState extends State<BuildQuestion> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    widget.question.text,
+                    question.text,
                     style: const TextStyle(
                       fontSize: 18,
                       color: Colors.white,
@@ -59,16 +61,16 @@ class _BuildQuestionState extends State<BuildQuestion> {
         // Options
         Expanded(
           child: BuildOptions(
-            question: widget.question,
+            question: question,
             onClickedOption: (option) {
-              if (widget.question.isLocked) {
+              if (question.isLocked) {
                 return;
               } else {
                 setState(() {
-                  widget.question.isLocked = true;
-                  widget.question.selectedOption = option;
+                  question.isLocked = true;
+                  question.selectedOption = option;
                 });
-                if (widget.question.selectedOption!.isCorrect) {
+                if (question.selectedOption!.isCorrect) {
                   widget.increaseScore();
                 }
                 widget.updateParent();

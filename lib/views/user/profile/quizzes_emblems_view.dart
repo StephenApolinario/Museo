@@ -1,8 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:museo/models/emblems/emblems.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/models/emblems.dart';
+import 'package:museo/providers/user/user.dart';
+import 'package:museo/services/emblem_service.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,25 +22,37 @@ class QuizzesEmblemListView extends StatefulWidget {
 class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<User>(context, listen: true);
+
+    final List<dynamic> emblems = userProvider.loggedUser.emblems;
+
+    List<Emblem> emblemList = emblems.map((item) {
+      return Emblem(
+        color: item['color'],
+        title: item['title'],
+        image: item['image'],
+        maxPoints: item['maxPoints'],
+        minPoints: item['minPoints'],
+        quiz: item['quiz'],
+      );
+    }).toList();
+
     return Scaffold(
       appBar: AppBar(
-        // TODO:  MUST be provided by L10N
-        title: const Text('Emblems'),
+        title: Text(context.loc.emblems),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            //TODO:  This shoul be emblems from API.
-            fakeUserEmblemsData.isEmpty
-                ? const Expanded(
+            emblems.isEmpty
+                ? Expanded(
                     child: Center(
-                      // TODO:  MUST be provided by L10N
-                      child: Text('Você ainda não nenhum emblema!'),
+                      child: Text(context.loc.no_emblems),
                     ),
                   )
-                //TODO:  This shoul be emblems from API.
-                : buildEmblemsList(emblems: fakeUserEmblemsData),
+                // : const Text('Tem emblema'),
+                : buildEmblemsList(emblems: emblemList),
           ],
         ),
       ),
@@ -45,7 +61,6 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
 
   buildEmblemsList({required List<Emblem> emblems}) {
     return GridView.builder(
-      //TODO:  This must be emblems from API.
       itemCount: emblems.length,
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -70,7 +85,7 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: emblem.quiz.color,
+            color: Color(int.parse('0xFF${emblem.color}')),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
@@ -100,7 +115,7 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    emblem.imagePath,
+                    emblem.image,
                     height: 100,
                     width: 100,
                     fit: BoxFit.cover,
@@ -127,29 +142,38 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
   }
 
   Widget emblemDetails({required Emblem emblem}) {
-    return Column(
-      children: [
-        Text(
-          emblem.title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        Text(
-          emblem.quiz.title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ],
+    return FutureBuilder(
+      future: EmblemService().getEmblemQuizTitle(context, emblem.quiz),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: [
+              Text(
+                emblem.title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                snapshot.data,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
     );
   }
 }
 
 shareEmblem({required Emblem emblem}) async {
-  final url = Uri.parse(emblem.imagePath);
+  final url = Uri.parse(emblem.image);
   final response = await http.get(url);
   final bytes = response.bodyBytes;
 

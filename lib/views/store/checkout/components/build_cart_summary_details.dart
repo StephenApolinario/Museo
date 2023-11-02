@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/helpers/price.dart';
 import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:provider/provider.dart';
@@ -40,13 +41,12 @@ class BuildTotalCart extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 30),
-        // TODO:  MUST be provided by L10N
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'TOTAL',
-              style: TextStyle(
+            Text(
+              context.loc.total,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),

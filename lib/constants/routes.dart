@@ -16,6 +16,7 @@ const checkout = '/store/checkout';
 // User
 const userUpdatePassword = '/user/updatePassword';
 const userForgetPassword = '/user/forgetPassword';
+const userGetNewPassword = '/user/forgetPassword/update';
 const userUpdateInformation = '/user/updateInformation';
 const userProfile = '/user/profile';
 const favorites = '/user/favorites';

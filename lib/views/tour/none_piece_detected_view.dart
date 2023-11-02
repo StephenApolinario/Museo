@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 
 class NonePieceDetectedView extends StatelessWidget {
   const NonePieceDetectedView({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class NonePieceDetectedView extends StatelessWidget {
 
   Widget buildTitle(BuildContext context) {
     return Text(
-      'Please, move near to some museum piece', // TODO:  MUST be provided by L10N
+      context.loc.move_near,
       style: Theme.of(context)
           .primaryTextTheme
           .titleSmall
@@ -24,9 +25,7 @@ class NonePieceDetectedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lets start!'), // TODO:  MUST be provided by L10N
-      ),
+      appBar: AppBar(title: Text(context.loc.lets_start)),
       body: Scaffold(
         backgroundColor: Colors.lightBlue,
         body: Center(

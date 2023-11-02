@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/store/products.dart';
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/helpers/price.dart';
+import 'package:museo/models/store/product.dart';
 
 class BuildItemCard extends StatelessWidget {
   final Product product;
@@ -23,7 +25,7 @@ class BuildItemCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: product.color,
+                color: colorFromApi(color: product.color),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
@@ -33,13 +35,13 @@ class BuildItemCard extends StatelessWidget {
             ),
           ),
           Text(
-            product.title,
+            product.name,
             style: const TextStyle(
               color: lightGrayStoreColor,
             ),
           ),
           Text(
-            '\$${product.price}',
+            generatePrice(price: product.price),
             style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),

@@ -5,7 +5,7 @@ import 'package:museo/helpers/price.dart';
 import 'package:museo/models/store/tickets.dart';
 
 class CouponsDetailsView extends StatelessWidget {
-  final Ticket ticket;
+  final NewTicket ticket;
 
   const CouponsDetailsView({
     super.key,
@@ -173,7 +173,7 @@ class BuildOfficeHour extends StatelessWidget {
 }
 
 class TicketDetails extends StatelessWidget {
-  final Ticket ticket;
+  final NewTicket ticket;
 
   const TicketDetails({
     super.key,
@@ -191,7 +191,7 @@ class TicketDetails extends StatelessWidget {
           // Title
           Center(
             child: Text(
-              ticket.title,
+              ticket.name,
               style: const TextStyle(
                 color: mainBlue,
                 fontSize: 24,
@@ -202,7 +202,7 @@ class TicketDetails extends StatelessWidget {
           const SizedBox(height: 30),
           // Subtitle
           Text(
-            ticket.subtitle,
+            ticket.subname,
             textAlign: TextAlign.justify,
             style: const TextStyle(
               color: mainBlue,
@@ -210,9 +210,8 @@ class TicketDetails extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40),
-          // Price TODO:  This string shoul be provided by Context.loc
           Text(
-            'Valor: ${generatePrice(price: ticket.price)}',
+            '${context.loc.price} ${generatePrice(price: ticket.price)}',
             style: const TextStyle(
               color: mainBlue,
               fontSize: 22,

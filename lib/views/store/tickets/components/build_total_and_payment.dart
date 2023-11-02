@@ -31,22 +31,20 @@ class BuildTotalAndPayment extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              // TODO:  This text should be provided by L10N
-              'Carrinho atual: ${generatePrice(price: providerTicket.cart.totalPriceBeforeDiscount)}',
+              '${context.loc.current_cart}: ${generatePrice(price: providerTicket.cart.totalPriceBeforeDiscount)}',
               style: const TextStyle(
                 color: Colors.white,
               ),
             ),
             // TODO:  Payment screen
-            // TODO:  Check if the user is loggin. If not, show some message.
-            CheckoutButton(context),
+            checkoutButton(context),
           ],
         ),
       ),
     );
   }
 
-  ElevatedButton CheckoutButton(BuildContext context) {
+  ElevatedButton checkoutButton(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -66,8 +64,7 @@ class BuildTotalAndPayment extends StatelessWidget {
           showGenericDialog(
             context: context,
             title: context.loc.dialog_error_ops,
-            // TODO:  This text must be provided by L10N
-            content: 'Você deve primeiro selecionar seus ingressos!',
+            content: context.loc.first_select_tickets,
             optionsBuilder: () => {
               'Ok': false,
             },
@@ -75,10 +72,9 @@ class BuildTotalAndPayment extends StatelessWidget {
         }
         return;
       },
-      // TODO:  This text should be provided by L10N
-      child: const Text(
-        'Checkout',
-        style: TextStyle(
+      child: Text(
+        context.loc.checkout,
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),

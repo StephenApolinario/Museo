@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/gen/assets.gen.dart';
 import 'package:museo/models/store/tickets.dart';
 import 'package:museo/providers/store/shopping_ticket_cart.dart';
+import 'package:museo/services/ticket_service.dart';
 import 'package:museo/views/store/components/build_outilned_button.dart';
 import 'package:museo/views/store/tickets/tickets_details_view.dart';
 import 'package:museo/helpers/price.dart';
@@ -18,26 +20,49 @@ class BuildTicketsList extends StatefulWidget {
 }
 
 class _BuildTicketsListState extends State<BuildTicketsList> {
+  late ShoppingTicketCart _shoppingTicketCart;
+
+  @override
+  void initState() {
+    _shoppingTicketCart =
+        Provider.of<ShoppingTicketCart>(context, listen: false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: fakeTickets.length,
-        padding: const EdgeInsets.all(16),
-        itemBuilder: (context, index) {
-          return TicketBuilder(index: index);
-        },
-      ),
+    return FutureBuilder(
+      future: TicketService().getTickets(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          // Initialize cart with nothing inside.
+          _shoppingTicketCart.updateTickets(snapshot.data);
+          _shoppingTicketCart.createEmptyCart();
+          return Expanded(
+            child: ListView.builder(
+              itemCount: (snapshot.data as List<NewTicket>).length,
+              padding: const EdgeInsets.all(16),
+              itemBuilder: (context, index) {
+                return TicketBuilder(
+                  ticket: (snapshot.data as List<NewTicket>)[index],
+                );
+              },
+            ),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 }
 
 class TicketBuilder extends StatefulWidget {
-  final int index;
+  final NewTicket ticket;
 
   const TicketBuilder({
     super.key,
-    required this.index,
+    required this.ticket,
   });
 
   @override
@@ -62,10 +87,9 @@ class _TicketBuilderState extends State<TicketBuilder> {
       ),
       child: Row(
         children: [
-          LeftSideTicket(ticket: fakeTickets[widget.index]),
+          LeftSideTicket(ticket: widget.ticket),
           RightSideTicket(
-            ticket: fakeTickets[widget.index],
-            index: widget.index,
+            ticket: widget.ticket,
           ),
         ],
       ),
@@ -74,7 +98,7 @@ class _TicketBuilderState extends State<TicketBuilder> {
 }
 
 class LeftSideTicket extends StatelessWidget {
-  final Ticket ticket;
+  final NewTicket ticket;
 
   const LeftSideTicket({
     super.key,
@@ -88,7 +112,6 @@ class LeftSideTicket extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO:  This title & Subtitle should be provided by the API
           TicketTitle(ticket: ticket),
           Price(ticket: ticket),
           TicketSubtitle(ticket: ticket),
@@ -100,7 +123,7 @@ class LeftSideTicket extends StatelessWidget {
 }
 
 class Price extends StatelessWidget {
-  final Ticket ticket;
+  final NewTicket ticket;
 
   const Price({
     super.key,
@@ -126,12 +149,10 @@ class Price extends StatelessWidget {
 }
 
 class RightSideTicket extends StatefulWidget {
-  final Ticket ticket;
-  final int index;
+  final NewTicket ticket;
 
   const RightSideTicket({
     super.key,
-    required this.index,
     required this.ticket,
   });
 
@@ -156,7 +177,6 @@ class _RightSideTicketState extends State<RightSideTicket> {
       padding: const EdgeInsets.only(right: 25),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           buildOutlinedButton(
             icon: Icons.add,
@@ -166,7 +186,7 @@ class _RightSideTicketState extends State<RightSideTicket> {
               });
               _shoppingTicketCart.updateCart(
                 newQuantity: numOfItems,
-                ticketID: fakeTickets[widget.index].id,
+                ticketID: widget.ticket.id,
               );
             },
           ),
@@ -192,7 +212,7 @@ class _RightSideTicketState extends State<RightSideTicket> {
               });
               _shoppingTicketCart.updateCart(
                 newQuantity: numOfItems,
-                ticketID: fakeTickets[widget.index].id,
+                ticketID: widget.ticket.id,
               );
             },
           ),
@@ -203,7 +223,7 @@ class _RightSideTicketState extends State<RightSideTicket> {
 }
 
 class MoreInformation extends StatelessWidget {
-  final Ticket ticket;
+  final NewTicket ticket;
   const MoreInformation({
     super.key,
     required this.ticket,
@@ -225,15 +245,14 @@ class MoreInformation extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             splashFactory: NoSplash.splashFactory,
           ),
-          child: const Row(
+          child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.info,
                 color: mainBlue,
                 size: 24,
               ),
-              // TODO:  This should be provided by context.loc
-              Text('Mais informações'),
+              Text(context.loc.more_information),
             ],
           ),
         ),
@@ -248,14 +267,14 @@ class TicketSubtitle extends StatelessWidget {
     required this.ticket,
   });
 
-  final Ticket ticket;
+  final NewTicket ticket;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 50, right: 50),
       child: Text(
-        ticket.subtitle,
+        ticket.subname,
         textAlign: TextAlign.justify,
       ),
     );
@@ -263,7 +282,8 @@ class TicketSubtitle extends StatelessWidget {
 }
 
 class TicketTitle extends StatelessWidget {
-  final Ticket ticket;
+  final NewTicket ticket;
+
   const TicketTitle({
     super.key,
     required this.ticket,
@@ -274,7 +294,7 @@ class TicketTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10, left: 50),
       child: Text(
-        ticket.title,
+        ticket.name,
         textAlign: TextAlign.justify,
         style: const TextStyle(
           color: mainBlue,

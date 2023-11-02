@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:museo/models/quizz/quiz.dart';
+import 'package:museo/models/quiz.dart';
 import 'package:museo/views/quiz/components/main/build_question.dart';
 
 class QuestionWithOptions extends StatelessWidget {
-  final Quiz quiz;
+  final NewQuiz quiz;
   final PageController controller;
   final Function() increaseScore;
   final Function updateParent;
@@ -26,10 +26,10 @@ class QuestionWithOptions extends StatelessWidget {
           controller: controller,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            final question = quiz.questions[index];
             return BuildQuestion(
               updateParent: updateParent,
-              question: question,
+              quiz: quiz,
+              index: index,
               increaseScore: increaseScore,
             );
           },

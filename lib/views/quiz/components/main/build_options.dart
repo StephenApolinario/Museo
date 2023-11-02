@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/quizz/quiz.dart';
+import 'package:museo/models/quiz.dart';
 
 class BuildOptions extends StatelessWidget {
-  final Question question;
-  final ValueChanged<Option> onClickedOption;
+  final NewQuestion question;
+  final ValueChanged<NewOption> onClickedOption;
 
   const BuildOptions({
     super.key,
@@ -23,7 +23,7 @@ class BuildOptions extends StatelessWidget {
     );
   }
 
-  Widget buildOption(BuildContext context, Option option) {
+  Widget buildOption(BuildContext context, NewOption option) {
     final color = getColorForOption(option, question);
     return GestureDetector(
       onTap: () => onClickedOption(option),
@@ -55,7 +55,7 @@ class BuildOptions extends StatelessWidget {
     );
   }
 
-  Color getColorForOption(Option option, Question question) {
+  Color getColorForOption(NewOption option, NewQuestion question) {
     final isSelected = option == question.selectedOption;
     if (question.isLocked) {
       if (isSelected) {
@@ -67,7 +67,7 @@ class BuildOptions extends StatelessWidget {
     return mainBlue;
   }
 
-  Widget getIconForOption(Option option, Question question) {
+  Widget getIconForOption(NewOption option, NewQuestion question) {
     final isSelected = option == question.selectedOption;
     if (question.isLocked) {
       if (isSelected) {

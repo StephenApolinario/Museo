@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/models/store/products.dart';
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/models/store/product.dart';
 
 class BuildColorAndSize extends StatelessWidget {
   const BuildColorAndSize({
@@ -27,7 +28,7 @@ class BuildColorAndSize extends StatelessWidget {
               Row(
                 children: [
                   ColorDot(
-                    color: product.color,
+                    color: colorFromApi(color: product.color),
                     isSelected: true,
                   ),
                   const ColorDot(
@@ -52,7 +53,7 @@ class BuildColorAndSize extends StatelessWidget {
                   text: 'Size\n',
                 ),
                 TextSpan(
-                  text: '${product.size} cm',
+                  text: product.size,
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

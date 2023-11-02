@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/helpers/price.dart';
 import 'package:museo/models/store/payments_methods.dart';
 import 'package:museo/providers/store/shopping_ticket_cart.dart';
@@ -18,7 +19,7 @@ class BuildPaymentMethod extends StatelessWidget {
       padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
       child: Column(
         children: [
-          title(),
+          title(context),
           const SizedBox(height: 5),
           options(),
           const SizedBox(height: 5),
@@ -27,27 +28,26 @@ class BuildPaymentMethod extends StatelessWidget {
     );
   }
 
-  Widget title() {
+  Widget title(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: mainBlue,
         borderRadius: BorderRadius.circular(6),
       ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(
+            const Icon(
               Icons.credit_card_outlined,
               color: Colors.white,
               size: 30,
             ),
-            // TODO:  This text MUST be provided by L10N
             Text(
-              'Formas de pagamento',
-              style: TextStyle(
+              context.loc.payment_methods,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 22,
               ),

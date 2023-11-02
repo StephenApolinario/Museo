@@ -26,8 +26,8 @@ class AddressData {
 }
 
 class UserInformation {
-  final PersonalData personalData;
-  final AddressData addressData;
+  PersonalData personalData;
+  AddressData addressData;
 
   UserInformation({
     required this.personalData,

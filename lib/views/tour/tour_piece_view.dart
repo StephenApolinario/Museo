@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/models/tour/tour_mode.dart';
-import 'package:museo/models/tour/tour_piece.dart';
-import 'package:museo/providers/favorites/favorites_tours.dart';
-import 'package:museo/providers/tour/tourPiece.dart';
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/models/museum_piece.dart';
+import 'package:museo/models/tour_mode.dart';
+import 'package:museo/providers/tour/tour_piece.dart';
+import 'package:museo/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 enum TtsState { playing, stopped, paused, continued }
@@ -43,7 +44,7 @@ Speed slow = Speed(
 
 class TourPieceView extends StatefulWidget {
   final TourMode tourMode;
-  final TourPiece tourPiece;
+  final MuseumPiece tourPiece;
 
   const TourPieceView({
     super.key,
@@ -56,7 +57,6 @@ class TourPieceView extends StatefulWidget {
 }
 
 class _TourPieceViewState extends State<TourPieceView> {
-  late FavoritesTours favoritesTours;
   late SpeakAboutTourPiece speakAboutTourPiece;
 
   // TTS
@@ -84,7 +84,6 @@ class _TourPieceViewState extends State<TourPieceView> {
   void initState() {
     super.initState();
     initTts();
-    favoritesTours = Provider.of<FavoritesTours>(context, listen: false);
     speakAboutTourPiece =
         Provider.of<SpeakAboutTourPiece>(context, listen: false);
     speakAboutTourPiece.updateTempPiece(tourPiece: widget.tourPiece);
@@ -200,10 +199,20 @@ class _TourPieceViewState extends State<TourPieceView> {
         actions: [
           IconButton(
             onPressed: () async {
-              favoritesTours.addToFavorite(
-                tour: widget.tourPiece,
-                context: context,
-              );
+              final addFavorite =
+                  await UserService().addFavorite(context, widget.tourPiece.id);
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(addFavorite == 'user-already-have-favorite'
+                        ? context.loc.favorite_already_added
+                        : context.loc.favorite_added),
+                    backgroundColor: addFavorite == 'user-already-have-favorite'
+                        ? Colors.red.shade300
+                        : Colors.green.shade300,
+                  ),
+                );
+              }
             },
             icon: const Icon(
               Icons.favorite,
@@ -239,13 +248,13 @@ class _TourPieceViewState extends State<TourPieceView> {
 
   verticallyTextAndIcons({
     required String description,
-    required Color color,
+    required String color,
   }) {
     return Expanded(
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: color,
+          color: colorFromApi(color: color),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: secondBlue,
@@ -355,8 +364,8 @@ class TourImageWithTitleAndSubtitle extends StatelessWidget {
         // Image on top
         ClipRRect(
           borderRadius: BorderRadius.circular(35),
-          child: Image.asset(
-            image,
+          child: Image(
+            image: NetworkImage(image),
             fit: BoxFit.fill,
           ),
         ),

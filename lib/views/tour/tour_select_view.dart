@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/models/tour/tour_mode.dart';
+import 'package:museo/models/tour_mode.dart';
+import 'package:museo/services/tour_service.dart';
 import 'package:museo/views/tour/tour_view.dart';
 
 class TourSelectView extends StatelessWidget {
@@ -22,25 +22,52 @@ class TourSelectView extends StatelessWidget {
           ),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                'Choose one tour option',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+      body: FutureBuilder(
+        // Get all avaliables Tour Mode with Quizzes and Museum Pieces
+        future: TourService().getTourModes(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (!snapshot.hasData) {
+              return const Center(
+                child: Text(
+                  'Sorry, but there doesn\'t seem to be any tour at the moment',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  optionTitle(context),
+                  TourOptions(
+                    tourModes: snapshot.data as List<TourMode>,
+                  ),
+                ],
               ),
-            ),
-            Expanded(
-              child: Center(
-                child: TourOptions(),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
               ),
-            ),
-          ],
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  Center optionTitle(BuildContext context) {
+    return Center(
+      child: Text(
+        context.loc.choose_tour_option,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 24,
         ),
       ),
     );
@@ -48,37 +75,37 @@ class TourSelectView extends StatelessWidget {
 }
 
 class TourOptions extends StatelessWidget {
+  final List<TourMode> tourModes;
+
   const TourOptions({
     super.key,
+    required this.tourModes,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (fakeTourMode.isNotEmpty) {
-      return ListView.builder(
-        shrinkWrap: true,
-        itemCount: fakeTourMode.length,
-        itemBuilder: (context, index) {
-          return buildTourTypeList(index: index);
-        },
-      );
-    } else {
-      return const Text(
-        'Sorry, but there doesn\'t seem to be any tour at the moment',
-        textAlign: TextAlign.center,
-      );
-    }
+    return Expanded(
+      child: Center(
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: tourModes.length,
+          itemBuilder: (context, index) {
+            return buildTourTypeList(index: index);
+          },
+        ),
+      ),
+    );
   }
 
   Widget buildTourTypeList({required int index}) {
     if (index % 2 == 0) {
-      if (index == fakeTourMode.length - 1) {
+      if (index == tourModes.length - 1) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TourCard(
-              tourMode: fakeTourMode[index],
+              tourMode: tourModes[index],
             ),
           ],
         );
@@ -88,10 +115,10 @@ class TourOptions extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TourCard(
-              tourMode: fakeTourMode[index],
+              tourMode: tourModes[index],
             ),
             TourCard(
-              tourMode: fakeTourMode[index + 1],
+              tourMode: tourModes[index + 1],
             ),
           ],
         );
@@ -112,61 +139,59 @@ class TourCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return TourView(
-                  tourMode: tourMode, // TODO:  Uncomment line
-                );
-              },
-            ),
-          );
-        },
-        child: Container(
-          height: 210,
-          width: 150,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 2,
-              color: Colors.white,
-            ),
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.transparent,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return TourView(
+                tourMode: tourMode,
+              );
+            },
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Column(
-              children: [
-                // Icon
-                SvgPicture.asset(
-                  tourMode.icon,
-                  height: 50,
-                  width: 50,
+        );
+      },
+      child: Container(
+        height: 210,
+        width: 150,
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 2,
+            color: Colors.white,
+          ),
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.transparent,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Icon
+              Image(
+                image: NetworkImage(tourMode.image),
+                height: 50,
+                width: 50,
+              ),
+              // Tour name
+              const SizedBox(height: 10),
+              Text(
+                tourMode.title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
                 ),
-                // Tour name
-                const SizedBox(height: 10),
-                Text(
-                  tourMode.title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
+              ),
+              // Description
+              const SizedBox(height: 10),
+              Text(
+                tourMode.subtitle,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
                 ),
-                // Description
-                const SizedBox(height: 10),
-                Text(
-                  tourMode.description,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

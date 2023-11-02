@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 
-class BuildTitleCouponStore extends StatelessWidget {
+class BuildTicketStore extends StatelessWidget {
   final String title;
 
-  const BuildTitleCouponStore({
+  const BuildTicketStore({
     super.key,
     required this.title,
   });

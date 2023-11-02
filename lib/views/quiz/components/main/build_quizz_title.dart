@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:museo/constants/colors.dart';
-import 'package:museo/models/quizz/quiz.dart';
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/models/quiz.dart';
 
 class BuildQuizTitle extends StatelessWidget {
   const BuildQuizTitle({
@@ -8,7 +8,7 @@ class BuildQuizTitle extends StatelessWidget {
     required this.quiz,
   });
 
-  final Quiz quiz;
+  final NewQuiz quiz;
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,11 @@ class BuildQuizTitle extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        // TODO This color must be provided by an API
-        color: mainBlue,
+        color: colorFromApi(color: quiz.color),
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 5, bottom: 5, right: 5, left: 16),
         child: Text(
-          // TODO This title must be provided by an API
           quiz.title,
           style: const TextStyle(
             color: Colors.white,

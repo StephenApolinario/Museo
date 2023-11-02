@@ -1,25 +1,37 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/models/tour/tour_piece.dart';
-import 'package:museo/providers/favorites/favorites_tours.dart'
-    show FavoritesTours;
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/models/tour_piece.dart';
+import 'package:museo/providers/user/user.dart';
 import 'package:museo/views/user/favorite/favorite_tour_view.dart';
 import 'package:provider/provider.dart';
 
-class FavoriteTourListView extends StatefulWidget {
+class FavoriteTourListView extends StatelessWidget {
   const FavoriteTourListView({
     super.key,
   });
 
   @override
-  State<FavoriteTourListView> createState() => _FavoriteTourListViewState();
-}
-
-class _FavoriteTourListViewState extends State<FavoriteTourListView> {
-  @override
   Widget build(BuildContext context) {
-    final FavoritesTours favoritesTours = context.watch<FavoritesTours>();
+    final userProvider = Provider.of<User>(context, listen: true);
+    final List<dynamic> favorites = userProvider.loggedUser.favorites;
+
+    List<TourPiece> favoritesTourPieces = favorites.map((item) {
+      return TourPiece(
+        id: item['_id'],
+        title: item['title'],
+        subtitle: item['subtitle'],
+        description: item['description'],
+        image: item['image'],
+        rssi: item['rssi'],
+        color: item['color'],
+        beacon: item['beacon'],
+        tour: item['tour'],
+      );
+    }).toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,35 +42,37 @@ class _FavoriteTourListViewState extends State<FavoriteTourListView> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            favoritesTours.favoritesTours.isEmpty
-                ? const Expanded(
+            favoritesTourPieces.isEmpty
+                ? Expanded(
                     child: Center(
-                      child: Text(
-                          'Você ainda não tem favoritos!'), // TODO:  MUST be provided by L10N
+                      child: Text(context.loc.no_favorites_yet),
                     ),
                   )
-                : buildFavoritesList(provider: favoritesTours),
+                : buildFavoritesList(favorites: favoritesTourPieces),
           ],
         ),
       ),
     );
   }
 
-  buildFavoritesList({required FavoritesTours provider}) {
+  buildFavoritesList({required List<TourPiece> favorites}) {
     return GridView.builder(
-      itemCount: provider.favoritesTours.length,
+      itemCount: favorites.length,
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // Set the number of elements per line
       ),
       itemBuilder: (context, index) => favoritesListView(
-        tour: provider.favoritesTours[index],
+        favoriteMuseumPiece: favorites[index],
         context: context,
       ),
     );
   }
 
-  favoritesListView({required TourPiece tour, required BuildContext context}) {
+  favoritesListView({
+    required TourPiece favoriteMuseumPiece,
+    required BuildContext context,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -66,14 +80,14 @@ class _FavoriteTourListViewState extends State<FavoriteTourListView> {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => FavoriteTourView(
-                tour: tour,
+                favoriteMuseumPiece: favoriteMuseumPiece,
               ),
             ),
           );
         },
         child: Container(
           decoration: BoxDecoration(
-            color: mainBlue,
+            color: colorFromApi(color: favoriteMuseumPiece.color),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
@@ -82,8 +96,8 @@ class _FavoriteTourListViewState extends State<FavoriteTourListView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  objectImage(tour),
-                  objectTitle(tour),
+                  objectImage(favoriteMuseumPiece),
+                  objectTitle(favoriteMuseumPiece),
                 ],
               ),
             ),
@@ -93,21 +107,50 @@ class _FavoriteTourListViewState extends State<FavoriteTourListView> {
     );
   }
 
-  Text objectTitle(TourPiece object) => Text(
-        object.title,
+  Text objectTitle(TourPiece favorite) => Text(
+        favorite.title,
         textAlign: TextAlign.center,
         style: const TextStyle(
           color: Colors.white,
         ),
       );
 
-  ClipRRect objectImage(TourPiece object) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Image.asset(
-        object.image,
-        fit: BoxFit.fill,
-      ),
+  Widget objectImage(TourPiece favorite) {
+    return FutureBuilder(
+      future: getImage(favorite.image),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              favorite.image,
+              fit: BoxFit.fill,
+            ),
+          );
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
     );
   }
+}
+
+Future<ImageProvider> getImage(String imageUrl) async {
+  ImageProvider imageProvider = NetworkImage(imageUrl);
+  Completer<ImageProvider> completer = Completer();
+  NetworkImage(imageUrl)
+      .resolve(
+        const ImageConfiguration(),
+      )
+      .addListener(
+        ImageStreamListener(
+          (info, synchronousCall) {
+            completer.complete(imageProvider);
+          },
+          onError: (dynamic exception, StackTrace? stackTrace) {
+            completer.completeError(exception, stackTrace);
+          },
+        ),
+      );
+  return completer.future;
 }

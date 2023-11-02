@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/models/user/update_informations.dart';
 import 'package:museo/providers/update/updating_fields.dart';
+import 'package:museo/providers/user/user.dart';
+import 'package:museo/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,6 +48,8 @@ class UpdateAddressData extends StatefulWidget {
 class _UpdateAddressDataState extends State<UpdateAddressData> {
   final formKey = GlobalKey<FormState>();
   late UpdatingFields updatingFields;
+  late User userProvider;
+
   late final TextEditingController cepController,
       stateController,
       cityController,
@@ -55,50 +59,63 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
   @override
   void initState() {
     updatingFields = Provider.of<UpdatingFields>(context, listen: false);
+    userProvider = Provider.of<User>(context, listen: false);
 
     cepController = TextEditingController(
-      text: updatingFields.updateUserInformation.addressData.cep,
+      text: updatingFields.updateUserInformation.addressData.cep != ''
+          ? updatingFields.updateUserInformation.addressData.cep
+          : userProvider.loggedUser.cep,
     );
 
     stateController = TextEditingController(
-      text: updatingFields.updateUserInformation.addressData.state,
+      text: updatingFields.updateUserInformation.addressData.state != ''
+          ? updatingFields.updateUserInformation.addressData.state
+          : userProvider.loggedUser.state,
     );
 
     cityController = TextEditingController(
-      text: updatingFields.updateUserInformation.addressData.city,
+      text: updatingFields.updateUserInformation.addressData.city != ''
+          ? updatingFields.updateUserInformation.addressData.city
+          : userProvider.loggedUser.city,
     );
 
     neighborhoodController = TextEditingController(
-      text: updatingFields.updateUserInformation.addressData.neighborhood,
+      text: updatingFields.updateUserInformation.addressData.neighborhood != ''
+          ? updatingFields.updateUserInformation.addressData.neighborhood
+          : userProvider.loggedUser.neighborhood,
     );
 
     addressController = TextEditingController(
-      text: updatingFields.updateUserInformation.addressData.address,
+      text: updatingFields.updateUserInformation.addressData.address != ''
+          ? updatingFields.updateUserInformation.addressData.address
+          : userProvider.loggedUser.address,
     );
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    stateController.text = Provider.of<UpdatingFields>(
-      context,
-      listen: true,
-    ).updateUserInformation.addressData.state;
+    if (updatingFields.updateUserInformation.addressData.cep != '') {
+      stateController.text = Provider.of<UpdatingFields>(
+        context,
+        listen: true,
+      ).updateUserInformation.addressData.state;
 
-    cityController.text = Provider.of<UpdatingFields>(
-      context,
-      listen: true,
-    ).updateUserInformation.addressData.city;
+      cityController.text = Provider.of<UpdatingFields>(
+        context,
+        listen: true,
+      ).updateUserInformation.addressData.city;
 
-    neighborhoodController.text = Provider.of<UpdatingFields>(
-      context,
-      listen: true,
-    ).updateUserInformation.addressData.neighborhood;
+      neighborhoodController.text = Provider.of<UpdatingFields>(
+        context,
+        listen: true,
+      ).updateUserInformation.addressData.neighborhood;
 
-    addressController.text = Provider.of<UpdatingFields>(
-      context,
-      listen: true,
-    ).updateUserInformation.addressData.address;
+      addressController.text = Provider.of<UpdatingFields>(
+        context,
+        listen: true,
+      ).updateUserInformation.addressData.address;
+    }
 
     super.didChangeDependencies();
   }
@@ -171,14 +188,11 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           onPressed: () {
             final isValid = formKey.currentState!.validate();
             if (isValid) {
-              print(updatingFields.updateUserInformation.addressData.address);
-              //TODO:  Create the user info into database, and redirect to the login page.
-              //TODO:  Clear the class UserInformation
+              formKey.currentState!.save();
+              UserService().updateInformation(context: context);
             }
           },
-          child: Text(
-            context.loc.continue_message,
-          ),
+          child: Text(context.loc.update_button),
         ),
       ],
     );
@@ -189,10 +203,11 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
       child: Column(
         children: [
           Text(
-            updateTitleSubtitle.title,
+            context.loc.address_data,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 32,
+              fontSize: 28,
             ),
           ),
         ],
@@ -205,7 +220,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          const InputTitle(title: 'CEP'), // TODO:  MUST be provided by L10N
+          InputTitle(title: context.loc.cep),
           TextFormField(
             controller: cepController,
             inputFormatters: [
@@ -215,8 +230,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
             decoration: defaultDecoration,
             validator: (value) => defaultValidator(
               value: value,
-              message:
-                  'Please, fill your CEP', // TODO:  MUST be provided by L10N
+              message: context.loc.fill_cep,
             ),
             onSaved: (newValue) => updatingFields.updateCEP(newValue),
           ),
@@ -236,8 +250,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your state', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_state,
           ),
           onSaved: (newValue) => updatingFields.updateState(newValue),
         ),
@@ -255,8 +268,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your city', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_city,
           ),
           onSaved: (newValue) => updatingFields.updateCity(newValue),
         ),
@@ -274,8 +286,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your neighborhood', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_neighborhood,
           ),
           onSaved: (newValue) => updatingFields.updateNeighborhood(newValue),
         ),
@@ -293,8 +304,7 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your house address', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_home_address,
           ),
           onSaved: (newValue) => updatingFields.updateHouseAddres(newValue),
         ),
@@ -310,12 +320,14 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
           title: context.loc.registering_house_number,
         ),
         TextFormField(
-          initialValue: updatingFields.updateUserInformation.addressData.number,
+          initialValue:
+              updatingFields.updateUserInformation.addressData.number != ''
+                  ? updatingFields.updateUserInformation.addressData.number
+                  : userProvider.loggedUser.number,
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your house number', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_home_number,
           ),
           onSaved: (newValue) => updatingFields.updateHouseNumber(newValue),
         ),
@@ -332,7 +344,9 @@ class _UpdateAddressDataState extends State<UpdateAddressData> {
         ),
         TextFormField(
           initialValue:
-              updatingFields.updateUserInformation.addressData.complement,
+              updatingFields.updateUserInformation.addressData.complement != ''
+                  ? updatingFields.updateUserInformation.addressData.complement
+                  : userProvider.loggedUser.complement,
           decoration: defaultDecoration,
           onSaved: (newValue) => updatingFields.updateHouseComplement(newValue),
         ),

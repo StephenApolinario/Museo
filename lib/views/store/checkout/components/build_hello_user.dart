@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/gen/assets.gen.dart';
+import 'package:museo/providers/user/user.dart';
+import 'package:provider/provider.dart';
 
 class BuildHelloUser extends StatelessWidget {
   const BuildHelloUser({
@@ -28,6 +32,8 @@ class UserMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<User>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.only(left: 65),
       child: Flex(
@@ -40,13 +46,12 @@ class UserMessage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: mainBlue,
               ),
-              child: const Padding(
-                padding: EdgeInsets.only(top: 5, bottom: 5, right: 5, left: 20),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 5, bottom: 5, right: 5, left: 20),
                 child: Text(
-                  // TODO:  This string must be provided by L10N
-                  // TODO:  The name of the user must be provided by an API
-                  'Olá, Stephen',
-                  style: TextStyle(
+                  '${context.loc.hello}, ${userProvider.loggedUser.name}',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                   ),
@@ -67,6 +72,8 @@ class UserImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<User>(context, listen: false);
+
     return Container(
       height: 80,
       width: 80,
@@ -76,10 +83,14 @@ class UserImage extends StatelessWidget {
           color: Colors.grey.shade800,
           width: 2,
         ),
-        image: const DecorationImage(
-          // TODO:  This image must be provided by API
-          image: NetworkImage(
-              'https://media.istockphoto.com/id/1223671392/vector/default-profile-picture-avatar-photo-placeholder-vector-illustration.jpg?s=612x612&w=0&k=20&c=s0aTdmT5aU6b8ot7VKm11DeID6NctRCpB755rA1BIP0='),
+        image: DecorationImage(
+          //TODO: In future, when the user upload an image, you must change this code.
+          image:
+              userProvider.loggedUser.picture != 'https://www.nopicture.com.br/'
+                  ? NetworkImage(userProvider.loggedUser.picture)
+                  : AssetImage(Assets.user.defaultProfilePicture.path)
+                      as ImageProvider,
+
           fit: BoxFit.fill,
         ),
       ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/helpers/loading_screen.dart';
 import 'package:museo/models/user/registering.dart';
 import 'package:museo/providers/register/registerig_fields.dart';
+import 'package:museo/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 class RegisteringPasswordData extends StatefulWidget {
@@ -37,6 +39,7 @@ class _RegisteringPasswordDataState extends State<RegisteringPasswordData> {
   @override
   void dispose() {
     passwordController.dispose();
+    LoadingScreen().hide(); //TODO: Remove this after. WHY??
     repeatedPasswordController.dispose();
     super.dispose();
   }
@@ -92,18 +95,18 @@ class _RegisteringPasswordDataState extends State<RegisteringPasswordData> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const InputTitle(title: 'Password'), // TODO:  MUST be provided by L10N
+        InputTitle(title: context.loc.password_hint),
         TextFormField(
           obscureText: true,
           controller: passwordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
+              return context.loc.registering_password;
             } else if (value != repeatedPasswordController.text) {
-              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
+              return context.loc.password_match;
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
+              return context.loc.password_min_characters;
             }
             return null;
           },
@@ -116,19 +119,20 @@ class _RegisteringPasswordDataState extends State<RegisteringPasswordData> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const InputTitle(
-            title: 'Repeat password'), // TODO:  MUST be provided by L10N
+        InputTitle(
+          title: context.loc.repeat_password,
+        ),
         TextFormField(
           obscureText: true,
           controller: repeatedPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
+              return context.loc.registering_password;
             } else if (value != passwordController.text) {
-              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
+              return context.loc.password_match;
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
+              return context.loc.password_min_characters;
             }
             return null;
           },
@@ -142,13 +146,14 @@ class _RegisteringPasswordDataState extends State<RegisteringPasswordData> {
       children: [
         const SizedBox(height: 20),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
+            FocusManager.instance.primaryFocus?.unfocus();
             final isValid = formKey.currentState!.validate();
             if (isValid) {
-              print(registeringFields
-                  .registerUserInformation.addressData.address);
-              //TODO:  Create the user info into database, and redirect to the login page.
-              //TODO:  Clear the class UserInformation
+              await UserService().create(
+                context: context,
+                password: passwordController.text,
+              );
             }
           },
           child: Text(

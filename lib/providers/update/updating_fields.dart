@@ -90,4 +90,27 @@ class UpdatingFields with ChangeNotifier {
     updateUserInformation.addressData.complement = newValue;
     notifyListeners();
   }
+
+  void clear() {
+    updateUserInformation = UserInformation(
+      personalData: PersonalData(
+        name: '',
+        lastName: '',
+        email: '',
+        cpf: '',
+        birthday: '',
+        phoneNumber: '',
+      ),
+      addressData: AddressData(
+        cep: '',
+        state: '',
+        city: '',
+        neighborhood: '',
+        address: '',
+        number: '',
+        complement: '',
+      ),
+    );
+    notifyListeners();
+  }
 }

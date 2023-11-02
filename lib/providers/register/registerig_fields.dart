@@ -90,4 +90,25 @@ class RegisteringFields with ChangeNotifier {
     registerUserInformation.addressData.complement = newValue;
     notifyListeners();
   }
+
+  void clear() {
+    registerUserInformation.personalData = PersonalData(
+      name: '',
+      lastName: '',
+      email: '',
+      cpf: '',
+      birthday: '',
+      phoneNumber: '',
+    );
+    registerUserInformation.addressData = AddressData(
+      cep: '',
+      state: '',
+      city: '',
+      neighborhood: '',
+      address: '',
+      number: '',
+      complement: '',
+    );
+    notifyListeners();
+  }
 }

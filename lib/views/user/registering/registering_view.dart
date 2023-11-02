@@ -17,8 +17,6 @@ class _RegisteringViewState extends State<RegisteringView> {
   late PageController pageController;
   int currentPage = 0;
 
-  // Address Data
-
   // Password Data
   late String? password, repeatedPassword;
 

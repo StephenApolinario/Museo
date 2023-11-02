@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/gen/assets.gen.dart';
+import 'package:museo/providers/user/user.dart';
+import 'package:provider/provider.dart';
 
 class BuildTopProfileInformations extends StatelessWidget {
   const BuildTopProfileInformations({super.key});
@@ -8,14 +11,16 @@ class BuildTopProfileInformations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        profilePicture(),
+        profilePicture(context),
         const SizedBox(height: 10),
-        profileName(),
+        profileName(context),
       ],
     );
   }
 
-  Widget profilePicture() {
+  Widget profilePicture(BuildContext context) {
+    final userProvider = Provider.of<User>(context, listen: true);
+
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Center(
@@ -24,10 +29,13 @@ class BuildTopProfileInformations extends StatelessWidget {
           height: 100.0,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
-            child: const Image(
-              image: NetworkImage(
-                  // TODO:  This MUST be provided by API.
-                  'https://i.pinimg.com/564x/97/aa/84/97aa847d061a14894178805f1d551500.jpg'),
+            child: Image(
+              //TODO: In future, when the user upload an image, you must change this code.
+              image: userProvider.loggedUser.picture !=
+                      'https://www.nopicture.com.br/'
+                  ? NetworkImage(userProvider.loggedUser.picture)
+                  : AssetImage(Assets.user.defaultProfilePicture.path)
+                      as ImageProvider,
             ),
           ),
         ),
@@ -35,21 +43,23 @@ class BuildTopProfileInformations extends StatelessWidget {
     );
   }
 
-  Widget profileName() {
-    return const Center(
+  Widget profileName(BuildContext context) {
+    final userProvider = Provider.of<User>(context, listen: true);
+
+    return Center(
       child: Column(
         children: [
           Text(
-            'Stephen', // TODO:  This MUST be provided by API.
-            style: TextStyle(
+            userProvider.loggedUser.name,
+            style: const TextStyle(
               fontSize: 20,
               color: mainBlue,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            'Michael Apolinário', // TODO:  This MUST be provided by API.
-            style: TextStyle(
+            userProvider.loggedUser.lastName,
+            style: const TextStyle(
               fontSize: 16,
               color: mainBlue,
             ),

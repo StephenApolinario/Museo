@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 
 class UpdateInformationTitle {
   final String title;
@@ -12,11 +13,7 @@ List<UpdateInformationTitle> createUpdateInformationSteps({
   required BuildContext context,
 }) {
   return [
-    UpdateInformationTitle(
-      title: 'Personal Data', // TODO:  MUST be provided by L10N
-    ),
-    UpdateInformationTitle(
-      title: 'Address Data', // TODO:  MUST be provided by L10N
-    ),
+    UpdateInformationTitle(title: context.loc.personal_data),
+    UpdateInformationTitle(title: context.loc.address_data),
   ];
 }

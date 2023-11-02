@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:museo/views/store/checkout/components/build_cart_summary_title.dart';
 import 'package:museo/views/store/checkout/components/build_cart_summary_details.dart';
@@ -21,8 +22,7 @@ class CheckoutView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // TODO:  This text must be provided by the L10N
-        title: const Text('CHECKOUT'),
+        title: Text(context.loc.checkout_title),
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 20),

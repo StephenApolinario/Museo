@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 
 class BluetoothOffView extends StatelessWidget {
   const BluetoothOffView({Key? key, this.adapterState}) : super(key: key);
@@ -19,7 +20,7 @@ class BluetoothOffView extends StatelessWidget {
   Widget buildTitle(BuildContext context) {
     String? state = adapterState?.toString().split('.').last;
     return Text(
-      'Bluetooth Adapter is ${state ?? 'not available'}', // TODO:  MUST be provided by L10N
+      '${context.loc.bluetooth_state} ${state ?? context.loc.bluetooth_not_avaliable}',
       style: Theme.of(context)
           .primaryTextTheme
           .titleSmall
@@ -31,7 +32,7 @@ class BluetoothOffView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ElevatedButton(
-        child: const Text('TURN ON'), // TODO:  MUST be provided by L10N
+        child: Text(context.loc.turn_bluetooth_on),
         onPressed: () async {
           try {
             if (Platform.isAndroid) {

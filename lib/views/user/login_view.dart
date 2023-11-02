@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/constants/routes.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/services/user_service.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -14,7 +15,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final formLoginKey = GlobalKey<FormState>();
   late String? email, password;
-  final int minimumPasswordCharacters = 4;
+  final int minimumPasswordCharacters = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +75,17 @@ class _LoginViewState extends State<LoginView> {
               fontSize: 18,
             ),
           ),
-          onPressed: () {
+          onPressed: () async {
+            FocusManager.instance.primaryFocus?.unfocus();
             final isValid = formLoginKey.currentState!.validate();
 
             if (isValid) {
               formLoginKey.currentState!.save();
+              await UserService().login(
+                context: context,
+                email: email!,
+                password: password!,
+              );
             }
           },
         ),
@@ -135,22 +142,22 @@ class _LoginViewState extends State<LoginView> {
         ),
         TextFormField(
           keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(
-            hintText: 'your@email.com', // TODO:  MUST be provided by L10N
-            contentPadding: EdgeInsets.only(left: 10),
+          decoration: InputDecoration(
+            hintText: context.loc.your_email_example,
+            contentPadding: const EdgeInsets.only(left: 10),
             fillColor: Colors.white,
             filled: true,
-            border: OutlineInputBorder(),
-            errorStyle: TextStyle(
+            border: const OutlineInputBorder(),
+            errorStyle: const TextStyle(
               color: Colors.red,
             ),
-            errorBorder: OutlineInputBorder(
+            errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.red,
                 width: 2,
               ),
             ),
-            focusedErrorBorder: OutlineInputBorder(
+            focusedErrorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.red,
                 width: 2,
@@ -160,7 +167,7 @@ class _LoginViewState extends State<LoginView> {
           validator: (value) {
             if (value != null) {
               if (!EmailValidator.validate(value)) {
-                return 'Your email is not valid'; // TODO:  MUST be provided by L10N
+                return context.loc.email_not_valid;
               }
             }
             return null;
@@ -226,8 +233,8 @@ class _LoginViewState extends State<LoginView> {
           ),
           validator: (value) {
             if (value != null) {
-              if (value.length <= minimumPasswordCharacters) {
-                return 'Your password must have more than $minimumPasswordCharacters characters'; // TODO:  MUST be provided by L10N
+              if (value.length < minimumPasswordCharacters) {
+                return '${context.loc.password_more_characters} $minimumPasswordCharacters ${context.loc.characters}';
               }
             }
             return null;

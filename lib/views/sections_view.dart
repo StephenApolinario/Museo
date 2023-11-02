@@ -23,24 +23,9 @@ class SectionsView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Title
-                    // TODO:  Get string by L10N
-                    const Center(
-                      child: Text(
-                        'A EXPOSIÇÃO',
-                        style: TextStyle(
-                          color: mainBlue,
-                          fontSize: 28,
-                        ),
-                      ),
-                    ),
-                    // About exhibition
+                    title(context),
                     const SizedBox(height: 10),
-                    const Text(
-                      // TODO:  Get string by L10N
-                      'O projeto museográfico é moderno e valoriza as peças de maneira segura e confortável para o visitante. O Projeto luminotécnico é todo em led e os ambientes são climatizados, o que garante uma visitação agradável em qualquer época do ano. É totalmente acessível para pessoas com deficiência física e com mobilidade reduzida.',
-                      textAlign: TextAlign.justify,
-                    ),
+                    aboutExhibition(context),
                     const SizedBox(height: 10),
                     Image.asset(
                       Assets.sections.exhibition.path,
@@ -184,6 +169,25 @@ class SectionsView extends StatelessWidget {
               );
           }
         },
+      ),
+    );
+  }
+
+  Text aboutExhibition(BuildContext context) {
+    return Text(
+      context.loc.about_exhibition,
+      textAlign: TextAlign.justify,
+    );
+  }
+
+  Center title(BuildContext context) {
+    return Center(
+      child: Text(
+        context.loc.exhibition_title,
+        style: const TextStyle(
+          color: mainBlue,
+          fontSize: 28,
+        ),
       ),
     );
   }

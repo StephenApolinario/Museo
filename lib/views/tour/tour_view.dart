@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:museo/models/beacon/beacons.dart';
-import 'package:museo/models/quizz/quiz.dart';
-import 'package:museo/models/tour/tour_mode.dart';
-import 'package:museo/models/tour/tour_piece.dart';
+import 'package:museo/models/museum_piece.dart';
+import 'package:museo/models/quiz.dart';
+import 'package:museo/models/tour_mode.dart';
+import 'package:museo/providers/user/user.dart';
+import 'package:museo/services/user_service.dart';
 import 'package:museo/views/quiz/quiz_view.dart';
 import 'package:museo/views/tour/bluetooth_off_view.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:museo/views/tour/none_piece_detected_view.dart';
 import 'package:museo/views/tour/tour_piece_view.dart';
+import 'package:provider/provider.dart';
 
 class TourView extends StatefulWidget {
   final TourMode tourMode;
@@ -23,6 +25,8 @@ class TourView extends StatefulWidget {
 }
 
 class _TourViewState extends State<TourView> {
+  late User userProvider;
+
   // Bluetooth Adapter State
   BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown;
   late StreamSubscription<BluetoothAdapterState> _adapterStateStateSubscription;
@@ -35,9 +39,9 @@ class _TourViewState extends State<TourView> {
   bool _isScanning = false;
   late bool loopScannig = false;
   late bool isWaiting = false;
-  Beacon? previousBeaconDetected;
+  dynamic previousBeaconDetected;
 
-  Timer? timer;
+  late Timer timer;
 
   void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 5), (Timer t) {
@@ -46,13 +50,19 @@ class _TourViewState extends State<TourView> {
   }
 
   Future startScanning() async {
-    if (_isScanning == false) {
-      await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
+    if (timer.isActive) {
+      timer.cancel();
     }
-    detectNearestBeacon();
+    if (_isScanning == false && loopScannig) {
+      await FlutterBluePlus.startScan(timeout: const Duration(seconds: 5));
+      detectNearestBeacon();
+    }
   }
 
   Future stopScanning() async {
+    if (timer.isActive) {
+      timer.cancel();
+    }
     loopScannig = false;
     await FlutterBluePlus.stopScan();
     setState(() {});
@@ -61,6 +71,10 @@ class _TourViewState extends State<TourView> {
   @override
   void initState() {
     super.initState();
+
+    userProvider = Provider.of<User>(context, listen: false);
+
+    loopScannig = true;
     // Bluetooth state
     _adapterStateStateSubscription =
         FlutterBluePlus.adapterState.listen((state) {
@@ -86,9 +100,8 @@ class _TourViewState extends State<TourView> {
     _adapterStateStateSubscription.cancel();
     _scanResultsSubscription.cancel();
     _isScanningSubscription.cancel();
-    // TODO:  I dont know yet if i uncomment the next line or not.
-    // previousBeaconDetected.clear();
     _scanResults.clear();
+    previousBeaconDetected.clear();
     stopScanning();
     super.dispose();
   }
@@ -99,25 +112,16 @@ class _TourViewState extends State<TourView> {
     if (_adapterState != BluetoothAdapterState.on) {
       return const BluetoothOffView();
     } else {
-      // Just for implement the voice.
-      // return TourPieceView(
-      //   tourMode: widget.tourMode,
-      //   tourPiece: widget.tourMode.tourBeacons[0] as TourPiece,
-      // );
-
-      // This logic can be read on detect_beacon_workflow.md
-
-      // 3.0
-      // detectNearestBeacon();
-
       if (previousBeaconDetected != null) {
-        if (previousBeaconDetected is Quiz) {
+        if (previousBeaconDetected is NewQuiz) {
           return QuizView(
-              tourMode: widget.tourMode, quiz: previousBeaconDetected as Quiz);
+            tourMode: widget.tourMode,
+            quiz: previousBeaconDetected as NewQuiz,
+          );
         } else {
           return TourPieceView(
             tourMode: widget.tourMode,
-            tourPiece: previousBeaconDetected as TourPiece,
+            tourPiece: previousBeaconDetected as MuseumPiece,
           );
         }
       } else {
@@ -126,85 +130,54 @@ class _TourViewState extends State<TourView> {
         return const NonePieceDetectedView();
       }
     }
-
-    // Second flow 2.0
-    //   if (isWaiting == false) {
-    //     if (previousBeaconDetected.isNotEmpty) {
-    //       if (previousBeaconDetected.length == 1) {
-    //         if (previousBeaconDetected.last is Quiz) {
-    //           return QuizView(
-    //               tourMode: widget.tourMode,
-    //               quiz: previousBeaconDetected.last as Quiz);
-    //         } else {
-    //           return TourPieceView(
-    //             tourMode: widget.tourMode,
-    //             tourPiece: previousBeaconDetected.last as TourPiece,
-    //           );
-    //         }
-    //       } else {
-    //         // ASK if user want to move to a new piece or stay on the last one
-    //         // IF user want to move: clear previousBeaconDetected and add the new beacon
-    //         // IF user want to stay on the same beacon: isWaiting = true
-
-    //         // IF User wants to move:
-    //         // Just keep the last detected beacon.
-    //         previousBeaconDetected.removeRange(
-    //             0, previousBeaconDetected.length - 1);
-    //         if (previousBeaconDetected.last is Quiz) {
-    //           return QuizView(
-    //               tourMode: widget.tourMode,
-    //               quiz: previousBeaconDetected.last as Quiz);
-    //         } else {
-    //           return TourPieceView(
-    //             tourMode: widget.tourMode,
-    //             tourPiece: previousBeaconDetected.last as TourPiece,
-    //           );
-    //         }
-    //       }
-    //     }
-    //     // Executed just on the first time. (When detect a beacon, this MUST never be executed)
-    //     else {
-    //       startScanning();
-    //       return const NonePieceDetectedView();
-    //     }
-    //   } else {
-    //     // Continue showing the last peice
-    //     // Wait xx seconds (User can skip the delay)
-    //     // Is waiting = false
-    //     return const Text('2.0 NO: Not implemented yet');
-    //   }
   }
 
   void detectNearestBeacon() {
-    // Find the nearest beacon and check if exists on tourModeBeacons
-    Beacon? findedBeacon;
-    int findedBeaconRSSI = 999;
+    //foundBeacon can be a Tour Piece/Quiz or "null"
+    dynamic foundBeacon;
+    int foundBeaconRSSI = 999;
+
+    List<dynamic> beacons = [
+      ...widget.tourMode.tourPieces,
+      ...widget.tourMode.tourQuizzes
+    ];
 
     for (var scannedBluetooth in _scanResults) {
       String scannedBluetoothID = scannedBluetooth.device.remoteId.str;
       int scannedBluetoothRSSI = scannedBluetooth.rssi;
 
-      for (var beacon in widget.tourMode.tourBeacons) {
-        if (beacon is Quiz) {
-          if (scannedBluetoothID == beacon.beaconUUID &&
+      // Get the nearest beacon
+      var tempFoundBeacon = beacons.firstWhere(
+        (beacon) {
+          return scannedBluetoothID == beacon.beaconUUID &&
               scannedBluetoothRSSI.abs() < beacon.rssi &&
-              scannedBluetoothRSSI.abs() < findedBeaconRSSI) {
-            findedBeacon = beacon;
-            findedBeaconRSSI = scannedBluetoothRSSI.abs();
-          }
-        } else if (beacon is TourPiece) {
-          if (scannedBluetoothID == beacon.beaconUUID &&
-              scannedBluetoothRSSI.abs() < beacon.rssi &&
-              scannedBluetoothRSSI.abs() < findedBeaconRSSI) {
-            findedBeacon = beacon;
-            findedBeaconRSSI = scannedBluetoothRSSI.abs();
-          }
-        }
+              scannedBluetoothRSSI.abs() < foundBeaconRSSI;
+        },
+        orElse: () => null,
+      );
+
+      // Check if the beacon has been found and if it is different from the last beacon found
+      if (tempFoundBeacon != null &&
+          (previousBeaconDetected == null ||
+              previousBeaconDetected != tempFoundBeacon)) {
+        foundBeaconRSSI = tempFoundBeacon.rssi;
+        foundBeacon = tempFoundBeacon;
       }
     }
 
-    if (findedBeacon != null) {
-      previousBeaconDetected = findedBeacon;
+    if (foundBeacon != null) {
+      // Check if it is a quiz and if the user is logged and if already completed the quiz
+      if (foundBeacon is NewQuiz && userProvider.logged) {
+        final completed = UserService().checkQuiz(context, (foundBeacon).id);
+        if (!completed) {
+          previousBeaconDetected = foundBeacon;
+        }
+        // else {
+        //   print('I found the quiz but I won't show it because the user has already completed it!');
+        // }
+      } else if (foundBeacon is MuseumPiece) {
+        previousBeaconDetected = foundBeacon;
+      }
     }
   }
 }

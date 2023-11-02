@@ -215,7 +215,7 @@ class _RegisteringAddressDataState extends State<RegisteringAddressData> {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          const InputTitle(title: 'CEP'), // TODO:  MUST be provided by L10N
+          InputTitle(title: context.loc.cep),
           TextFormField(
             controller: cepController,
             inputFormatters: [
@@ -225,8 +225,7 @@ class _RegisteringAddressDataState extends State<RegisteringAddressData> {
             decoration: defaultDecoration,
             validator: (value) => defaultValidator(
               value: value,
-              message:
-                  'Please, fill your CEP', // TODO:  MUST be provided by L10N
+              message: context.loc.fill_cep,
             ),
             onSaved: (newValue) => registeringFields.updateCEP(newValue),
           ),
@@ -246,8 +245,7 @@ class _RegisteringAddressDataState extends State<RegisteringAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your state', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_state,
           ),
           onSaved: (newValue) => registeringFields.updateState(newValue),
         ),
@@ -265,8 +263,7 @@ class _RegisteringAddressDataState extends State<RegisteringAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your city', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_city,
           ),
           onSaved: (newValue) => registeringFields.updateCity(newValue),
         ),
@@ -284,8 +281,7 @@ class _RegisteringAddressDataState extends State<RegisteringAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your neighborhood', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_neighborhood,
           ),
           onSaved: (newValue) => registeringFields.updateNeighborhood(newValue),
         ),
@@ -303,8 +299,7 @@ class _RegisteringAddressDataState extends State<RegisteringAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your house address', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_home_address,
           ),
           onSaved: (newValue) => registeringFields.updateHouseAddres(newValue),
         ),
@@ -325,8 +320,7 @@ class _RegisteringAddressDataState extends State<RegisteringAddressData> {
           decoration: defaultDecoration,
           validator: (value) => defaultValidator(
             value: value,
-            message:
-                'Please, fill your house number', // TODO:  MUST be provided by L10N
+            message: context.loc.fill_home_address,
           ),
           onSaved: (newValue) => registeringFields.updateHouseNumber(newValue),
         ),

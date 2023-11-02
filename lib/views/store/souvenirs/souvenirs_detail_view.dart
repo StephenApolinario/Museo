@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/gen/assets.gen.dart';
-import 'package:museo/models/store/products.dart';
+import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/helpers/price.dart';
+import 'package:museo/models/store/product.dart';
 import 'package:museo/views/store/souvenirs/components/build_cart_counter.dart';
 import 'package:museo/views/store/souvenirs/components/build_color_and_size.dart';
 
@@ -17,7 +20,7 @@ class SouvenirsDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: product.color,
+      backgroundColor: colorFromApi(color: product.color),
       appBar: buildAppBar(),
       body: Stack(
         children: [
@@ -30,7 +33,7 @@ class SouvenirsDetailsView extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: product.color,
+      backgroundColor: colorFromApi(color: product.color),
       actions: [
         IconButton(
           onPressed: () {},
@@ -111,7 +114,7 @@ class AddToCart extends StatelessWidget {
             width: 58,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: product.color),
+              border: Border.all(color: colorFromApi(color: product.color)),
             ),
             child: IconButton(
               onPressed: () {},
@@ -125,7 +128,7 @@ class AddToCart extends StatelessWidget {
               margin: const EdgeInsets.only(left: 20),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: product.color,
+                  backgroundColor: colorFromApi(color: product.color),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                       18,
@@ -222,7 +225,7 @@ class ProductWithImage extends StatelessWidget {
             ),
           ),
           Text(
-            product.title,
+            product.name,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 28,
@@ -235,9 +238,9 @@ class ProductWithImage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   children: [
-                    const TextSpan(text: 'Price\n'),
+                    TextSpan(text: '${context.loc.price}\n'),
                     TextSpan(
-                      text: '\$${product.price}',
+                      text: generatePrice(price: product.price),
                       style: const TextStyle(
                         fontSize: 28,
                         color: Colors.white,

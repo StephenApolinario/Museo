@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/services/user_service.dart';
 
 class UpdatePasswordView extends StatefulWidget {
   const UpdatePasswordView({super.key});
@@ -36,10 +37,9 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // TODO:  MUST be provided by L10N
-        title: const Text(
-          'Update Password',
-          style: TextStyle(
+        title: Text(
+          context.loc.update_password,
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -81,16 +81,18 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const InputTitle(
-            title: 'Actual password'), // TODO:  MUST be provided by L10N
+        InputTitle(
+          title: context.loc.current_password,
+        ),
         TextFormField(
           obscureText: true,
           controller: actualPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
-            if (value != 'teste') {
-              // TODO:  Check if the provided password is the actual one
-              return 'You enter an incorrect actual password!';
+            if (value == null || value == '') {
+              return context.loc.fill_current_password;
+            } else if (value.length < 4) {
+              return context.loc.current_password_min_characters;
             }
             return null;
           },
@@ -103,19 +105,20 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const InputTitle(
-            title: 'New Password'), // TODO:  MUST be provided by L10N
+        InputTitle(
+          title: context.loc.new_password,
+        ),
         TextFormField(
           obscureText: true,
           controller: newPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
+              return context.loc.fill_new_password;
             } else if (value != repeatedNewPasswordController.text) {
-              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
+              return context.loc.password_match;
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
+              return context.loc.password_min_characters;
             }
             return null;
           },
@@ -128,19 +131,20 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const InputTitle(
-            title: 'Repeat new password'), // TODO:  MUST be provided by L10N
+        InputTitle(
+          title: context.loc.repeat_new_password,
+        ),
         TextFormField(
           obscureText: true,
           controller: repeatedNewPasswordController,
           decoration: defaultDecoration,
           validator: (value) {
             if (value == null || value == '') {
-              return 'Please, provide your password'; // TODO:  MUST be provided by L10N
+              return context.loc.fill_new_password;
             } else if (value != newPasswordController.text) {
-              return 'The passwords must match!'; // TODO:  MUST be provided by L10N
+              return context.loc.password_match;
             } else if (value.length < 4) {
-              return 'The password must have at least 4 characters'; // TODO:  MUST be provided by L10N
+              return context.loc.password_min_characters;
             }
             return null;
           },
@@ -155,9 +159,13 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
+            FocusManager.instance.primaryFocus?.unfocus();
             final isValid = formKey.currentState!.validate();
             if (isValid) {
-              print('Pronto');
+              UserService().updatePasword(
+                  context: context,
+                  actualPassword: actualPasswordController.text,
+                  newPassword: newPasswordController.text);
             }
           },
           child: Text(

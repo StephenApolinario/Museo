@@ -1,8 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/constants/routes.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/gen/assets.gen.dart';
+import 'package:museo/helpers/loading_complete.dart';
+import 'package:museo/services/user_service.dart';
 
 class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
@@ -21,10 +24,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
     return Scaffold(
       backgroundColor: mainBlue,
       appBar: AppBar(
-        title: const Text(
-          // TODO:  MUST be provided by L10N
-          'Esqueci minha senha',
-          style: TextStyle(
+        title: Text(
+          context.loc.forgot_password,
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
@@ -45,6 +47,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                     forgetPasswordTitle(context),
                     emailInput(context),
                     sendButton(context),
+                    alreadyHaveCode(context),
                   ],
                 ),
               ),
@@ -68,20 +71,58 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
         // Enter
         const SizedBox(height: 20),
         TextButton(
-          child: const Text(
-            // TODO:  MUST be provided by L10N
-            'Enviar',
-            style: TextStyle(
+          child: Text(
+            context.loc.send,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+          onPressed: () async {
+            FocusManager.instance.primaryFocus?.unfocus();
+            final isValid = formLoginKey.currentState!.validate();
+
+            if (isValid) {
+              formLoginKey.currentState!.save();
+              loadingIndicatorTime(
+                title: context.loc.wait_a_second,
+                context: context,
+              );
+              final sendEmail =
+                  await UserService().sendResetPasswordLink(context, email!);
+              if (context.mounted) {
+                loadingMessageTime(
+                  title: sendEmail == 'error'
+                      ? context.loc.dialog_error_ops
+                      : context.loc.successful,
+                  subtitle: sendEmail == 'error'
+                      ? context.loc.email_send_failed
+                      : context.loc.email_send_success,
+                  context: context,
+                );
+              }
+            }
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget alreadyHaveCode(BuildContext context) {
+    return Column(
+      children: [
+        // Enter
+        const SizedBox(height: 20),
+        TextButton(
+          child: Text(
+            context.loc.already_have_code,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
             ),
           ),
           onPressed: () {
-            final isValid = formLoginKey.currentState!.validate();
-
-            if (isValid) {
-              formLoginKey.currentState!.save(); // TODO:  Remove this line
-            }
+            Navigator.of(context).pushNamed(userGetNewPassword);
           },
         ),
       ],
@@ -106,22 +147,22 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
           ),
           TextFormField(
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              hintText: 'your@email.com', // TODO:  MUST be provided by L10N
-              contentPadding: EdgeInsets.only(left: 10),
+            decoration: InputDecoration(
+              hintText: context.loc.your_email_example,
+              contentPadding: const EdgeInsets.only(left: 10),
               fillColor: Colors.white,
               filled: true,
-              border: OutlineInputBorder(),
-              errorStyle: TextStyle(
+              border: const OutlineInputBorder(),
+              errorStyle: const TextStyle(
                 color: Colors.red,
               ),
-              errorBorder: OutlineInputBorder(
+              errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.red,
                   width: 2,
                 ),
               ),
-              focusedErrorBorder: OutlineInputBorder(
+              focusedErrorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.red,
                   width: 2,
@@ -131,7 +172,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             validator: (value) {
               if (value != null) {
                 if (!EmailValidator.validate(value)) {
-                  return 'Your email is not valid'; // TODO:  MUST be provided by L10N
+                  return context.loc.email_not_valid;
                 }
               }
               return null;
@@ -146,12 +187,11 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   }
 
   Widget forgetPasswordTitle(BuildContext context) {
-    return const Align(
+    return Align(
       alignment: Alignment.center,
       child: Text(
-        // TODO:  MUST be provided by L10N
-        'Qual seu e-mail?',
-        style: TextStyle(
+        context.loc.what_is_your_email,
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 32,
         ),

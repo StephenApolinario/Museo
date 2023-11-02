@@ -9,6 +9,7 @@
     "store": "INGRESSO E CUPONS",
     "about_movi": "SOBRE O MOVI",
     "about_application": "SOBRE O APLICATIVO",
+	"localization": "LOCALIZAÇÃO",
 
     "start_title": "VAMOS INICIAR",
     "start_text": "Conforme for andando pelo museu, o áudio vai estar sincronizado com o que está a sua frente.",
@@ -31,6 +32,10 @@
     "forget_password": "Esqueceu sua senha?",
     "enter": "Entrar",
     "not_registred_yet": "Ainda não tem conta?",
+	"password_match": "As senhas devem corresponder!",
+	"password_min_characters": "A senha deve ter pelo menos 4 caracteres",
+	"repeat_password": "Repita a senha",
+	"repeat_new_password": "Repita a nova senha",
 
     "registering_title": "Cadastro",
     "registering_content_title": "CRIE SUA CONTA",
@@ -51,6 +56,7 @@
     "registering_house_address": "Endereço",
     "registering_house_number": "Número",
     "registering_house_complement": "Complemento",
+    "registering_password": "Escolha sua senha",
 
     "about_movi_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean scelerisque eleifend eros, quis ultricies metus iaculis aliquam. Ut eros dolor, consequat vitae congue et, luctus id dolor. Praesent id odio quis leo fermentum fringilla. Aenean ut egestas elit. Sed hendrerit erat tellus, quis tempor neque suscipit vel. Donec quis magna quis ante sollicitudin ullamcorper. Ut in magna at eros scelerisque pellentesque sed molestie tellus. Cras hendrerit ipsum nec aliquam molestie. Nulla eget nisi egestas, sollicitudin tortor euismod, facilisis lectus. Duis dictum dui vel commodo blandit.\nProin varius varius nunc, nec viverra purus vestibulum non. Integer dictum tortor vel dui pulvinar imperdiet. In consequat molestie eleifend. Nam a felis quis mi porttitor egestas eu quis leo. Pellentesque ultrices sem mi, et lobortis ipsum tincidunt sed. Aenean congue dolor neque. Morbi placerat bibendum maximus.",
     "about_application_content": "O Aplicativo foi realizado através do Trabalho de Conclusão de Curso dos acadêmicos de Bacharel da Univali, Louis Lane Zelinda Da Silva de Design Gráfico e Stephen Michael Apolinário de Engenharia de computação.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id eros eu lorem suscipit mollis vel quis ligula. In hac habitasse platea dictumst. Nulla pellentesque tincidunt massa, at molestie libero consectetur quis. Etiam arcu augue, fringilla at convallis sed, dignissim vitae libero. Nullam id rutrum orci. Nulla commodo blandit massa. Aliquam ex elit, dignissim eget suscipit consequat, gravida vel augue. Proin ut feugiat nisi. Aenean sagittis fermentum ex, a scelerisque turpis facilisis sed. Ut ornare gravida quam sed condimentum. Nunc ac cursus ligula. Suspendisse potenti. Proin efficitur lacus lobortis enim tempor facilisis. Suspendisse at eros non massa venenatis tincidunt id eget risus. Duis in tempor ipsum. Donec aliquet odio ut diam semper consectetur.\nSed bibendum dui vel erat congue efficitur. Cras nec tempor mauris. Nunc et auctor quam. Nunc sagittis enim eu lorem blandit tempus. Morbi lacinia consequat lectus ac vestibulum. Nam sit amet tellus tristique, ultricies nunc eu, dictum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse vel arcu leo. Pellentesque at iaculis metus. Morbi luctus vehicula ipsum ut vehicula. Quisque et turpis tempus, malesuada mi sed, facilisis eros. Mauris tempus tempus arcu sit amet tincidunt. Duis malesuada efficitur massa vel fermentum. Vestibulum at gravida lorem. Donec tincidunt nibh a velit fermentum, non sodales libero elementum.",
@@ -59,6 +65,129 @@
     "dialog_error_not_filled": "Você deve preencher todos os campos antes de continuar!",
 
     "route_title": "Percurso",
+
+	"emblems": "Emblemas",
+	"no_emblems": "Você ainda não nenhum emblema!",
+
+	"favorite_pieces": "Favoritos",
+	"emblem_quizzes": "Emblemas de quizzes",
+	"update_information": "Alterar informações",
+	"update_password": "Alterar senha",
+	"current_password": "Senha atual",
+	"fill_current_password": "Por favor, forneça sua senha atual",
+	"current_password_min_characters": "Sua senha atual tem pelo menos 4 caracteres",
+	"new_password": "Nova senha",
+	"fill_new_password": "Por favor, preencha sua nova senha",
+	"logout": "Sair",
+
+	"performance_quiz": "Desempenho nos quizzes",
+	"no_performance_quiz": "Quando você terminar o seu primeiro quiz, seu desempenho será exibido aqui",
+
+	"no_favorites_yet": "Você ainda não tem nenhum favorito!",
+	"favorite_removed": "Você removeu dos seu favoritos!",
+
+	"personal_data": "Dados pessoais",
+	"address_data": "Dados de endereço",
+
+	"fill_name": "Por favor, digite seu nome",
+	"fill_last_name": "Por favor, digite seu sobrenome",
+	"fill_email": "Por favor, digite seu email",
+	"fill_cpf": "Por favor, digite seu CPF",
+	"fill_birthday": "Por favor, digite sua data de nascimento",
+	"fill_phone_number": "Por favor, digite seu número de telefone",
+
+	"update_button": "Atualizar",
+	"cep": "CEP",
+
+	"fill_cep": "Por favor, digite o seu CEP",
+	"fill_state": "Por favor, digite o seu estado",
+	"fill_city": "Por favor, digite a sua cidade",
+	"fill_neighborhood": "Por favor, digite o seu bairro",
+	"fill_home_address": "Por favor, digite a sua rua",
+	"fill_home_number": "Por favor, digite o número da sua casa",
+
+	"loading": "Carregando",
+	"wait_a_second": "Aguarde alguns segundos...",
+	"successful": "Perfeito!",
+	"successful_registred_user": "Usuário registrado com sucesso! Faça login agora",
+	"successful_login_user": "Usuário logado com sucesso! \nRedirecionando...",
+	"redirecting": "Redirecionando", 
+	"leaving": "Saindo",
+
+	"error_button_update": "Erro!",
+	"success_button_update": "Sucesso!",
+	"update_password_error": "Houve algum erro ao atualizar a sua senha...\nTenha certeza que você forneceu a senha correta!",
+	"update_password_success": "Você atualizou a senha com sucesso!",
+
+	"update_data_error": "Houve algum erro ao atualizar seus dados...",
+	"update_data_success": "Você atualizou seus dados com sucesso!",
+	"your_email_example": "seu@email.com", 
+	"email_not_valid": "Seu email não é válido",
+	"password_more_characters": "Sua senha deve possuir mais que",
+	"characters": "caracteres",
+	"forgot_password": "Esqueci minha senha",
+	"send": "Enviar",
+	"what_is_your_email": "Qual é o seu email?",
+
+	"lets_start": "Vamos começar",
+	"move_near": "Por favor, aproxime-se de alguma peça do museu",
+
+	"quiz_title": "Quiz",
+
+	"about_exhibition": "O projeto museográfico é moderno e valoriza as peças de maneira segura e confortável para o visitante. O Projeto luminotécnico é todo em led e os ambientes são climatizados, o que garante uma visitação agradável em qualquer época do ano. É totalmente acessível para pessoas com deficiência física e com mobilidade reduzida.",
+	"exhibition_title": "A exposição",
+
+	"avaliable_dates": "Datas disponíveis",
+	"more_information": "Mais informações",
+	"price": "Valor:",
+	"current_cart": "Carrinho atual",
+	"first_select_tickets": "Você deve primeiro selecionar seus ingressos!",
+	"checkout": "Checkout",
+	"checkout_title": "CHECKOUT",
+	"discount_coupon": "Discount coupon",
+	"remove_coupon": "Remover",
+	"apply_coupon": "Aplicar",
+	"coupon_not_exists": "Esse cupom de desconto não existe!",
+	"coupon_code": "Código de cupom",
+	
+	"should_login": "Você deve se autenticar para acessar essa funcionalidade",
+	"login_error": "Aconteceu algum problema ao entrar em sua conta\nVocê tem certeza de que seu email e senha estão certos?",
+	"duplicated_email": "O email fornecido já está em uso!",
+
+	"favorite_added": "Favorito adicionado",
+	"favorite_already_added": "Você já adicionou essa peça aos favoritos!",
+	
+	"question": "Pergunta",
+	"next_question": "Próxima",
+	"see_quiz_result": "Ver resultado",
+	"quiz_performance": "Desempenho de seu quiz!",
+	"completed_quiz": "Você completou o quiz",
+	"quiz_performance_obtained": "Você alcançou um desempenho de",
+	"emblem_acchieved": "Você conseguiu o",
+
+	"total": "total",
+	"order_overview": "Resumo do pedido",
+	"accept_payments_in": "Aceitamos pagamentos em",
+	"payment_methods": "Formas de pagamento",
+
+	"data": "data",
+
+	"hello": "Olá", 
+
+	"bluetooth_state": "O Bluetooth está",
+	"bluetooth_not_avaliable": "indisponível",
+	"turn_bluetooth_on": "LIGAR",
+	"choose_tour_option": "Escolha uma opção de tour",
+	
+	"email_send_failed": "Por favor, verifique se seu email está correto.",
+	"email_send_success": "Foi enviado um email a você\nVerifique a sua caixa de mensagem!",
+	"already_have_code": "Já possuo um código",
+	"password_code": "Código",
+	"your_code_password_example": "Seu código recebido no email",
+	"update_password_from_code": "Atualizar senha",
+	"password_reset_blank_code": "Por favor, cole aqui o código recebido em seu email",
+	"update_password_from_code_success": "Sua senha foi atualizado com sucesso!",
+	"update_password_from_code_failed": "O código informado está inválido!\nPor favor, obtenha um novo código",
 
     "under_construction": "Under construction..."
 }

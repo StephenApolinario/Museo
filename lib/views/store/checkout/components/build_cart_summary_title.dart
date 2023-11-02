@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 
 class BuildCartSummaryTitle extends StatelessWidget {
   const BuildCartSummaryTitle({
@@ -20,13 +21,12 @@ class BuildCartSummaryTitle extends StatelessWidget {
                 color: mainBlue,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(5),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
                 child: Center(
                   child: Text(
-                    // TODO:  This text must be provided by L10N
-                    'Resumo do pedido',
-                    style: TextStyle(
+                    context.loc.order_overview,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                     ),

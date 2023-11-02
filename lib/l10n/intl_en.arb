@@ -9,6 +9,7 @@
     "store": "TICKETS AND COUPONS",
     "about_movi": "ABOUT MOVI",
     "about_application": "ABOUT THE APP",
+	"localization": "LOCALIZATION",
 
     "start_title": "LETS START",
     "start_text": "As you walk through the museum, the audio will be synchronized with what's in front of you.",
@@ -31,6 +32,10 @@
     "forget_password": "Forgot your password?",
     "enter": "Enter",
     "not_registred_yet": "Don't have an account yet?",
+	"password_match": "The passwords must match!",
+	"password_min_characters": "The password must have at least 4 characters",
+	"repeat_password": "Repeat password",
+	"repeat_new_password": "Repeat the new password",
     
     "registering_title": "Registration",
     "registering_content_title": "CREATE YOUR ACCOUNT",
@@ -51,6 +56,7 @@
     "registering_house_address": "Address",
     "registering_house_number": "Home Number",
     "registering_house_complement": "Complement",
+    "registering_password": "Choose your password",
     
     "about_movi_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean scelerisque eleifend eros, quis ultricies metus iaculis aliquam. Ut eros dolor, consequat vitae congue et, luctus id dolor. Praesent id odio quis leo fermentum fringilla. Aenean ut egestas elit. Sed hendrerit erat tellus, quis tempor neque suscipit vel. Donec quis magna quis ante sollicitudin ullamcorper. Ut in magna at eros scelerisque pellentesque sed molestie tellus. Cras hendrerit ipsum nec aliquam molestie. Nulla eget nisi egestas, sollicitudin tortor euismod, facilisis lectus. Duis dictum dui vel commodo blandit.\nProin varius varius nunc, nec viverra purus vestibulum non. Integer dictum tortor vel dui pulvinar imperdiet. In consequat molestie eleifend. Nam a felis quis mi porttitor egestas eu quis leo. Pellentesque ultrices sem mi, et lobortis ipsum tincidunt sed. Aenean congue dolor neque. Morbi placerat bibendum maximus.",
     "about_application_content": "O Aplicativo foi realizado através do Trabalho de Conclusão de Curso dos acadêmicos de Bacharel da Univali, Louis Lane Zelinda Da Silva de Design Gráfico e Stephen Michael Apolinário de Engenharia de computação.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id eros eu lorem suscipit mollis vel quis ligula. In hac habitasse platea dictumst. Nulla pellentesque tincidunt massa, at molestie libero consectetur quis. Etiam arcu augue, fringilla at convallis sed, dignissim vitae libero. Nullam id rutrum orci. Nulla commodo blandit massa. Aliquam ex elit, dignissim eget suscipit consequat, gravida vel augue. Proin ut feugiat nisi. Aenean sagittis fermentum ex, a scelerisque turpis facilisis sed. Ut ornare gravida quam sed condimentum. Nunc ac cursus ligula. Suspendisse potenti. Proin efficitur lacus lobortis enim tempor facilisis. Suspendisse at eros non massa venenatis tincidunt id eget risus. Duis in tempor ipsum. Donec aliquet odio ut diam semper consectetur.\nSed bibendum dui vel erat congue efficitur. Cras nec tempor mauris. Nunc et auctor quam. Nunc sagittis enim eu lorem blandit tempus. Morbi lacinia consequat lectus ac vestibulum. Nam sit amet tellus tristique, ultricies nunc eu, dictum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse vel arcu leo. Pellentesque at iaculis metus. Morbi luctus vehicula ipsum ut vehicula. Quisque et turpis tempus, malesuada mi sed, facilisis eros. Mauris tempus tempus arcu sit amet tincidunt. Duis malesuada efficitur massa vel fermentum. Vestibulum at gravida lorem. Donec tincidunt nibh a velit fermentum, non sodales libero elementum.",
@@ -59,6 +65,129 @@
     "dialog_error_not_filled": "You must fill in all the fields before continuing!",
 
     "route_title": "Route",
+
+	"emblems": "Emblems",
+	"no_emblems": "You don't have any emblem yet!",
+
+	"favorite_pieces": "Favorites",
+	"emblem_quizzes": "Quizzes emblems",
+	"update_information": "Update information",
+	"update_password": "Update password",
+	"current_password": "Current password",
+	"fill_current_password": "Please, provide your current password",
+	"current_password_min_characters": "Your current password have at least 4 characters",
+	"new_password": "New password",
+	"fill_new_password": "Please, provide your new password",
+	"logout": "Logout",
+
+	"performance_quiz": "Performance in quizzes",
+	"no_performance_quiz": "When you finish your first quizz, your performance will showed right here",
+
+	"no_favorites_yet": "You don't have any favorites yet!",
+	"favorite_removed": "You've deleted from your favorites!",
+
+	"personal_data": "Personal data",
+	"address_data": "Address data",
+
+	"fill_name": "Please, fill with your name",
+	"fill_last_name": "Please, fill with your last name",
+	"fill_email": "Please, fill with your email",
+	"fill_cpf": "Please, fill with your CPF\n(The Individual Taxpayer Registration on Brazil)",
+	"fill_birthday": "Please, fill with your date of birth",
+	"fill_phone_number": "Please, fill with your phone number",
+
+	"update_button": "Upate",
+	"cep": "CEP (Brazilian Zip Addres)",
+
+	"fill_cep": "Please enter your zip code",
+	"fill_state": "Please enter your state",
+	"fill_city": "Please enter your city",
+	"fill_neighborhood": "Please enter your neighborhood",
+	"fill_home_address": "Please enter your street",
+	"fill_home_number": "Please enter your house number",
+
+	"loading": "Loading",
+	"wait_a_second": "Wait a few seconds...",
+	"successful": "Successful",
+	"successful_registred_user": "Successfully registered user! Login now",
+	"successful_login_user": "User successfully logged in! \nRedirecting...",
+	"redirecting": "Redirecionando", 
+	"leaving": "Saindo",
+
+	"error_button_update": "Error!",
+	"success_button_update": "Success!",
+	"update_password_error": "There was an error updating your password...\nMake sure you provided the correct password!",
+	"update_password_success": "You have successfully updated your password!",
+
+	"update_data_error": "There was an error updating your data...",
+	"update_data_success": "You have successfully updated your data!",
+	"your_email_example": "your@email.com", 
+	"email_not_valid": "Your email is not valid",
+	"password_more_characters": "Your password must have more than",
+	"characters": "characters",
+	"forgot_password": "I forgot my password",
+	"send": "Send",
+	"what_is_your_email": "What is your email?",
+
+	"lets_start": "Lets start",
+	"move_near": "Please, move near to some museum piece",
+
+	"quiz_title": "Quiz",
+
+	"about_exhibition": "The museographic project is modern and enhances the pieces in a safe and comfortable way for visitors. The lighting design is all LED and the rooms are air-conditioned, which guarantees a pleasant visit at any time of the year. It is fully accessible to people with physical disabilities and reduced mobility.",
+	"exhibition_title": "The exhibition",
+
+	"avaliable_dates": "Avaliable dates",
+	"more_information": "More information",
+	"price": "Price:",
+	"current_cart": "Current cart",
+	"first_select_tickets": "You must first select your tickets!",
+	"checkout": "Checkout",
+	"checkout_title": "CHECKOUT",
+	"discount_coupon": "Cupom de desconto",
+	"remove_coupon": "Remove",
+	"apply_coupon": "Apply",
+	"coupon_not_exists": "This discount coupon doesn't exist!",
+	"coupon_code": "Coupon code",
+	"should_login": "You should log to acess this feature",
+	"login_error": "There was a problem logging in to your account\nAre you sure your email and password are correct?",
+
+	"duplicated_email": "The provided email is already in use!",
+
+	"favorite_added": "Favorite added",
+	"favorite_already_added": "You've already added this piece to your favorites!",
+
+	"question": "Question",
+	"next_question": "Next",
+	"see_quiz_result": "See the result",
+	"quiz_performance": "Performance of your quiz!",
+	"completed_quiz": "You completed the quiz",
+	"quiz_performance_obtained": "You achieved a performance of",
+	"emblem_acchieved": "You have achieved the",
+
+	"total": "total",
+	"order_overview": "Order overview",
+	"accept_payments_in": "We accept payments in",
+	"payment_methods": "Payment methods",
+
+	"data": "date",
+
+	"hello": "hello", 
+
+	"bluetooth_state": "Bluetooth Adapter is",
+	"bluetooth_not_avaliable": "not avaliable",
+	"turn_bluetooth_on": "TURN ON",
+	"choose_tour_option": "Choose one tour option",
+
+	"email_send_failed": "Please check that your email is correct.",
+	"email_send_success": "An email has been sent to you.\nCheck your mailbox!",
+	"already_have_code": "I already have a code",
+	"password_code": "Code",
+	"your_code_password_example": "Your code received in the email",
+	"update_password_from_code": "Update Password",
+	"password_reset_blank_code": "Please paste the code you received in your email here",
+	"update_password_from_code_success": "Your password has been updated successfully!",
+	"update_password_from_code_failed": "The code you entered is invalid!\nPlease get a new code",
 
     "under_construction": "Under construction..."
 }
