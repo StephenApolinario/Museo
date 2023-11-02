@@ -30,7 +30,9 @@ class BuildItemCard extends StatelessWidget {
               ),
               child: Hero(
                 tag: '${product.id}',
-                child: Image.asset(product.image),
+                child: Image(
+                  image: NetworkImage(product.image),
+                ),
               ),
             ),
           ),
