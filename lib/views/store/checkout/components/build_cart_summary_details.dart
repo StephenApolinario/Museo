@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/helpers/price.dart';
 import 'package:museo/providers/store/shopping_ticket_cart.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class BuildTotalCart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              context.loc.total,
+              context.loc.total.toCapitalized(),
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

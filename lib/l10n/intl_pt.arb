@@ -144,7 +144,7 @@
 	"first_select_tickets": "Você deve primeiro selecionar seus ingressos!",
 	"checkout": "Checkout",
 	"checkout_title": "CHECKOUT",
-	"discount_coupon": "Discount coupon",
+	"discount_coupon": "Cupom de desconto",
 	"remove_coupon": "Remover",
 	"apply_coupon": "Aplicar",
 	"coupon_not_exists": "Esse cupom de desconto não existe!",
@@ -188,6 +188,9 @@
 	"password_reset_blank_code": "Por favor, cole aqui o código recebido em seu email",
 	"update_password_from_code_success": "Sua senha foi atualizado com sucesso!",
 	"update_password_from_code_failed": "O código informado está inválido!\nPor favor, obtenha um novo código",
+
+	"phone": "Telefone",
+	"email_contact": "Para contato e agendamento envie e-mail para",
 
     "under_construction": "Under construction..."
 }

@@ -36,4 +36,8 @@ class Api {
   Uri productCategory({required String endpoint}) {
     return Uri.parse('${dotenv.get('URL_API')}/product/category/$endpoint');
   }
+
+  Uri museumInformation({required String endpoint}) {
+    return Uri.parse('${dotenv.get('URL_API')}/museumInformation/$endpoint');
+  }
 }

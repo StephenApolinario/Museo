@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/helpers/price.dart';
+import 'package:museo/models/museum_information.dart';
 import 'package:museo/models/store/tickets.dart';
+import 'package:museo/services/museum_information_service.dart';
 
 class CouponsDetailsView extends StatelessWidget {
   final NewTicket ticket;
@@ -14,144 +17,78 @@ class CouponsDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final parentContex = context;
     return Scaffold(
       appBar: AppBar(
         title: Text(context.loc.store),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TicketDetails(ticket: ticket),
-                const MuseumDetails(),
+      body: FutureBuilder(
+        future: MuseumInformationService().getMuseumInformation(context),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TicketDetails(
+                        ticket: ticket,
+                      ),
+                      MuseumDetails(
+                        museumInformation: snapshot.data,
+                        parentContex: parentContex,
+                      ),
+                    ],
+                  ),
+                ),
               ],
-            ),
-          ),
-        ],
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: mainBlue,
+              ),
+            );
+          }
+        },
       ),
     );
   }
 }
 
 class MuseumDetails extends StatelessWidget {
+  final BuildContext parentContex;
+  final MuseumInformation museumInformation;
+
   const MuseumDetails({
     super.key,
+    required this.museumInformation,
+    required this.parentContex,
   });
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        BlueDivider(height: 35, top: 10),
+        const BlueDivider(height: 35, top: 10),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              BuildOfficeHour(),
-              BuildContact(),
-              BuildPhoneNumber(),
-              BuildInstagram(),
+              buildOfficeHour(parentContex),
+              buildContact(parentContex),
+              buildPhoneNumber(parentContex),
+              buildInstagram(parentContex),
             ],
           ),
         ),
       ],
     );
   }
-}
 
-class BuildInstagram extends StatelessWidget {
-  const BuildInstagram({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        // TODO:  INSTAGRAM icon
-        Icon(Icons.construction),
-        Flexible(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 5,
-              top: 15,
-              bottom: 15,
-            ),
-            child: Text(
-              '@museuoceanografico',
-              textAlign: TextAlign.justify,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class BuildPhoneNumber extends StatelessWidget {
-  const BuildPhoneNumber({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Icon(Icons.phone_outlined),
-        Flexible(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 5,
-              top: 15,
-            ),
-            child: Text(
-              'Telefone: +55 (47) 3261-1402',
-              textAlign: TextAlign.justify,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class BuildContact extends StatelessWidget {
-  const BuildContact({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Icon(Icons.email_outlined),
-        Flexible(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 5,
-              top: 15,
-            ),
-            child: Text(
-              'Para contato e agendamento envie e-mail para educaco.movi@univali.br',
-              textAlign: TextAlign.justify,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class BuildOfficeHour extends StatelessWidget {
-  const BuildOfficeHour({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildOfficeHour(BuildContext context) {
     return const Row(
       children: [
         Icon(Icons.watch_later_outlined),
@@ -163,6 +100,67 @@ class BuildOfficeHour extends StatelessWidget {
             ),
             child: Text(
               'Expediente: Segunda a sexta-feira das 08h às 12h e das 13h30 às 17h30',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildInstagram(BuildContext context) {
+    return Row(
+      children: [
+        const FaIcon(FontAwesomeIcons.instagram),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 5,
+              top: 15,
+              bottom: 15,
+            ),
+            child: Text(
+              '@${museumInformation.instagram}',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildPhoneNumber(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(Icons.phone_outlined),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 5,
+              top: 15,
+            ),
+            child: Text(
+              '${context.loc.phone}: ${museumInformation.phoneList[0].phoneNumber}',
+              textAlign: TextAlign.justify,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildContact(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(Icons.email_outlined),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 5,
+              top: 15,
+            ),
+            child: Text(
+              '${context.loc.email_contact} ${museumInformation.emailList[0].email}',
               textAlign: TextAlign.justify,
             ),
           ),

@@ -7,10 +7,12 @@ import 'package:museo/providers/store/shopping_ticket_cart.dart';
 
 class BuildLocationAddress extends StatelessWidget {
   final ShoppingTicketCart providerTicket;
+  final MuseumInformation museumInformation;
 
   const BuildLocationAddress({
     super.key,
     required this.providerTicket,
+    required this.museumInformation,
   });
 
   @override
@@ -33,7 +35,7 @@ class BuildLocationAddress extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                      '${fakeMuseumAddress.city} - ${fakeMuseumAddress.state}'),
+                      '${museumInformation.city} - ${museumInformation.state}'),
                   Text(
                     '${context.loc.data}: ${DateFormat('yMd', language).format(providerTicket.cart.date!).toUpperCase()}',
                   ),

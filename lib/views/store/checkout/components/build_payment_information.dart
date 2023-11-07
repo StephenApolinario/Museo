@@ -5,7 +5,12 @@ import 'package:museo/models/museum_information.dart';
 import 'package:museo/models/store/payments_methods.dart';
 
 class BuildPaymentInformation extends StatelessWidget {
-  const BuildPaymentInformation({super.key});
+  final MuseumInformation museumInformation;
+
+  const BuildPaymentInformation({
+    super.key,
+    required this.museumInformation,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +65,7 @@ class BuildPaymentInformation extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Para mais informações, entrar em contato por \nE-mail: ${fakeMuseumAddress.email} \nTelefone: ${fakeMuseumAddress.phoneNumber}',
+            'Para mais informações, entrar em contato por \nE-mail: ${museumInformation.emailList[0].email} \nTelefone: ${museumInformation.phoneList[0].phoneNumber}',
             textAlign: TextAlign.justify,
           ),
         ],
