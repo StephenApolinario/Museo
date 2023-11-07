@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/tour_mode.dart';
 import 'package:museo/services/tour_service.dart';
 import 'package:museo/views/tour/tour_view.dart';
@@ -98,34 +99,33 @@ class TourOptions extends StatelessWidget {
   }
 
   Widget buildTourTypeList({required int index}) {
-    if (index % 2 == 0) {
-      if (index == tourModes.length - 1) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TourCard(
-              tourMode: tourModes[index],
-            ),
-          ],
-        );
-      } else {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TourCard(
-              tourMode: tourModes[index],
-            ),
-            TourCard(
-              tourMode: tourModes[index + 1],
-            ),
-          ],
-        );
-      }
-    } else {
-      return Container();
-    }
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: index % 2 == 0
+          ? (index == tourModes.length - 1
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TourCard(
+                      tourMode: tourModes[index],
+                    ),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TourCard(
+                      tourMode: tourModes[index],
+                    ),
+                    TourCard(
+                      tourMode: tourModes[index + 1],
+                    ),
+                  ],
+                ))
+          : Container(),
+    );
   }
 }
 
@@ -176,7 +176,8 @@ class TourCard extends StatelessWidget {
               // Tour name
               const SizedBox(height: 10),
               Text(
-                tourMode.title,
+                tourMode.title.toCapitalized(),
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -185,7 +186,7 @@ class TourCard extends StatelessWidget {
               // Description
               const SizedBox(height: 10),
               Text(
-                tourMode.subtitle,
+                tourMode.subtitle.toCapitalized(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,

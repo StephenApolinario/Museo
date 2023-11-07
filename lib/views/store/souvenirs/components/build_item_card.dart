@@ -3,6 +3,12 @@ import 'package:museo/constants/colors.dart';
 import 'package:museo/helpers/color_from_api.dart';
 import 'package:museo/helpers/price.dart';
 import 'package:museo/models/store/product.dart';
+import 'package:shimmer/shimmer.dart';
+
+Color getContrastingColor(Color color) {
+  final double relativeLuminance = color.computeLuminance();
+  return relativeLuminance > 0.5 ? Colors.black : Colors.white;
+}
 
 class BuildItemCard extends StatelessWidget {
   final Product product;
@@ -23,6 +29,7 @@ class BuildItemCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
+              width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: colorFromApi(color: product.color),
@@ -30,8 +37,35 @@ class BuildItemCard extends StatelessWidget {
               ),
               child: Hero(
                 tag: '${product.id}',
-                child: Image(
-                  image: NetworkImage(product.image),
+                child: Image.network(
+                  product.image,
+                  loadingBuilder: (
+                    BuildContext context,
+                    Widget child,
+                    ImageChunkEvent? loadingProgress,
+                  ) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      return Center(
+                        child: Shimmer.fromColors(
+                          baseColor: colorFromApi(color: product.color),
+                          highlightColor: getContrastingColor(
+                            colorFromApi(color: product.color),
+                          ),
+                          child: Container(
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return const Center(
+                      child: Text('Failed to load image'),
+                    );
+                  },
                 ),
               ),
             ),
