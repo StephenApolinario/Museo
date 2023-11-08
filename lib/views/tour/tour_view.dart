@@ -101,7 +101,6 @@ class _TourViewState extends State<TourView> {
     _scanResultsSubscription.cancel();
     _isScanningSubscription.cancel();
     _scanResults.clear();
-    previousBeaconDetected.clear();
     stopScanning();
     super.dispose();
   }
