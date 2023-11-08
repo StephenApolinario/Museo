@@ -168,13 +168,13 @@ class VerticallyTextAndIcons extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.play_arrow),
-                  Icon(Icons.speed),
-                ],
-              ),
+              // const Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Icon(Icons.play_arrow),
+              //     Icon(Icons.speed),
+              //   ],
+              // ),
             ],
           ),
         ),
