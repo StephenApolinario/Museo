@@ -136,9 +136,9 @@ class AddToCart extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text(
-                  'BUY NOW',
-                  style: TextStyle(
+                child: Text(
+                  context.loc.souvenir_buy,
+                  style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -218,12 +218,12 @@ class ProductWithImage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Hand Bag',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
+          // const Text(
+          //   'Hand Bag',
+          //   style: TextStyle(
+          //     color: Colors.white,
+          //   ),
+          // ),
           Text(
             product.name,
             style: const TextStyle(

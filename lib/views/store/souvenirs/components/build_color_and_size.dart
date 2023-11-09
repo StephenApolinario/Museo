@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
+import 'package:museo/extensions/buildcontext/loc.dart';
 import 'package:museo/helpers/color_from_api.dart';
 import 'package:museo/models/store/product.dart';
 
@@ -19,9 +20,9 @@ class BuildColorAndSize extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Color',
-                style: TextStyle(
+              Text(
+                context.loc.souvenir_color,
+                style: const TextStyle(
                   color: grayStoreColor,
                 ),
               ),
@@ -49,8 +50,8 @@ class BuildColorAndSize extends StatelessWidget {
                 color: grayStoreColor,
               ),
               children: [
-                const TextSpan(
-                  text: 'Size\n',
+                TextSpan(
+                  text: '${context.loc.souvenir_size}\n',
                 ),
                 TextSpan(
                   text: product.size,

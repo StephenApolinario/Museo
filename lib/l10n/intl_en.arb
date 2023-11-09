@@ -189,5 +189,11 @@
 	"update_password_from_code_success": "Your password has been updated successfully!",
 	"update_password_from_code_failed": "The code you entered is invalid!\nPlease get a new code",
 
+	"souvenir_color": "Color",
+	"souvenir_size": "Size",
+	"souvenir_buy": "BUY NOW",
+
+	"offline_wifi": "Wifi offline, please connect to the internet to get the system working",
+
     "under_construction": "Under construction..."
 }

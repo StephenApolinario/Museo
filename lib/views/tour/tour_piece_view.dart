@@ -8,6 +8,7 @@ import 'package:museo/helpers/color_from_api.dart';
 import 'package:museo/models/museum_piece.dart';
 import 'package:museo/models/tour_mode.dart';
 import 'package:museo/providers/tour/tour_piece.dart';
+import 'package:museo/providers/user/user.dart';
 import 'package:museo/services/user_service.dart';
 import 'package:provider/provider.dart';
 
@@ -57,6 +58,8 @@ class TourPieceView extends StatefulWidget {
 }
 
 class _TourPieceViewState extends State<TourPieceView> {
+  late User userProvider;
+
   late SpeakAboutTourPiece speakAboutTourPiece;
 
   // TTS
@@ -87,6 +90,7 @@ class _TourPieceViewState extends State<TourPieceView> {
     speakAboutTourPiece =
         Provider.of<SpeakAboutTourPiece>(context, listen: false);
     speakAboutTourPiece.updateTempPiece(tourPiece: widget.tourPiece);
+    userProvider = Provider.of<User>(context, listen: false);
     speakHandler();
   }
 
@@ -197,28 +201,32 @@ class _TourPieceViewState extends State<TourPieceView> {
       appBar: AppBar(
         title: Text('${context.loc.route_title} ${widget.tourMode.title}'),
         actions: [
-          IconButton(
-            onPressed: () async {
-              final addFavorite =
-                  await UserService().addFavorite(context, widget.tourPiece.id);
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(addFavorite == 'user-already-have-favorite'
-                        ? context.loc.favorite_already_added
-                        : context.loc.favorite_added),
-                    backgroundColor: addFavorite == 'user-already-have-favorite'
-                        ? Colors.red.shade300
-                        : Colors.green.shade300,
+          userProvider.logged
+              ? IconButton(
+                  onPressed: () async {
+                    final addFavorite = await UserService()
+                        .addFavorite(context, widget.tourPiece.id);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              addFavorite == 'user-already-have-favorite'
+                                  ? context.loc.favorite_already_added
+                                  : context.loc.favorite_added),
+                          backgroundColor:
+                              addFavorite == 'user-already-have-favorite'
+                                  ? Colors.red.shade300
+                                  : Colors.green.shade300,
+                        ),
+                      );
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: mainBlue,
                   ),
-                );
-              }
-            },
-            icon: const Icon(
-              Icons.favorite,
-              color: mainBlue,
-            ),
-          ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
       body: Column(

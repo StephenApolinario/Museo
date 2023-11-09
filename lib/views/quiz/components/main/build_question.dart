@@ -47,6 +47,7 @@ class _BuildQuestionState extends State<BuildQuestion> {
                 children: [
                   Text(
                     question.text,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 18,
                       color: Colors.white,

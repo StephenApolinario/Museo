@@ -65,6 +65,7 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        childAspectRatio: 0.95,
       ),
       itemBuilder: (context, index) => emblemsListView(
         emblem: emblems[index],
@@ -73,7 +74,7 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
     );
   }
 
-  emblemsListView({
+  Widget emblemsListView({
     required Emblem emblem,
     required BuildContext context,
   }) {
@@ -146,23 +147,26 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
       future: EmblemService().getEmblemQuizTitle(context, emblem.quiz),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Column(
-            children: [
-              Text(
-                emblem.title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+          return Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  emblem.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              Text(
-                snapshot.data,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
+                Text(
+                  snapshot.data,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         } else {
           return const CircularProgressIndicator();

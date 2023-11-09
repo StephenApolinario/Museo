@@ -192,5 +192,10 @@
 	"phone": "Telefone",
 	"email_contact": "Para contato e agendamento envie e-mail para",
 
+	"souvenir_color": "Cor",
+	"souvenir_size": "Tamanho",
+	"souvenir_buy": "COMPRAR",
+	"offline_wifi": "Wifi offline, por favor se conecte a internet para obter o funcionamento do sistema",
+
     "under_construction": "Under construction..."
 }
