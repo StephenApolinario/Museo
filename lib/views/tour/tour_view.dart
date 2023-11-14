@@ -172,7 +172,8 @@ class _TourViewState extends State<TourView> {
           previousBeaconDetected = foundBeacon;
         }
         // else {
-        //   print('I found the quiz but I won't show it because the user has already completed it!');
+        //   print(
+        //       'I found the quiz but I won\'t show it because the user has already completed it!');
         // }
       } else if (foundBeacon is MuseumPiece) {
         previousBeaconDetected = foundBeacon;

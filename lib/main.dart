@@ -173,120 +173,148 @@ class MyHomePage extends StatelessWidget {
                 throw Exception('Could not launch $url');
               }
             },
-            // icon: const Icon(Icons.access_alarm), //Logo Movi Here
             icon: Image.asset(Assets.logos.movi.path),
           ),
         ],
       ),
       drawer: const menu.NavigationDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 'Vamos iniciar' [X]
-              Text(
-                context.loc.start_title,
-                style: const TextStyle(
-                  color: mainBlue,
-                  fontSize: 28,
-                ),
-              ),
-              // Start text [X]
-              const SizedBox(height: 10),
-              Text(
-                context.loc.start_text,
-                textAlign: TextAlign.justify,
-              ),
-              // Start Button [X]
-              const SizedBox(height: 30),
-              Center(
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      side: const BorderSide(
-                        color: mainGray,
-                      ),
-                    ),
-                    minimumSize: const Size(double.infinity, 60),
-                    backgroundColor: Colors.white,
-                    foregroundColor: mainBlue,
-                  ),
-                  onPressed: () async {
-                    final userProvider =
-                        Provider.of<User>(context, listen: false);
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            start(context),
+            // search(context),
+            moviImage(),
+          ],
+        ),
+      ),
+    );
+  }
 
-                    final navigator = Navigator.of(context);
-                    if (!userProvider.logged) {
-                      final shouldLogin = await showStartDialog(context);
-                      if (shouldLogin) {
-                        navigator.push(
-                          MaterialPageRoute(
-                            builder: (context) => const LoginView(),
-                          ),
-                        );
-                      } else if (shouldLogin == false) {
-                        navigator.push(
-                          MaterialPageRoute(
-                            builder: (context) => const TourSelectView(),
-                          ),
-                        );
-                      }
-                    } else {
-                      navigator.push(
-                        MaterialPageRoute(
-                          builder: (context) => const TourSelectView(),
-                        ),
-                      );
-                    }
-                  },
-                  child: Text(
-                    context.loc.start_button,
-                    style: const TextStyle(
-                      color: mainGray,
-                    ),
-                  ),
+  Widget start(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          context.loc.start_title,
+          style: const TextStyle(
+            color: mainBlue,
+            fontSize: 28,
+          ),
+        ),
+        Text(
+          context.loc.start_text,
+          textAlign: TextAlign.justify,
+        ),
+        const SizedBox(height: 20),
+        startButton(context),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Center startButton(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: const BorderSide(
+              color: mainGray,
+            ),
+          ),
+          minimumSize: const Size(double.infinity, 60),
+          backgroundColor: Colors.white,
+          foregroundColor: mainBlue,
+        ),
+        onPressed: () async {
+          final userProvider = Provider.of<User>(context, listen: false);
+
+          final navigator = Navigator.of(context);
+          if (!userProvider.logged) {
+            final shouldLogin = await showStartDialog(context);
+            if (shouldLogin) {
+              navigator.push(
+                MaterialPageRoute(
+                  builder: (context) => const LoginView(),
                 ),
-              ),
-              // 'Search title'
-              const SizedBox(height: 30),
-              Text(
-                context.loc.search_title,
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontSize: 28,
+              );
+            } else if (shouldLogin == false) {
+              navigator.push(
+                MaterialPageRoute(
+                  builder: (context) => const TourSelectView(),
                 ),
+              );
+            }
+          } else {
+            navigator.push(
+              MaterialPageRoute(
+                builder: (context) => const TourSelectView(),
               ),
-              // Search text [X]
-              const SizedBox(height: 10),
-              Text(
-                context.loc.search_text,
-                textAlign: TextAlign.justify,
-                style: const TextStyle(
-                  color: Colors.black87,
-                ),
-              ),
-              // Search field [X]
-              const SizedBox(height: 30),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: context.loc.search_hint,
-                  prefixIcon: const Icon(Icons.search),
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                ),
-                onChanged: (value) {},
-              ),
-              // MOVI PIC? [X]
-              const SizedBox(height: 30),
-              Image.asset('assets/movi.png'),
-            ],
+            );
+          }
+        },
+        child: Text(
+          context.loc.start_button,
+          style: const TextStyle(
+            color: mainGray,
           ),
         ),
       ),
+    );
+  }
+
+  Widget moviImage() {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'MUSEU MOVI',
+            style: TextStyle(
+              color: mainBlue,
+              fontSize: 24,
+            ),
+          ),
+          Image.asset('assets/movi.png'),
+        ],
+      ),
+    );
+  }
+
+  Widget search(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          context.loc.search_title,
+          style: const TextStyle(
+            color: Colors.black87,
+            fontSize: 28,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          context.loc.search_text,
+          textAlign: TextAlign.justify,
+          style: const TextStyle(
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 30),
+        TextField(
+          decoration: InputDecoration(
+            hintText: context.loc.search_hint,
+            prefixIcon: const Icon(Icons.search),
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            ),
+          ),
+          onChanged: (value) {},
+        ),
+      ],
     );
   }
 }
