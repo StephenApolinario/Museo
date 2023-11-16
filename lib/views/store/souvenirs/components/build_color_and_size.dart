@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/store/product.dart';
 
 class BuildColorAndSize extends StatelessWidget {
@@ -29,7 +29,7 @@ class BuildColorAndSize extends StatelessWidget {
               Row(
                 children: [
                   ColorDot(
-                    color: colorFromApi(color: product.color),
+                    color: product.color.fromHex(),
                     isSelected: true,
                   ),
                   const ColorDot(

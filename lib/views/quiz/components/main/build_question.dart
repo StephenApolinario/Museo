@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/quiz.dart';
 import 'package:museo/views/quiz/components/main/build_options.dart';
 
@@ -36,7 +36,8 @@ class _BuildQuestionState extends State<BuildQuestion> {
               minWidth: 300,
             ),
             decoration: BoxDecoration(
-              color: colorFromApi(color: widget.quiz.color),
+              color: question.color.fromHex(),
+              // color: widget.quiz.color.fromHex(),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(

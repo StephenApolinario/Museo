@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/gen/assets.gen.dart';
-import 'package:museo/helpers/color_from_api.dart';
 import 'package:museo/helpers/price.dart';
 import 'package:museo/models/store/product.dart';
 import 'package:museo/views/store/souvenirs/components/build_cart_counter.dart';
@@ -20,7 +20,7 @@ class SouvenirsDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: colorFromApi(color: product.color),
+      backgroundColor: product.color.fromHex(),
       appBar: buildAppBar(),
       body: Stack(
         children: [
@@ -33,7 +33,7 @@ class SouvenirsDetailsView extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: colorFromApi(color: product.color),
+      backgroundColor: product.color.fromHex(),
       actions: [
         IconButton(
           onPressed: () {},
@@ -114,7 +114,7 @@ class AddToCart extends StatelessWidget {
             width: 58,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: colorFromApi(color: product.color)),
+              border: Border.all(color: product.color.fromHex()),
             ),
             child: IconButton(
               onPressed: () {},
@@ -128,7 +128,7 @@ class AddToCart extends StatelessWidget {
               margin: const EdgeInsets.only(left: 20),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: colorFromApi(color: product.color),
+                  backgroundColor: product.color.fromHex(),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                       18,

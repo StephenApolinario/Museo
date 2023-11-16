@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
-import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/helpers/price.dart';
 import 'package:museo/models/store/product.dart';
 import 'package:shimmer/shimmer.dart';
@@ -32,7 +32,7 @@ class BuildItemCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: colorFromApi(color: product.color),
+                color: product.color.fromHex(),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
@@ -49,9 +49,9 @@ class BuildItemCard extends StatelessWidget {
                     } else {
                       return Center(
                         child: Shimmer.fromColors(
-                          baseColor: colorFromApi(color: product.color),
+                          baseColor: product.color.fromHex(),
                           highlightColor: getContrastingColor(
-                            colorFromApi(color: product.color),
+                            product.color.fromHex(),
                           ),
                           child: Container(
                             color: Colors.white,

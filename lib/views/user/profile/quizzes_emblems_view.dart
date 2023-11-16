@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/emblems.dart';
 import 'package:museo/providers/user/user.dart';
 import 'package:museo/services/emblem_service.dart';
@@ -86,7 +87,7 @@ class _QuizzesEmblemListViewState extends State<QuizzesEmblemListView> {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Color(int.parse('0xFF${emblem.color}')),
+            color: emblem.color.fromHex(),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(

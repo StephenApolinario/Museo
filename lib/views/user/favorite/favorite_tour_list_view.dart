@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/tour_piece.dart';
 import 'package:museo/providers/user/user.dart';
 import 'package:museo/views/user/favorite/favorite_tour_view.dart';
@@ -87,7 +87,7 @@ class FavoriteTourListView extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: colorFromApi(color: favoriteMuseumPiece.color),
+            color: favoriteMuseumPiece.color.fromHex(),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(

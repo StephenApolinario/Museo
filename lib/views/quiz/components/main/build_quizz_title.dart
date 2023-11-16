@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/quiz.dart';
 
 class BuildQuizTitle extends StatelessWidget {
@@ -16,7 +16,7 @@ class BuildQuizTitle extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: colorFromApi(color: quiz.color),
+        color: quiz.color.fromHex(),
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 5, bottom: 5, right: 5, left: 16),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/museum_piece.dart';
 import 'package:museo/models/tour_mode.dart';
 import 'package:museo/providers/tour/tour_piece.dart';
@@ -262,7 +262,7 @@ class _TourPieceViewState extends State<TourPieceView> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: colorFromApi(color: color),
+          color: color.fromHex(),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: secondBlue,

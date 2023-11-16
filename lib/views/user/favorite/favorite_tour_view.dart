@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:museo/constants/colors.dart';
 import 'package:museo/extensions/buildcontext/loc.dart';
-import 'package:museo/helpers/color_from_api.dart';
+import 'package:museo/extensions/string.dart';
 import 'package:museo/models/tour_piece.dart';
 import 'package:museo/services/user_service.dart';
 
@@ -140,7 +140,7 @@ class VerticallyTextAndIcons extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: colorFromApi(color: favorite.color),
+          color: favorite.color.fromHex(),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: secondBlue,
