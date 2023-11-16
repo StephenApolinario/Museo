@@ -191,7 +191,7 @@ final List<OnBoard> data = [
   OnBoard(
     title: 'Sobre o aplicativo',
     description:
-        'Aqui se encontra uma visita guiada por áudios em cada vitrine do museu, ou seja, automaticamente quando você for passando pelas vitrines, o áudio e determina assunto vai mudar, gerando uma facilidade de manusear o aplicativo. \n\n Continue com seu fone de ouvido que estamos apenas começando!',
+        'Aqui se encontra uma visita guiada por áudios em cada vitrine do museu, ou seja, automaticamente quando você for passando pelas vitrines, o áudio e determinado assunto vai mudar, gerando uma facilidade de manusear o aplicativo. \n\n Continue com seu fone de ouvido que estamos apenas começando!',
     image: 'assets/mascots/whale.png',
   ),
 ];
